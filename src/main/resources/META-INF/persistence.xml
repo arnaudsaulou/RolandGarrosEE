@@ -10,8 +10,10 @@
             <!--Hibernate properties-->
             <property name="hibernate.archive.autodetection" value="class"/>
             <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="drop-and-create"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MariaDBDialect"/>
+
+            <property name="javax.persistence.sql-load-script-source" value="META-INF/data.sql"/>
         </properties>
     </persistence-unit>
 </persistence>
