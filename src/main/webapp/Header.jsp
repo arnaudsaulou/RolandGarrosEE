@@ -28,43 +28,61 @@
     <div class="collapse navbar-collapse col-7 d-flex flex-row" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="${pageContext.request.contextPath}/MatchSimple/Femme">
                     <button class="btn btn-outline-success btn-outline-success">Simple Femme</button>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="${pageContext.request.contextPath}/MatchSimple/Homme">
                     <button class="btn btn-outline-success btn-outline-success">Simple Homme</button>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="${pageContext.request.contextPath}/MatchDouble/Homme">
                     <button class="btn btn-outline-success btn-outline-success">Double Femme</button>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="${pageContext.request.contextPath}/MatchDouble/Homme">
                     <button class="btn btn-outline-success btn-outline-success">Double Homme</button>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="${pageContext.request.contextPath}/MatchDouble/Mixte">
                     <button class="btn btn-outline-success btn-outline-success">Double Mixte</button>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/Joueurs">
+                    <button class="btn btn-outline-success btn-outline-success">Joueurs</button>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/Equipes">
+                    <button class="btn btn-outline-success btn-outline-success">Equipes</button>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/Arbitres">
+                    <button class="btn btn-outline-success btn-outline-success">Arbitres</button>
                 </a>
             </li>
         </ul>
     </div>
 
     <div class="col-2 d-flex flex-row-reverse">
-        <a class="text-decoration-none" href="#">
+        <a class="text-decoration-none" href="${pageContext.request.contextPath}/Deconnexion">
             <div>
-                <%-- TODO Remove--%>
-                <h4 class="d-inline align-middle">Arnaud Saulou</h4>
+                <div class="d-inline align-middle text-right">
 
-                <%-- TODO Add--%>
-                <%--<h4 class="d-inline align-middle">${firstname} ${lastname}</h4>--%>
-                <img src="${pageContext.request.contextPath}/resources/svg/user_logo.svg" width="40" height="40"
-                     alt="User Logo">
+                    <%-- TODO Add--%>
+                    <%--<h4 class="d-inline align-middle">${firstname} ${lastname}</h4>--%>
+
+                    <%-- TODO Remove--%>
+                    <h4>Arnaud Saulou</h4>
+
+                    <h6>Déconnexion</h6>
+                </div>
             </div>
         </a>
     </div>
@@ -73,6 +91,9 @@
     <%--</c:if>--%>
 
 </nav>
+
+<%-- TODO Add--%>
+<%--<c:if test="${isConnected}">--%>
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -88,3 +109,6 @@
                 <li class="breadcrumb-item active" aria-current="page">${current_breadcrumb}</li>--%>
     </ol>
 </nav>
+
+<%-- TODO Add--%>
+<%--</c:if>--%>
