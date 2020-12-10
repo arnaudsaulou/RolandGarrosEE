@@ -1,4 +1,4 @@
-<%@include file="/Header.jsp" %>
+<%@include file="/WEB-INF/Header.jsp" %>
     <body>
         <h1><%= "Helloo World!" %></h1>
         <div class="container"><br/>
@@ -11,3 +11,4 @@
         <%@include file="/bodyGridSimple.jsp" %>
     </body>
 </html>
+

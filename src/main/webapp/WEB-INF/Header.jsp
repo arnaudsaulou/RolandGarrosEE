@@ -3,11 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%-- TODO Remove--%>
-    <title>JSP - Hello World</title>
-    <%-- TODO Add --%>
-    <%--<title>JSP - Hello World</title>--%>
-
+    <title>${title}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/webjars/bootstrap/4.5.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/stylesheet.css">
@@ -28,12 +24,12 @@
     <div class="collapse navbar-collapse col-7 d-flex flex-row" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="${pageContext.request.contextPath}/MatchSimple/Femme">
+                <a class="nav-link" href="${pageContext.request.contextPath}/MatchSimple?type=Femme">
                     <button class="btn btn-outline-success btn-outline-success">Simple Femme</button>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/MatchSimple/Homme">
+                <a class="nav-link" href="${pageContext.request.contextPath}/MatchSimple?type=Homme">
                     <button class="btn btn-outline-success btn-outline-success">Simple Homme</button>
                 </a>
             </li>
@@ -98,15 +94,10 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
 
-        <%-- TODO Remove--%>
-        <li class="breadcrumb-item"><a href="#">Match Simple</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Homme</li>
-
-        <%-- TODO Add--%>
-        <%--        <c:forEach items="${ancestor_breadcrumb}" var="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">${breadcrumb}</a></li>
-                </c:forEach>
-                <li class="breadcrumb-item active" aria-current="page">${current_breadcrumb}</li>--%>
+        <c:forEach items="${ancestor_breadcrumb}" var="breadcrumb">
+            <li class="breadcrumb-item">${breadcrumb}</li>
+        </c:forEach>
+        <%-- <li class="breadcrumb-item active" aria-current="page">${current_breadcrumb}</li>--%>
     </ol>
 </nav>
 
