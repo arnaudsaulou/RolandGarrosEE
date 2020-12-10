@@ -10,18 +10,18 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "FirstName")
-    private String firstName;
+    @Column(name = "firstname")
+    private String firstname;
 
-    @Column(name = "LastName")
+    @Column(name = "lastname")
     private String lastname;
 
     public void setId(long id) {
         this.id = id;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
     public void setLastname(String lastname) {
@@ -33,10 +33,10 @@ public class User implements Serializable {
     }
 
     public String getFirstName() {
-        return firstName;
+        return this.firstname;
     }
 
     public String getLastname() {
-        return lastname;
+        return this.lastname;
     }
 }

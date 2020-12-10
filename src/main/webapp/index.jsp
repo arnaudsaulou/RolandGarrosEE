@@ -1,4 +1,4 @@
-<%@include file="/WEB-INF/Header.jsp" %>
+<%@include file="/WEB-INF/header.jsp" %>
     <body>
         <h1><%= "Hello World!" %></h1>
         <div class="container"><br/>
