@@ -1,4 +1,4 @@
-<%@include file="/Header.jsp" %>
+<%@include file="/WEB-INF/Header.jsp" %>
     <body>
         <h1><%= "Hello World!" %></h1>
         <div class="container"><br/>
@@ -10,3 +10,4 @@
         <a href="hello-servlet">Hello Servlet</a>
     </body>
 </html>
+
