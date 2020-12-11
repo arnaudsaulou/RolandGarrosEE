@@ -10,6 +10,6 @@ import java.io.IOException;
 @WebServlet(name = "ajouterJoueurServlet", value = "/joueurs/ajouterJoueur")
 public class AddPlayerServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        this.getServletContext().getRequestDispatcher("/WEB-INF/addPlayerjoueurs.jsp").forward(req, resp);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/addPlayer.jsp").forward(req, resp);
     }
 }
