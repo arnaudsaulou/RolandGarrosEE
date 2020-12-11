@@ -20,7 +20,7 @@
         <c:if test="${error != null}">
             <div class="form-group bg-danger text-white p-2">
                 <div>
-                    <h6 class="m-0 pl-2">${error}</h6>
+                    <h6 class="m-0 pl-2">${connectionError}</h6>
                 </div>
             </div>
         </c:if>

@@ -1,5 +1,6 @@
 package com.cactus.RolandGarrosEE.controller.authentication;
 
+import com.cactus.RolandGarrosEE.controller.Constantes;
 import com.cactus.RolandGarrosEE.entities.User;
 import com.cactus.RolandGarrosEE.utils.exceptions.UserNotFoundException;
 
@@ -14,32 +15,25 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "loginServlet", value = "/connexion")
 public class LoginServlet extends HttpServlet {
 
-    private static final String ATT_SESSION_USER = "userSession";
-    private static final String ATT_SESSION_ORGANIZER = "isOrganizer";
-    private static final String VIEW_LOGIN = "/pages/login.jsp";
-    private static final String HOME_URL = "tournoi?type=MatchSimple&genre=Femme";
-    private static final String FIELD_MAIL = "mail";
-    private static final String FIELD_PASSWORD = "password";
-
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.getServletContext().getRequestDispatcher(VIEW_LOGIN).forward(request, response);
+        this.getServletContext().getRequestDispatcher(Constantes.VIEW_LOGIN).forward(request, response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             User user = this.tryToLogUser(request);
-            this.saveUserIntoSession(request, user);
-            response.sendRedirect(HOME_URL);
+            this.saveUserInfoIntoSession(request, user);
+            response.sendRedirect(Constantes.URL_HOME);
         } catch (UserNotFoundException e) {
-            request.setAttribute("error", e.getMessage());
-            this.getServletContext().getRequestDispatcher(VIEW_LOGIN).forward(request, response);
+            request.setAttribute(Constantes.REQUEST_ATTR_CONNECTION_ERROR, e.getMessage());
+            this.getServletContext().getRequestDispatcher(Constantes.VIEW_LOGIN).forward(request, response);
         }
 
     }
 
     private User tryToLogUser(HttpServletRequest request) throws UserNotFoundException {
-        String mail = this.getValue(request, FIELD_MAIL);
-        String password = this.getValue(request, FIELD_PASSWORD);
+        String mail = this.getValue(request, Constantes.LOGIN_FORM_FIELD_MAIL);
+        String password = this.getValue(request, Constantes.LOGIN_FORM_FIELD_PASSWORD);
         return this.getUserFromDatabase(mail, password);
     }
 
@@ -53,16 +47,17 @@ public class LoginServlet extends HttpServlet {
         User user = new User();
         user.setMail(mail);
         user.setPassword(password);
+        user.setFirstname("Patrick");
+        user.setLastname("Teller");
+        user.setStatus(0);
 
         return user;
     }
 
-    private void saveUserIntoSession(HttpServletRequest request, User user) {
+    private void saveUserInfoIntoSession(HttpServletRequest request, User user) {
         HttpSession session = request.getSession();
-        session.setAttribute(ATT_SESSION_USER, user);
-
-        // TODO Check if user organizer or not
-        session.setAttribute(ATT_SESSION_ORGANIZER, true);
+        session.setAttribute(Constantes.SESSION_USER, user);
+        session.setAttribute(Constantes.SESSION_IS_ORGANIZER, user.getStatus() == 0);
     }
 
     private String getValue(HttpServletRequest request, String field) {
