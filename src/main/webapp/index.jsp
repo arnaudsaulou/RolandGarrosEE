@@ -1,14 +1,23 @@
 <%@include file="/WEB-INF/header.jsp" %>
-    <body>
-        <h1><%= "Helloo World!" %></h1>
-        <div class="container"><br/>
-            <div class="alert alert-success">
-                <strong>Success!</strong> It is working as we expected.
-            </div>
-        </div>
-        <br/>
-        <a href="hello-servlet">Hello Servlet</a>
-        <%@include file="/bodyGridSimple.jsp" %>
-    </body>
-</html>
+<%@include file="/WEB-INF/navbar.jsp" %>
 
+<body>
+<div class="col-4 offset-4 mt-5">
+    <form class="p-5 card card-block bg-light text-dark" action="#" method="post">
+        <h2 class="text-center mb-5">Connexion</h2>
+
+        <div class="form-group">
+            <input name="username" type="text" class="form-control" placeholder="Nom d'utilisateur" required="required">
+        </div>
+
+        <div class="form-group">
+            <input name="password" type="password" class="form-control" placeholder="Mot de passe" required="required">
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">Me connecter</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
