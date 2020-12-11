@@ -19,7 +19,7 @@
         <div class="form-group row">
             <label class="col-3 col-form-label">Nationalité</label>
             <div class="col-9">
-                <input class="form-control" type="text" placeholder="Nationalité" required="required">
+                <%@include file="/includes/countriesDropdownList.jsp" %>
             </div>
         </div>
         <div class="form-group row">
