@@ -1,30 +1,42 @@
 package com.cactus.RolandGarrosEE.controller.tournament;
 
 import com.cactus.RolandGarrosEE.entities.User;
-import com.cactus.RolandGarrosEE.utils.MatchGender;
-import com.cactus.RolandGarrosEE.utils.MatchType;
+import com.cactus.RolandGarrosEE.utils.enums.MatchGender;
+import com.cactus.RolandGarrosEE.utils.enums.MatchType;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-@WebServlet(name = "bodyGridSimpleServlet", value = "/Tournois")
+@WebServlet(name = "tournamentServlet", value = "/tournoi")
 public class TournamentServlet extends HttpServlet {
 
+    private static final String LOGIN_URL = "connexion";
     private static final String TITLE_BASE_SIMPLE = "Match Simple";
     private static final String TITLE_BASE_DOUBLE = "Match Double";
+
     private String[] breadcrumbs = new String[2];
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        this.SelectMatchType(request, response);
+        if (this.isUserLogin(request))
+            this.SelectMatchType(request, response);
+        else
+            response.sendRedirect(LOGIN_URL);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+    }
+
+    private boolean isUserLogin(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("userSession");
+        return user != null;
     }
 
     private void UpdateBreadcrumb(MatchType matchType, MatchGender matchGender) {
@@ -61,15 +73,6 @@ public class TournamentServlet extends HttpServlet {
     private void setAttribute(HttpServletRequest request, String title) {
         request.setAttribute("title", title);
         request.setAttribute("breadcrumbs", breadcrumbs);
-
-        /* TODO Remove*/
-        User user = new User();
-        user.setFirstname("Arnaud");
-        user.setLastname("Saulou");
-        request.setAttribute("isConnected", user!= null);
-        request.setAttribute("isOrganizer", false);
-
-        request.setAttribute("user", user);
     }
 
     private void NotFoundPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -78,15 +81,12 @@ public class TournamentServlet extends HttpServlet {
 
     private void SimpleMatch(HttpServletRequest request, HttpServletResponse response, MatchGender matchGender) throws ServletException, IOException {
         this.setAttribute(request, TITLE_BASE_SIMPLE + " - " + matchGender.toString());
-        this.getServletContext().getRequestDispatcher("/WEB-INF/grids/bodyGridSimple.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/pages/bodyGridSimple.jsp").forward(request, response);
     }
 
     private void DoubleMatch(HttpServletRequest request, HttpServletResponse response, MatchGender matchGender) throws ServletException, IOException {
         this.setAttribute(request, TITLE_BASE_DOUBLE + "-" + matchGender.toString());
-        this.getServletContext().getRequestDispatcher("/WEB-INF/grids/bodyGridDouble.jsp").forward(request, response);
-
-        // TODO Remove
-        this.getServletContext().getRequestDispatcher("/WEB-INF/header.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/bodyGridDouble.jsp").forward(request, response);
     }
 
 }
