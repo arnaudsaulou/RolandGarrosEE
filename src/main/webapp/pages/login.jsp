@@ -1,5 +1,4 @@
-<%@include file="/WEB-INF/header.jsp" %>
-<%@include file="/WEB-INF/navbar.jsp" %>
+<%@include file="/includes/navbar.jsp" %>
 
 <body>
 <div class="col-4 offset-4 mt-5">
@@ -7,7 +6,7 @@
         <h2 class="text-center mb-5">Connexion</h2>
 
         <div class="form-group">
-            <input name="username" type="text" class="form-control" placeholder="Nom d'utilisateur" required="required">
+            <input name="mail" type="email" class="form-control" placeholder="Email" required="required">
         </div>
 
         <div class="form-group">

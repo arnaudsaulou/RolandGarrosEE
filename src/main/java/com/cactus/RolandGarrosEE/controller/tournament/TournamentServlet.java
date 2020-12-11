@@ -9,10 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-@WebServlet(name = "bodyGridSimpleServlet", value = "/Tournois")
+@WebServlet(name = "tournamentServlet", value = "/Tournois")
 public class TournamentServlet extends HttpServlet {
 
     private static final String TITLE_BASE_SIMPLE = "Match Simple";
@@ -62,14 +63,9 @@ public class TournamentServlet extends HttpServlet {
         request.setAttribute("title", title);
         request.setAttribute("breadcrumbs", breadcrumbs);
 
-        /* TODO Remove*/
-        User user = new User();
-        user.setFirstname("Arnaud");
-        user.setLastname("Saulou");
-        request.setAttribute("isConnected", user!= null);
+        /* TODO */
+        request.setAttribute("isConnected", true);
         request.setAttribute("isOrganizer", false);
-
-        request.setAttribute("user", user);
     }
 
     private void NotFoundPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -78,7 +74,7 @@ public class TournamentServlet extends HttpServlet {
 
     private void SimpleMatch(HttpServletRequest request, HttpServletResponse response, MatchGender matchGender) throws ServletException, IOException {
         this.setAttribute(request, TITLE_BASE_SIMPLE + " - " + matchGender.toString());
-        this.getServletContext().getRequestDispatcher("/WEB-INF/bodyGridSimple.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/pages/bodyGridSimple.jsp").forward(request, response);
     }
 
     private void DoubleMatch(HttpServletRequest request, HttpServletResponse response, MatchGender matchGender) throws ServletException, IOException {

@@ -1,4 +1,4 @@
-<%@include file="/WEB-INF/header.jsp" %>
+<%@include file="/includes/header.jsp" %>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="col-3 flex-row">
@@ -7,7 +7,7 @@
         <h2 class="d-inline align-middle">Roland Garros Planer</h2>
     </div>
 
-    <c:if test="${isConnected}">
+    <c:if test="${sessionScope.userSession != null}">
 
         <div class="collapse navbar-collapse col-7 d-flex flex-row" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
@@ -55,11 +55,11 @@
         </div>
 
         <div class="col-2 d-flex flex-row-reverse">
-            <a class="text-decoration-none" href="${pageContext.request.contextPath}/Deconnexion">
+            <a class="text-decoration-none" href="${pageContext.request.contextPath}/deconnexion">
                 <div>
                     <div class="d-inline align-middle text-right">
-                        <h4 class="d-inline align-middle">${user.firstname} ${user.lastname}</h4>
-                        <h6>Déconnexion</h6>
+                        <h4 class="d-inline align-middle"><c:out value='${sessionScope.userSession.mail}' /></h4>
+                        <h6>Deconnexion</h6>
                     </div>
                 </div>
             </a>
@@ -69,7 +69,7 @@
 
 </nav>
 
-<c:if test="${isConnected}">
+<c:if test="${sessionScope.userSession != null}">
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">

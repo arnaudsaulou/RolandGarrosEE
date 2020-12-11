@@ -1,5 +1,4 @@
-<%@include file="/WEB-INF/header.jsp" %>
-<%@include file="/WEB-INF/navbar.jsp" %>
+<%@include file="/includes/navbar.jsp" %>
 
 <body>
 
@@ -10,6 +9,7 @@
 </c:if>
 
 <div class="container">
+
     <table class="table">
         <thead class="thead-light">
         <tr>
