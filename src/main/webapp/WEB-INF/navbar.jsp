@@ -2,8 +2,9 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="col-3 flex-row">
-        <img src="${pageContext.request.contextPath}/resources/svg/roland_garros_logo.svg" width="80" height="80"
-             alt="Roland Garros Logo">
+        <a class="nav-link" href="${pageContext.request.contextPath}/Tournois?type=MatchSimple&genre=Femme">
+            <img src="${pageContext.request.contextPath}/resources/svg/roland_garros_logo.svg" width="80" height="80" alt="Roland Garros Logo">
+        </a>
         <h2 class="d-inline align-middle">Roland Garros Planer</h2>
     </div>
 
@@ -12,42 +13,42 @@
         <div class="collapse navbar-collapse col-7 d-flex flex-row" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/MatchSimple?type=Femme">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/Tournois?type=MatchSimple&genre=Femme">
                         <button class="btn btn-outline-success btn-outline-success">Simple Femme</button>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/MatchSimple?type=Homme">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/Tournois?type=MatchSimple&genre=Homme">
                         <button class="btn btn-outline-success btn-outline-success">Simple Homme</button>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/MatchDouble/Homme">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/Tournois?type=MatchDouble&genre=Femme">
                         <button class="btn btn-outline-success btn-outline-success">Double Femme</button>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/MatchDouble/Homme">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/Tournois?type=MatchDouble&genre=Homme">
                         <button class="btn btn-outline-success btn-outline-success">Double Homme</button>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/MatchDouble/Mixte">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/Tournois?type=MatchDouble&genre=Mixte">
                         <button class="btn btn-outline-success btn-outline-success">Double Mixte</button>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/Joueurs">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/joueurs">
                         <button class="btn btn-outline-success btn-outline-success">Joueurs</button>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/Equipes">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/equipes">
                         <button class="btn btn-outline-success btn-outline-success">Equipes</button>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/Arbitres">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/arbitres">
                         <button class="btn btn-outline-success btn-outline-success">Arbitres</button>
                     </a>
                 </li>
