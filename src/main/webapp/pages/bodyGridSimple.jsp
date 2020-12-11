@@ -1,8 +1,8 @@
-<%@include file="/WEB-INF/navbar.jsp" %>
+<%@include file="/includes/navbar.jsp" %>
 
 <body>
 
-<c:if test="${isOrganizer}">
+<c:if test="${sessionScope.isOrganizer}">
     <a href="">
         <button type="button" class="btn btn-secondary mt-2 mr-5" style="float:right;">Ajouter</button>
     </a>

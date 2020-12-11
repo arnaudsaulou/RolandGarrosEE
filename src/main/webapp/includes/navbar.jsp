@@ -12,27 +12,27 @@
         <div class="collapse navbar-collapse col-7 d-flex flex-row" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/MatchSimple?type=Femme">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/tournoi?type=MatchSimple&genre=Femme">
                         <button class="btn btn-outline-success btn-outline-success">Simple Femme</button>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/MatchSimple?type=Homme">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/tournoi?type=MatchSimple&genre=Homme">
                         <button class="btn btn-outline-success btn-outline-success">Simple Homme</button>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/MatchDouble/Homme">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/tournoi?type=MatchDouble&genre=Femme">
                         <button class="btn btn-outline-success btn-outline-success">Double Femme</button>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/MatchDouble/Homme">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/tournoi?type=MatchDouble&genre=Homme">
                         <button class="btn btn-outline-success btn-outline-success">Double Homme</button>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/MatchDouble/Mixte">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/tournoi?type=MatchDouble&genre=Mixte">
                         <button class="btn btn-outline-success btn-outline-success">Double Mixte</button>
                     </a>
                 </li>
