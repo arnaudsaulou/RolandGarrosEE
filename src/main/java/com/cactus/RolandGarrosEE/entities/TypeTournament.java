@@ -2,8 +2,7 @@ package com.cactus.RolandGarrosEE.entities;
 
 public enum TypeTournament {
     SINGLE ("SINGLE"),
-    DOUBLE ("DOUBLE"),
-    MIXTE ("MIXTE");
+    DOUBLE ("DOUBLE");
 
     private final String name;
 

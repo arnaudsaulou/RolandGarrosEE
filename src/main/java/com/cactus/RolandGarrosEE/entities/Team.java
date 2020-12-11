@@ -19,4 +19,42 @@ public class Team {
     private Player playerA;
     @ManyToOne
     private Player playerB;
+
+    public Team(String name, Player playerA, Player playerB) {
+        this.name = name;
+        this.playerA = playerA;
+        this.playerB = playerB;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Player getPlayerA() {
+        return playerA;
+    }
+
+    public void setPlayerA(Player playerA) {
+        this.playerA = playerA;
+    }
+
+    public Player getPlayerB() {
+        return playerB;
+    }
+
+    public void setPlayerB(Player playerB) {
+        this.playerB = playerB;
+    }
 }
