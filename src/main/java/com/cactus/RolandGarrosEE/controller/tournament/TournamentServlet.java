@@ -82,7 +82,8 @@ public class TournamentServlet extends HttpServlet {
     }
 
     private void DoubleMatch(HttpServletRequest request, HttpServletResponse response, MatchGender matchGender) throws ServletException, IOException {
-        this.setAttribute(request, TITLE_BASE_DOUBLE + " - " + matchGender.toString());
+        this.setAttribute(request, TITLE_BASE_DOUBLE + "-" + matchGender.toString());
+        this.getServletContext().getRequestDispatcher("/WEB-INF/bodyGridDouble.jsp").forward(request, response);
 
         // TODO Remove
         this.getServletContext().getRequestDispatcher("/WEB-INF/header.jsp").forward(request, response);
