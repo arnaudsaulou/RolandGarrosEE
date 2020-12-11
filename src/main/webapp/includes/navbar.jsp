@@ -1,8 +1,8 @@
-<%@include file="/WEB-INF/header.jsp" %>
+<%@include file="/includes/header.jsp" %>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="col-3 flex-row">
-        <a class="nav-link" href="${pageContext.request.contextPath}/Tournois?type=MatchSimple&genre=Femme">
+        <a href="${pageContext.request.contextPath}/tournoi?type=MatchSimple&genre=Femme">
             <img src="${pageContext.request.contextPath}/resources/svg/roland_garros_logo.svg" width="80" height="80" alt="Roland Garros Logo">
         </a>
         <h2 class="d-inline align-middle">Roland Garros Planer</h2>

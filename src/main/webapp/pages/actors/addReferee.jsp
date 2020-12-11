@@ -1,4 +1,4 @@
-<%@include file="/WEB-INF/navbar.jsp" %>
+<%@include file="/includes/navbar.jsp" %>
 
 <body>
 <div class="col-6 offset-3 mt-5 mb-0">

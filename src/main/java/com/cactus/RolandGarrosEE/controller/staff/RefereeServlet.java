@@ -10,6 +10,6 @@ import java.io.IOException;
 @WebServlet(name = "arbitreServlet", value = "/arbitres")
 public class RefereeServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        this.getServletContext().getRequestDispatcher("/WEB-INF/grids/bodyGridReferees.jsp").forward(req, resp);
+        this.getServletContext().getRequestDispatcher("/pages/grids/bodyGridReferees.jsp").forward(req, resp);
     }
 }

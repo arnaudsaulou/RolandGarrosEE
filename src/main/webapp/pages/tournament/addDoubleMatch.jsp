@@ -1,9 +1,9 @@
-<%@include file="/WEB-INF/navbar.jsp" %>
+<%@include file="/includes/navbar.jsp" %>
 
 <body>
 <div class="col-6 offset-3 mt-5 mb-0">
     <form class="p-5 card bg-light text-dark mb-0" action="#" method="post">
-        <h2 class="text-center mb-5">Ajouter Match Simple</h2>
+        <h2 class="text-center mb-5">Ajouter Match Double</h2>
         <div class="form-group row">
             <label for="example-datetime-local-input" class="col-3 col-form-label">Date de début</label>
             <div class="col-8">
@@ -12,15 +12,15 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-3 col-form-label">Joueur A</label>
+            <label class="col-3 col-form-label">Equipe A</label>
             <div class="col-8">
-                <input class="form-control" type="text" placeholder="JoueurA" required="required">
+                <input class="form-control" type="text" placeholder="Equipe A" required="required">
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-3 col-form-label">Joueur B</label>
+            <label class="col-3 col-form-label">Equipe B</label>
             <div class="col-8">
-                <input class="form-control" type="text" placeholder="JoueurB" required="required">
+                <input class="form-control" type="text" placeholder="Equipe A" required="required">
             </div>
         </div>
         <div class="form-group row">
@@ -42,6 +42,7 @@
     </form>
 
 </div>
+
 
 </body>
 </html>

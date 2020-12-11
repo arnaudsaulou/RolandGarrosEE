@@ -76,17 +76,17 @@ public class TournamentServlet extends HttpServlet {
     }
 
     private void NotFoundPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.getServletContext().getRequestDispatcher("/WEB-INF/notFound.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/pages/notFound.jsp").forward(request, response);
     }
 
     private void SimpleMatch(HttpServletRequest request, HttpServletResponse response, MatchGender matchGender) throws ServletException, IOException {
         this.setAttribute(request, TITLE_BASE_SIMPLE + " - " + matchGender.toString());
-        this.getServletContext().getRequestDispatcher("/pages/bodyGridSimple.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/pages/grids/bodyGridSimple.jsp").forward(request, response);
     }
 
     private void DoubleMatch(HttpServletRequest request, HttpServletResponse response, MatchGender matchGender) throws ServletException, IOException {
         this.setAttribute(request, TITLE_BASE_DOUBLE + "-" + matchGender.toString());
-        this.getServletContext().getRequestDispatcher("/WEB-INF/bodyGridDouble.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/pages/grids/bodyGridDouble.jsp").forward(request, response);
     }
 
 }

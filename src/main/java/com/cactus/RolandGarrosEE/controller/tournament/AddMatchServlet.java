@@ -12,10 +12,10 @@ public class AddMatchServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getParameter("type").equals("double"))
         {
-            this.getServletContext().getRequestDispatcher("/WEB-INF/tournament/addDoubleMatch.jsp").forward(req, resp);
+            this.getServletContext().getRequestDispatcher("/pages/tournament/addDoubleMatch.jsp").forward(req, resp);
 
         } else {
-            this.getServletContext().getRequestDispatcher("/WEB-INF/tournament/addSingleMatch.jsp").forward(req, resp);
+            this.getServletContext().getRequestDispatcher("/pages/tournament/addSingleMatch.jsp").forward(req, resp);
         }
     }
 }
