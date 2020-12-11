@@ -1,11 +1,10 @@
-<%@include file="/WEB-INF/header.jsp" %>
 <%@include file="/WEB-INF/navbar.jsp" %>
 
 <body>
 
 <c:if test="${isOrganizer}">
     <a href="">
-        <button type="button" class="btn btn-secondary ml-5" style="float:right;">Nouveau</button>
+        <button type="button" class="btn btn-secondary mr-1" style="float:right;">Ajouter</button>
     </a>
 </c:if>
 
@@ -44,3 +43,4 @@
 </div>
 
 </body>
+</html>
