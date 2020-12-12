@@ -34,10 +34,10 @@ public class AddRefereeServlet extends BaseServlet {
         try {
             this.checkAuthentication(req);
             this.tryToSaveReferee(req);
-            this.getServletContext().getRequestDispatcher(Constantes.VIEW_REFEREES).forward(req, resp);
+            resp.sendRedirect("../" + Constantes.URL_REFEREES);
         } catch (UnauthenticatedUserException e) {
             resp.sendRedirect("../" + Constantes.URL_LOGIN);
-        } catch (InvalidActorException e){
+        } catch (InvalidActorException e) {
             this.getServletContext().getRequestDispatcher(Constantes.VIEW_ADD_REFEREE).forward(req, resp);
         }
     }
@@ -51,16 +51,16 @@ public class AddRefereeServlet extends BaseServlet {
     }
 
     private void tryToSaveReferee(HttpServletRequest req) throws InvalidActorException {
-        String firstname = this.getValue(req, "actorFirstname");
-        String lastname = this.getValue(req, "actorLastname");
-        String nationality = this.getValue(req, "actorNationality");
+        String firstname = this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_FIRSTNAME);
+        String lastname = this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_LASTNAME);
+        String nationality = this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_NATIONALITY);
         this.validateNewReferee(firstname, lastname, nationality);
         Arbitrator newArbitrator = new Arbitrator(firstname, lastname, nationality);
         refereePersistentRemote.saveArbitrator(newArbitrator);
     }
 
     private void validateNewReferee(String firstname, String lastname, String nationality) throws InvalidActorException {
-        if(firstname == null || lastname == null || nationality == null)
+        if (firstname == null || lastname == null || nationality == null)
             throw new InvalidActorException();
     }
 

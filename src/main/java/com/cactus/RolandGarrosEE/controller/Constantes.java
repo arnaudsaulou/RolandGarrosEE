@@ -32,6 +32,7 @@ public class Constantes {
 
     public static final String URL_HOME = "tournoi?type=MatchSimple&genre=Femme";
     public static final String URL_LOGIN = "connexion";
+    public static final String URL_REFEREES = "arbitres";
 
     //endregion
 
@@ -46,6 +47,9 @@ public class Constantes {
 
     public static final String LOGIN_FORM_FIELD_MAIL = "mail";
     public static final String LOGIN_FORM_FIELD_PASSWORD = "password";
+    public static final String NEW_ACTOR_FORM_FIELD_FIRSTNAME = "actorFirstname";
+    public static final String NEW_ACTOR_FORM_FIELD_LASTNAME = "actorLastname";
+    public static final String NEW_ACTOR_FORM_FIELD_NATIONALITY = "actorNationality";
 
     //endregion
 
@@ -54,6 +58,7 @@ public class Constantes {
     public static final String REQUEST_ATTR_TITLE = "title";
     public static final String REQUEST_ATTR_CONNECTION_ERROR = "connectionError";
     public static final String REQUEST_ATTR_BREADCRUMBS = "breadcrumbs";
+    public static final String REQUEST_ATTR_REFEREES_LIST = "refereesList";
 
     //endregion
 

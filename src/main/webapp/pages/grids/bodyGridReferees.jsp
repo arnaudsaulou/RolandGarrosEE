@@ -22,7 +22,7 @@
         <tbody>
         <c:forEach items="${refereesList}" var="referee">
             <tr class="d-flex">
-                <td class="col-3 text-center">${referee.number}</td>
+                <td class="col-3 text-center">${referee.id}</td>
                 <td class="col-3 text-center">${referee.lastname}</td>
                 <td class="col-3 text-center">${referee.firstname}</td>
                 <td class="col-3 text-center">${referee.nationality}</td>

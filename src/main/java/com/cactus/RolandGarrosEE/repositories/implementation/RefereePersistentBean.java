@@ -28,6 +28,6 @@ public class RefereePersistentBean implements RefereePersistentRemote {
     }
 
     public List<Arbitrator> allArbitrator() {
-        return null;
+        return entityManager.createQuery("SELECT arbitrators FROM Arbitrator arbitrators", Arbitrator.class).getResultList();
     }
 }
