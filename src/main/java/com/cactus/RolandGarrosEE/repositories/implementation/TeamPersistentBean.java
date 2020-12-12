@@ -7,7 +7,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.Optional;
 
 @Stateless
 public class TeamPersistentBean implements TeamPersistentRemote {
@@ -15,16 +14,50 @@ public class TeamPersistentBean implements TeamPersistentRemote {
     EntityManager entityManager;
 
     public void saveTeam(Team team) {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(team);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            e.printStackTrace();
+        }
     }
 
     public void deleteTeam(Team team) {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.remove(team);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            e.printStackTrace();
+        }
     }
 
-    public Optional<Team> getTeamById(int teamId) {
-        return Optional.empty();
+    public Team getTeamById(int teamId) {
+        Team team = null;
+        try {
+            entityManager.getTransaction().begin();
+            team = entityManager.find(Team.class, teamId);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return team;
     }
 
     public List<Team> allTeam() {
-        return null;
+        List<Team> teams = null;
+        try {
+            entityManager.getTransaction().begin();
+            teams = entityManager.createQuery("FROM Team", Team.class).getResultList();
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return teams;
     }
 }
