@@ -1,8 +1,8 @@
 package com.cactus.RolandGarrosEE.utils.exceptions;
 
-public class UnauthenticatedUserExcepetion extends Exception{
+public class InvalidActorException extends Exception{
 
-    public UnauthenticatedUserExcepetion() {
+    public InvalidActorException() {
         super("Connexion requise pour afficher cette page");
     }
 }

@@ -4,7 +4,7 @@ import com.cactus.RolandGarrosEE.controller.BaseServlet;
 import com.cactus.RolandGarrosEE.controller.Constantes;
 import com.cactus.RolandGarrosEE.utils.enums.MatchGender;
 import com.cactus.RolandGarrosEE.utils.enums.MatchType;
-import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserExcepetion;
+import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +18,7 @@ public class TournamentServlet extends BaseServlet {
         try{
             this.checkAuthentication(request);
             this.selectMatchType(request, response);
-        } catch (UnauthenticatedUserExcepetion e){
+        } catch (UnauthenticatedUserException e){
             response.sendRedirect(Constantes.URL_LOGIN);
         }
     }

@@ -1,12 +1,13 @@
 package com.cactus.RolandGarrosEE.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "ARBITRATOR")
-public class Arbitrator extends Member {
+public class Arbitrator extends Member implements Serializable {
     @ManyToMany
     private List<SingleMatch> matchsSingle;
     @ManyToMany
