@@ -23,6 +23,8 @@ public class Constantes {
     public static final String VIEW_REFEREES = "/pages/grids/bodyGridReferees.jsp";
     public static final String VIEW_ADD_SINGLE_MATCH = "/pages/tournament/addSingleMatch.jsp";
     public static final String VIEW_ADD_DOUBLE_MATCH = "/pages/tournament/addDoubleMatch.jsp";
+    public static final String VIEW_RESULT_SINGLE_MATCH = "/pages/tournament/resultSingleMatch.jsp";
+    public static final String VIEW_RESULT_DOUBLE_MATCH = "/pages/tournament/resultDoubleMatch.jsp";
 
     //endregion
 
