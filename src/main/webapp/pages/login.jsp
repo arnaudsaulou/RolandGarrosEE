@@ -17,7 +17,7 @@
             <button type="submit" class="btn btn-primary btn-block">Me connecter</button>
         </div>
 
-        <c:if test="${error != null}">
+        <c:if test="${connectionError != null}">
             <div class="form-group bg-danger text-white p-2">
                 <div>
                     <h6 class="m-0 pl-2">${connectionError}</h6>

@@ -3,9 +3,15 @@ package com.cactus.RolandGarrosEE.controller.authentication;
 import com.cactus.RolandGarrosEE.controller.BaseServlet;
 import com.cactus.RolandGarrosEE.controller.Constantes;
 import com.cactus.RolandGarrosEE.entities.User;
+import com.cactus.RolandGarrosEE.repositories.remotes.UserPeristentRemote;
+import com.cactus.RolandGarrosEE.utils.PasswordUtils;
+import com.cactus.RolandGarrosEE.utils.exceptions.InvalidPasswordException;
 import com.cactus.RolandGarrosEE.utils.exceptions.UserNotFoundException;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +22,9 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "loginServlet", value = "/connexion")
 public class LoginServlet extends BaseServlet {
 
+    @EJB
+    UserPeristentRemote userPeristentRemote;
+
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.getServletContext().getRequestDispatcher(Constantes.VIEW_LOGIN).forward(request, response);
     }
@@ -25,32 +34,31 @@ public class LoginServlet extends BaseServlet {
             User user = this.tryToLogUser(request);
             this.saveUserInfoIntoSession(request, user);
             response.sendRedirect(Constantes.URL_HOME);
-        } catch (UserNotFoundException e) {
+        } catch (UserNotFoundException | InvalidPasswordException e) {
             request.setAttribute(Constantes.REQUEST_ATTR_CONNECTION_ERROR, e.getMessage());
             this.getServletContext().getRequestDispatcher(Constantes.VIEW_LOGIN).forward(request, response);
         }
 
     }
 
-    private User tryToLogUser(HttpServletRequest request) throws UserNotFoundException {
+    private User tryToLogUser(HttpServletRequest request) throws UserNotFoundException, InvalidPasswordException {
         String mail = this.getValue(request, Constantes.LOGIN_FORM_FIELD_MAIL);
         String password = this.getValue(request, Constantes.LOGIN_FORM_FIELD_PASSWORD);
         return this.getUserFromDatabase(mail, password);
     }
 
-    private User getUserFromDatabase(String mail, String password) throws UserNotFoundException {
+    private User getUserFromDatabase(String mail, String password) throws UserNotFoundException, InvalidPasswordException {
+        boolean connectionOk = false;
 
-        // TODO Get data from database (Wait UserEJB)
+        User user = userPeristentRemote.findUserByMail(mail);
 
-        if(mail.equals("error@test.com"))
+        if (user == null)
             throw new UserNotFoundException();
 
-        User user = new User();
-        user.setMail(mail);
-        user.setPassword(password);
-        user.setFirstname("Patrick");
-        user.setLastname("Teller");
-        user.setStatus(0);
+        connectionOk = PasswordUtils.verifyPassword(user.getPassword(), password);
+
+        if (!connectionOk)
+            throw new InvalidPasswordException();
 
         return user;
     }
