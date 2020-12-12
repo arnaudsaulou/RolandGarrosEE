@@ -1,11 +1,11 @@
 <%@include file="/includes/header.jsp" %>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="col-3 flex-row">
+    <div class="col-3 p-0">
         <a href="${pageContext.request.contextPath}/tournoi?type=MatchSimple&genre=Femme">
-            <img src="${pageContext.request.contextPath}/resources/svg/roland_garros_logo.svg" width="80" height="80" alt="Roland Garros Logo">
+            <img src="${pageContext.request.contextPath}/resources/svg/roland_garros_logo.svg" width="70" height="70" alt="Roland Garros Logo">
         </a>
-        <h2 class="d-inline align-middle">Roland Garros Planer</h2>
+        <h3 class="d-inline align-middle">Roland Garros Planer</h3>
     </div>
 
     <c:if test="${sessionScope.userSession != null}">
@@ -59,7 +59,7 @@
             <a class="text-decoration-none" href="${pageContext.request.contextPath}/deconnexion">
                 <div>
                     <div class="d-inline align-middle text-right">
-                        <h4 class="d-inline align-middle"><c:out value='${sessionScope.userSession.mail}' /></h4>
+                        <h4><c:out value='${sessionScope.userSession.firstname}' /></h4>
                         <h6>Deconnexion</h6>
                     </div>
                 </div>
