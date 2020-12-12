@@ -17,7 +17,7 @@ public class Player extends Member implements Serializable {
     @Column(name="GENDER")
     @Enumerated(EnumType.STRING)
     private Gender gender;
-    @OneToMany()
+    @OneToMany
     private List<SingleMatch> matchsSingle;
     @OneToMany
     private List<DoubleMatch> matchsDouble;

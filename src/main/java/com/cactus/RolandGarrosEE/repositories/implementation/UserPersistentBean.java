@@ -29,7 +29,7 @@ public class UserPersistentBean implements UserPeristentRemote {
         try {
             entityManager.getTransaction().begin();
             entityManager.remove(user);
-            entityManager.getTransaction().rollback();
+            entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             e.printStackTrace();
