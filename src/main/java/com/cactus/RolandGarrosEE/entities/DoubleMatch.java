@@ -15,8 +15,8 @@ public class DoubleMatch extends Match implements Serializable {
     public DoubleMatch() {
     }
 
-    public DoubleMatch(Date dateEnd, Date dateBegin, int scoreA, int scoreB, Tournament tournament, Fields fields, Arbitrator arbitrator) {
-        super(dateEnd, dateBegin, scoreA, scoreB, tournament, fields, arbitrator);
+    public DoubleMatch(Date dateEnd, Date dateBegin, int scoreA, int scoreB, Tournament tournament, Fields fields, Referee referee) {
+        super(dateEnd, dateBegin, scoreA, scoreB, tournament, fields, referee);
     }
 
     public Team getTeamA() {

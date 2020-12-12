@@ -2,7 +2,7 @@ package com.cactus.RolandGarrosEE.controller.staff;
 
 import com.cactus.RolandGarrosEE.controller.BaseServlet;
 import com.cactus.RolandGarrosEE.controller.Constantes;
-import com.cactus.RolandGarrosEE.entities.Arbitrator;
+import com.cactus.RolandGarrosEE.entities.Referee;
 import com.cactus.RolandGarrosEE.repositories.remotes.RefereePersistentRemote;
 import com.cactus.RolandGarrosEE.utils.exceptions.InvalidActorException;
 import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserException;
@@ -55,8 +55,8 @@ public class AddRefereeServlet extends BaseServlet {
         String lastname = this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_LASTNAME);
         String nationality = this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_NATIONALITY);
         this.validateNewReferee(firstname, lastname, nationality);
-        Arbitrator newArbitrator = new Arbitrator(firstname, lastname, nationality);
-        refereePersistentRemote.saveArbitrator(newArbitrator);
+        Referee newReferee = new Referee(firstname, lastname, nationality);
+        refereePersistentRemote.saveArbitrator(newReferee);
     }
 
     private void validateNewReferee(String firstname, String lastname, String nationality) throws InvalidActorException {

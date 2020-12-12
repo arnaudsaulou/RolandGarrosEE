@@ -31,19 +31,19 @@ public abstract class Match implements Serializable {
     @ManyToOne
     private Fields fields;
     @ManyToOne
-    private Arbitrator arbitrator;
+    private Referee referee;
 
     public Match() {
     }
 
-    public Match(Date dateBegin, Date dateEnd, int scoreA, int scoreB, Tournament tournament, Fields fields, Arbitrator arbitrator) {
+    public Match(Date dateBegin, Date dateEnd, int scoreA, int scoreB, Tournament tournament, Fields fields, Referee referee) {
         this.dateBegin = dateBegin;
         this.dateEnd = dateEnd;
         this.scoreA = scoreA;
         this.scoreB = scoreB;
         this.tournament = tournament;
         this.fields = fields;
-        this.arbitrator = arbitrator;
+        this.referee = referee;
     }
 
     public int getId() {
@@ -102,11 +102,11 @@ public abstract class Match implements Serializable {
         this.fields = fields;
     }
 
-    public Arbitrator getArbitrator() {
-        return arbitrator;
+    public Referee getArbitrator() {
+        return referee;
     }
 
-    public void setArbitrator(Arbitrator arbitrator) {
-        this.arbitrator = arbitrator;
+    public void setArbitrator(Referee referee) {
+        this.referee = referee;
     }
 }

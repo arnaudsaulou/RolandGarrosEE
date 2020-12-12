@@ -2,7 +2,7 @@ package com.cactus.RolandGarrosEE.controller.staff;
 
 import com.cactus.RolandGarrosEE.controller.BaseServlet;
 import com.cactus.RolandGarrosEE.controller.Constantes;
-import com.cactus.RolandGarrosEE.entities.Arbitrator;
+import com.cactus.RolandGarrosEE.entities.Referee;
 import com.cactus.RolandGarrosEE.repositories.remotes.RefereePersistentRemote;
 import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserException;
 
@@ -39,7 +39,7 @@ public class RefereeServlet extends BaseServlet {
     }
 
     private void getRefereesList(HttpServletRequest req){
-        List<Arbitrator> refereesList = refereePersistentRemote.allArbitrator();
+        List<Referee> refereesList = refereePersistentRemote.allArbitrator();
         req.setAttribute(Constantes.REQUEST_ATTR_REFEREES_LIST,refereesList);
     }
 

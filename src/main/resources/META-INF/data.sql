@@ -16,7 +16,7 @@ DELETE FROM doublematch where DATEBEGIN = DATEBEGIN;
 DELETE FROM team where NAME = Name;
 DELETE FROM singlematch where DATEBEGIN = DATEBEGIN;
 DELETE FROM PLAYER where FIRSTNAME = FIRSTNAME;
-DELETE FROM arbitrator where FIRSTNAME = FIRSTNAME;
+DELETE FROM referee where FIRSTNAME = FIRSTNAME;
 DELETE FROM field where NAME = Name;
 DELETE FROM tournament where DATEBEGIN = DATEBEGIN;
 
@@ -66,16 +66,16 @@ VALUES ('Kaja', 'JUVAN', 'SLO', null, 'FEMME');
 
 -- INSERT ARBITRATOR --
 
-INSERT arbitrator(firstname, lastname, nationality)
+INSERT referee(firstname, lastname, nationality)
 VALUES ('Pierre', 'BACCHI', 'FRA');
 
-INSERT arbitrator(firstname, lastname, nationality)
+INSERT referee(firstname, lastname, nationality)
 VALUES ('Renaud', 'LICHTENSTEIN', 'FRA');
 
-INSERT arbitrator(firstname, lastname, nationality)
+INSERT referee(firstname, lastname, nationality)
 VALUES ('Jaume', 'CAMPISTOL', 'ESP');
 
-INSERT arbitrator(firstname, lastname, nationality)
+INSERT referee(firstname, lastname, nationality)
 VALUES ('Nico', 'HELWERTH', 'ALL');
 
 -- INSERT FIELD --

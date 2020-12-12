@@ -1,6 +1,6 @@
 package com.cactus.RolandGarrosEE.repositories.implementation;
 
-import com.cactus.RolandGarrosEE.entities.Arbitrator;
+import com.cactus.RolandGarrosEE.entities.Referee;
 import com.cactus.RolandGarrosEE.repositories.remotes.RefereePersistentRemote;
 
 import javax.ejb.Stateless;
@@ -15,19 +15,19 @@ public class RefereePersistentBean implements RefereePersistentRemote {
     @PersistenceContext(unitName = "PersistentUnitPU")
     EntityManager entityManager;
 
-    public void saveArbitrator(Arbitrator arbitrator) {
-        entityManager.persist(arbitrator);
+    public void saveArbitrator(Referee referee) {
+        entityManager.persist(referee);
     }
 
-    public void deleteArbitrator(Arbitrator arbitrator) {
-        entityManager.remove(arbitrator);
+    public void deleteArbitrator(Referee referee) {
+        entityManager.remove(referee);
     }
 
-    public Optional<Arbitrator> getArbitratorById(int arbitratorId) {
+    public Optional<Referee> getArbitratorById(int arbitratorId) {
         return Optional.empty();
     }
 
-    public List<Arbitrator> allArbitrator() {
-        return entityManager.createQuery("SELECT arbitrators FROM Arbitrator arbitrators", Arbitrator.class).getResultList();
+    public List<Referee> allArbitrator() {
+        return entityManager.createQuery("SELECT arbitrators FROM Referee arbitrators", Referee.class).getResultList();
     }
 }

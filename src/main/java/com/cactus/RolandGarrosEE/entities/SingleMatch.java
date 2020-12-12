@@ -1,7 +1,5 @@
 package com.cactus.RolandGarrosEE.entities;
 
-import com.sun.istack.NotNull;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -17,9 +15,9 @@ public class SingleMatch extends Match implements Serializable {
     public SingleMatch() {
     }
 
-    public SingleMatch(Date dateEnd, Date dateBegin, int scoreA, int scoreB, Tournament tournament, Fields fields, Arbitrator arbitrator) {
+    public SingleMatch(Date dateEnd, Date dateBegin, int scoreA, int scoreB, Tournament tournament, Fields fields, Referee referee) {
 
-        super(dateEnd, dateBegin, scoreA, scoreB, tournament, fields, arbitrator);
+        super(dateEnd, dateBegin, scoreA, scoreB, tournament, fields, referee);
     }
 
     public Player getPlayerA() {
