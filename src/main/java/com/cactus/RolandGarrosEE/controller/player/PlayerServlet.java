@@ -2,6 +2,7 @@ package com.cactus.RolandGarrosEE.controller.player;
 
 import com.cactus.RolandGarrosEE.controller.BaseServlet;
 import com.cactus.RolandGarrosEE.controller.Constantes;
+import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserExcepetion;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,8 +14,13 @@ import java.io.IOException;
 public class PlayerServlet extends BaseServlet {
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        this.setupViewAttributes(req);
-        this.getServletContext().getRequestDispatcher(Constantes.VIEW_PLAYERS).forward(req, resp);
+        try{
+            this.checkAuthentication(req);
+            this.setupViewAttributes(req);
+            this.getServletContext().getRequestDispatcher(Constantes.VIEW_PLAYERS).forward(req, resp);
+        } catch (UnauthenticatedUserExcepetion e){
+            resp.sendRedirect(Constantes.URL_LOGIN);
+        }
     }
 
     private void setupViewAttributes(HttpServletRequest req){
