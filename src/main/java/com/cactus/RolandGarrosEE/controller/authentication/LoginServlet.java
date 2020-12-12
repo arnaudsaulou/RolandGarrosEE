@@ -1,5 +1,6 @@
 package com.cactus.RolandGarrosEE.controller.authentication;
 
+import com.cactus.RolandGarrosEE.controller.BaseServlet;
 import com.cactus.RolandGarrosEE.controller.Constantes;
 import com.cactus.RolandGarrosEE.entities.User;
 import com.cactus.RolandGarrosEE.utils.exceptions.UserNotFoundException;
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "loginServlet", value = "/connexion")
-public class LoginServlet extends HttpServlet {
+public class LoginServlet extends BaseServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.getServletContext().getRequestDispatcher(Constantes.VIEW_LOGIN).forward(request, response);
@@ -60,12 +61,5 @@ public class LoginServlet extends HttpServlet {
         session.setAttribute(Constantes.SESSION_IS_ORGANIZER, user.getStatus() == 0);
     }
 
-    private String getValue(HttpServletRequest request, String field) {
-        String valeur = request.getParameter(field);
-        if (valeur != null && valeur.isEmpty()) {
-            return null;
-        } else {
-            return valeur;
-        }
-    }
+
 }

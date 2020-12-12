@@ -2,11 +2,10 @@ package com.cactus.RolandGarrosEE.controller.staff;
 
 import com.cactus.RolandGarrosEE.controller.BaseServlet;
 import com.cactus.RolandGarrosEE.controller.Constantes;
-import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserExcepetion;
+import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -19,7 +18,7 @@ public class RefereeServlet extends BaseServlet {
             this.checkAuthentication(req);
             this.setupViewAttributes(req);
             this.getServletContext().getRequestDispatcher(Constantes.VIEW_REFEREES).forward(req, resp);
-        } catch (UnauthenticatedUserExcepetion e){
+        } catch (UnauthenticatedUserException e){
             resp.sendRedirect(Constantes.URL_LOGIN);
         }
     }

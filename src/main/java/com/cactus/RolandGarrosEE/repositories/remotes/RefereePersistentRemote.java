@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Remote
-public interface ArbitratorPersistentRemote {
+public interface RefereePersistentRemote {
     void saveArbitrator(Arbitrator arbitrator);
     void deleteArbitrator(Arbitrator arbitrator);
     Optional<Arbitrator> getArbitratorById(long arbitratorId);

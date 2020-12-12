@@ -2,7 +2,7 @@ package com.cactus.RolandGarrosEE.controller.player;
 
 import com.cactus.RolandGarrosEE.controller.BaseServlet;
 import com.cactus.RolandGarrosEE.controller.Constantes;
-import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserExcepetion;
+import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +18,7 @@ public class TeamServlet extends BaseServlet {
             this.checkAuthentication(req);
             this.setupViewAttributes(req);
             this.getServletContext().getRequestDispatcher(Constantes.VIEW_TEAMS).forward(req, resp);
-        } catch (UnauthenticatedUserExcepetion e){
+        } catch (UnauthenticatedUserException e){
             resp.sendRedirect(Constantes.URL_LOGIN);
         }
     }

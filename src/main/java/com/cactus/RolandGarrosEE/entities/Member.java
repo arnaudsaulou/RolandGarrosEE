@@ -1,12 +1,12 @@
 package com.cactus.RolandGarrosEE.entities;
 
 import com.sun.istack.NotNull;
-import com.sun.istack.Nullable;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @MappedSuperclass
-public class Member {
+public class Member implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @NotNull
