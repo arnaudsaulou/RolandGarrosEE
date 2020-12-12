@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @Stateless
 public class UserPersistentBean implements UserPeristentRemote {
+
     @PersistenceContext(unitName = "PersistentUnitPU")
     EntityManager entityManager;
 

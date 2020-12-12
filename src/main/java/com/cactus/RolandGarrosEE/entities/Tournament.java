@@ -35,9 +35,9 @@ public class Tournament implements Serializable {
     @NotNull
     @Column(name="NBMATCH")
     private int nbMatch;
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE})
     private List<SingleMatch> matchsSingle;
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE})
     private List<DoubleMatch> matchsDouble;
 
     public Tournament(TypeTournament typeTournament, Gender gender, Date dateBegin, Date dateEnd, int nbMatch, List<SingleMatch> matchsSingle, List<DoubleMatch> matchsDouble) {

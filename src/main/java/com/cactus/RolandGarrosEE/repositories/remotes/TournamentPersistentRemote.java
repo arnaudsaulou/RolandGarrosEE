@@ -10,6 +10,6 @@ import java.util.Optional;
 public interface TournamentPersistentRemote {
     void saveTournament(Tournament tournament);
     void deleteTournament(Tournament tournament);
-    Optional<Tournament> getTournamentById(int tournamentId);
+    Tournament getTournamentById(int tournamentId);
     List<Tournament> allTournament();
 }
