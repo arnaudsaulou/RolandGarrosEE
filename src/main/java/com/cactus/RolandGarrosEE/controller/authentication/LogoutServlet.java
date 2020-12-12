@@ -1,7 +1,8 @@
 package com.cactus.RolandGarrosEE.controller.authentication;
 
-import java.io.IOException;
+import com.cactus.RolandGarrosEE.controller.Constantes;
 
+import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,13 +13,9 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "logoutServlet", value = "/deconnexion")
 public class LogoutServlet extends HttpServlet {
 
-    private static final String LOGIN_URL = "connexion";
-
-    public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.invalidate();
-
-        response.sendRedirect(LOGIN_URL);
-
+        response.sendRedirect(Constantes.URL_LOGIN);
     }
 }
