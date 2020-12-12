@@ -1,23 +1,21 @@
 package com.cactus.RolandGarrosEE.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "DOUBLEMATCH")
 public class DoubleMatch extends Match {
-    @ManyToOne
+    @ManyToOne(targetEntity=Team.class)
     private Team teamA;
-    @ManyToOne
+    @ManyToOne(targetEntity=Team.class)
     private Team teamB;
 
     public DoubleMatch() {
     }
 
-    public DoubleMatch(Date time, Date date, int scoreA, int scoreB, Tournament tournament, Fields fields, Arbitrator arbitrator) {
-        super(time, date, scoreA, scoreB, tournament, fields, arbitrator);
+    public DoubleMatch(Date dateEnd, Date dateBegin, int scoreA, int scoreB, Tournament tournament, Fields fields, Arbitrator arbitrator) {
+        super(dateEnd, dateBegin, scoreA, scoreB, tournament, fields, arbitrator);
     }
 
     public Team getTeamA() {
