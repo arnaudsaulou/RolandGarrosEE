@@ -4,12 +4,11 @@ import com.cactus.RolandGarrosEE.entities.SingleMatch;
 
 import javax.ejb.Remote;
 import java.util.List;
-import java.util.Optional;
 
 @Remote
 public interface SingleMatchRemote {
    void saveSingleMatch(SingleMatch singleMatch);
    void deleteSingleMatch(SingleMatch singleMatch);
-   Optional<SingleMatch> findSingleMatchById(long singleMatchId);
+   SingleMatch findSingleMatchById(int singleMatchId);
    List<SingleMatch> allSingleMatch();
 }

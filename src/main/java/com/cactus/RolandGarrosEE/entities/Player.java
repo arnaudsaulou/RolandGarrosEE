@@ -4,23 +4,24 @@ import com.sun.istack.NotNull;
 import com.sun.istack.Nullable;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "PLAYER")
-public class Player extends Member {
+public class Player extends Member implements Serializable {
     @Nullable
-    @Column(name="CLASSEMENT", unique = true)
+    @Column(name = "CLASSEMENT", unique = true)
     private int classement;
     @NotNull
-    @Column(name="GENDER")
+    @Column(name = "GENDER")
     @Enumerated(EnumType.STRING)
     private Gender gender;
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE})
     private List<SingleMatch> matchsSingle;
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE})
     private List<DoubleMatch> matchsDouble;
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE})
     private List<Team> teams;
 
     public Player() {

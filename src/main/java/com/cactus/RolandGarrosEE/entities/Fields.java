@@ -3,10 +3,11 @@ package com.cactus.RolandGarrosEE.entities;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "FIELD")
-public class Fields {
+public class Fields implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @NotNull
@@ -15,6 +16,9 @@ public class Fields {
     @NotNull
     @Column(name="NAME")
     private String name;
+
+    public Fields() {
+    }
 
     public Fields(String name) {
         this.name = name;

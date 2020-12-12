@@ -23,7 +23,7 @@ public class RefereePersistentBean implements RefereePersistentRemote {
         entityManager.remove(arbitrator);
     }
 
-    public Optional<Arbitrator> getArbitratorById(long arbitratorId) {
+    public Optional<Arbitrator> getArbitratorById(int arbitratorId) {
         return Optional.empty();
     }
 

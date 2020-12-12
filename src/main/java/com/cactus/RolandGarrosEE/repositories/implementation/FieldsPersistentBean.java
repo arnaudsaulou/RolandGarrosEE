@@ -1,25 +1,23 @@
 package com.cactus.RolandGarrosEE.repositories.implementation;
 
-import com.cactus.RolandGarrosEE.entities.Tournament;
-import com.cactus.RolandGarrosEE.entities.User;
-import com.cactus.RolandGarrosEE.repositories.remotes.TournamentPersistentRemote;
+import com.cactus.RolandGarrosEE.entities.Fields;
+import com.cactus.RolandGarrosEE.repositories.remotes.FieldsPersistentRemote;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Stateless
-public class TournamentPersistentBean implements TournamentPersistentRemote {
-
-    @PersistenceContext(unitName = "PersistentUnitPU")
+public class FieldsPersistentBean implements FieldsPersistentRemote {
+    @PersistenceContext(name = "PersistentUnitPU")
     EntityManager entityManager;
 
-    public void saveTournament(Tournament tournament) {
+    public void saveFields(Fields fields) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.persist(tournament);
+            entityManager.persist(fields);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
@@ -27,10 +25,10 @@ public class TournamentPersistentBean implements TournamentPersistentRemote {
         }
     }
 
-    public void deleteTournament(Tournament tournament) {
+    public void deleteFields(Fields fields) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.remove(tournament);
+            entityManager.remove(fields);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
@@ -38,29 +36,29 @@ public class TournamentPersistentBean implements TournamentPersistentRemote {
         }
     }
 
-    public Tournament getTournamentById(int tournamentId) {
-        Tournament tournament = null;
+    public Fields findFieldsById(int fieldsId) {
+        Fields fields = null;
         try {
-            entityManager.getTransaction().begin();
-            tournament = entityManager.find(Tournament.class, tournamentId);
-            entityManager.getTransaction().commit();
+           entityManager.getTransaction().begin();
+           fields = entityManager.find(Fields.class, fieldsId);
+           entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             e.printStackTrace();
         }
-        return tournament;
+        return fields;
     }
 
-    public List<Tournament> allTournament() {
-        List<Tournament> tournaments = null;
+    public List<Fields> allFields() {
+        List<Fields> fieldsList = null;
         try {
             entityManager.getTransaction().begin();
-            tournaments = entityManager.createQuery("from Tournament ", Tournament.class).getResultList();
+            fieldsList = entityManager.createQuery("from Fields", Fields.class).getResultList();
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             e.printStackTrace();
         }
-        return tournaments;
+        return fieldsList;
     }
 }

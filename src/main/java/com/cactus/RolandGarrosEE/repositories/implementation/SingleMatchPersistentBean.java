@@ -15,16 +15,49 @@ public class SingleMatchPersistentBean implements SingleMatchRemote {
     EntityManager entityManager;
 
     public void saveSingleMatch(SingleMatch singleMatch) {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(singleMatch);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            e.printStackTrace();
+        }
     }
 
     public void deleteSingleMatch(SingleMatch singleMatch) {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.remove(singleMatch);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            e.printStackTrace();
+        }
     }
 
-    public Optional<SingleMatch> findSingleMatchById(long singleMatchId) {
-        return Optional.empty();
+    public SingleMatch findSingleMatchById(int singleMatchId) {
+        SingleMatch singleMatch = null;
+        try {
+            entityManager.getTransaction().begin();
+            singleMatch = entityManager.find(SingleMatch.class, singleMatchId);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return singleMatch;
     }
 
     public List<SingleMatch> allSingleMatch() {
-        return null;
+        List<SingleMatch> singleMatches = null;
+        try {
+            entityManager.getTransaction().begin();
+            singleMatches = entityManager.createQuery("from SingleMatch", SingleMatch.class).getResultList();
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+        }
+        return singleMatches;
     }
 }

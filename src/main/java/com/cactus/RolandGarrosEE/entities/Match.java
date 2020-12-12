@@ -4,10 +4,11 @@ import com.sun.istack.NotNull;
 import com.sun.istack.Nullable;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @MappedSuperclass
-public abstract class Match {
+public abstract class Match implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @NotNull

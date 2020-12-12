@@ -1,11 +1,12 @@
 package com.cactus.RolandGarrosEE.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "DOUBLEMATCH")
-public class DoubleMatch extends Match {
+public class DoubleMatch extends Match implements Serializable {
     @ManyToOne(targetEntity=Team.class)
     private Team teamA;
     @ManyToOne(targetEntity=Team.class)

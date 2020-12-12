@@ -1,25 +1,22 @@
 package com.cactus.RolandGarrosEE.repositories.implementation;
 
-import com.cactus.RolandGarrosEE.entities.Tournament;
-import com.cactus.RolandGarrosEE.entities.User;
-import com.cactus.RolandGarrosEE.repositories.remotes.TournamentPersistentRemote;
+import com.cactus.RolandGarrosEE.entities.DoubleMatch;
+import com.cactus.RolandGarrosEE.repositories.remotes.DoubleMatchPersistentRemote;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.Optional;
 
 @Stateless
-public class TournamentPersistentBean implements TournamentPersistentRemote {
-
-    @PersistenceContext(unitName = "PersistentUnitPU")
+public class DoubleMatchPersistentBean implements DoubleMatchPersistentRemote {
+    @PersistenceContext(name = "PersistentUnitPU")
     EntityManager entityManager;
 
-    public void saveTournament(Tournament tournament) {
+    public void addDoubleMatch(DoubleMatch doubleMatch) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.persist(tournament);
+            entityManager.persist(doubleMatch);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
@@ -27,10 +24,10 @@ public class TournamentPersistentBean implements TournamentPersistentRemote {
         }
     }
 
-    public void deleteTournament(Tournament tournament) {
+    public void deleteDoubleMatch(DoubleMatch doubleMatch) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.remove(tournament);
+            entityManager.remove(doubleMatch);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
@@ -38,29 +35,29 @@ public class TournamentPersistentBean implements TournamentPersistentRemote {
         }
     }
 
-    public Tournament getTournamentById(int tournamentId) {
-        Tournament tournament = null;
+    public DoubleMatch findDoubleMatchById(int doubleMatchId) {
+        DoubleMatch match = null;
         try {
             entityManager.getTransaction().begin();
-            tournament = entityManager.find(Tournament.class, tournamentId);
+            match = entityManager.find(DoubleMatch.class, doubleMatchId);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             e.printStackTrace();
         }
-        return tournament;
+        return match;
     }
 
-    public List<Tournament> allTournament() {
-        List<Tournament> tournaments = null;
+    public List<DoubleMatch> allDoubleMatch() {
+        List<DoubleMatch> doubleMatches = null;
         try {
             entityManager.getTransaction().begin();
-            tournaments = entityManager.createQuery("from Tournament ", Tournament.class).getResultList();
+            doubleMatches = entityManager.createQuery("from DoubleMatch", DoubleMatch.class).getResultList();
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             e.printStackTrace();
         }
-        return tournaments;
+        return doubleMatches;
     }
 }

@@ -3,10 +3,11 @@ package com.cactus.RolandGarrosEE.entities;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "TEAM")
-public class Team {
+public class Team implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @NotNull
@@ -24,6 +25,9 @@ public class Team {
         this.name = name;
         this.playerA = playerA;
         this.playerB = playerB;
+    }
+
+    public Team() {
     }
 
     public int getId() {
