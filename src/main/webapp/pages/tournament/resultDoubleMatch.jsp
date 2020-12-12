@@ -5,9 +5,10 @@
     <form class="p-5 card bg-light text-dark mb-0" action="#" method="post">
         <h2 class="text-center mb-5">Résultat Match Double</h2>
         <div class="form-group row">
-            <label form="form-group row">Durée du match</label>
+            <label for="example-datetime-local-input" class="col-3 col-form-label">Date de fin</label>
             <div class="col-8">
-                <input type="time" id="tempsDeJeu" name="tempsDeJeu" min="00:00" max="24:00" required>
+                <input class="form-control" type="datetime-local" value="2020-12-12T14:00:00"
+                       id="example-datetime-local-input">
             </div>
         </div>
         <div class="form-group row">

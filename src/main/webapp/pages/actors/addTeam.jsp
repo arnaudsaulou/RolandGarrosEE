@@ -13,13 +13,13 @@
         <div class="form-group row">
             <label class="col-3 col-form-label">Joueur A</label>
             <div class="col-9">
-                <input class="form-control" type="text" placeholder="Prénom" required="required">
+                <input class="form-control" type="text" placeholder="Joueur A" required="required">
             </div>
         </div>
         <div class="form-group row">
             <label class="col-3 col-form-label">Joueur B</label>
             <div class="col-9">
-                <input class="form-control" type="text" placeholder="Nationalité" required="required">
+                <input class="form-control" type="text" placeholder="Joueur B" required="required">
             </div>
         </div>
         <div class="form-group text-center mt-3 mb-0">
