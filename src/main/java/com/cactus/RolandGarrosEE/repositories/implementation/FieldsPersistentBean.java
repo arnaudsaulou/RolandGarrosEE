@@ -1,23 +1,23 @@
 package com.cactus.RolandGarrosEE.repositories.implementation;
 
-import com.cactus.RolandGarrosEE.entities.User;
-import com.cactus.RolandGarrosEE.repositories.remotes.UserPeristentRemote;
+import com.cactus.RolandGarrosEE.entities.Fields;
+import com.cactus.RolandGarrosEE.repositories.remotes.FieldsPersistentRemote;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Stateless
-public class UserPersistentBean implements UserPeristentRemote {
-    @PersistenceContext(unitName = "PersistentUnitPU")
+public class FieldsPersistentBean implements FieldsPersistentRemote {
+    @PersistenceContext(name = "PersistentUnitPU")
     EntityManager entityManager;
 
-    public void saveUser(User user) {
+    public void saveFields(Fields fields) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.persist(user);
+            entityManager.persist(fields);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
@@ -25,40 +25,40 @@ public class UserPersistentBean implements UserPeristentRemote {
         }
     }
 
-    public void deleteUser(User user) {
+    public void deleteFields(Fields fields) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.remove(user);
-            entityManager.getTransaction().rollback();
+            entityManager.remove(fields);
+            entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             e.printStackTrace();
         }
     }
 
-    public User findUserById(int userId) {
-        User user = null;
+    public Fields findFieldsById(int fieldsId) {
+        Fields fields = null;
         try {
-            entityManager.getTransaction().begin();
-            user = entityManager.find(User.class, userId);
-            entityManager.getTransaction().commit();
+           entityManager.getTransaction().begin();
+           fields = entityManager.find(Fields.class, fieldsId);
+           entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             e.printStackTrace();
         }
-        return user;
+        return fields;
     }
 
-    public List<User> allUser() {
-        List<User> users = null;
+    public List<Fields> allFields() {
+        List<Fields> fieldsList = null;
         try {
             entityManager.getTransaction().begin();
-            users = entityManager.createQuery("from User ", User.class).getResultList();
+            fieldsList = entityManager.createQuery("from Fields", Fields.class).getResultList();
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             e.printStackTrace();
         }
-        return users;
+        return fieldsList;
     }
 }

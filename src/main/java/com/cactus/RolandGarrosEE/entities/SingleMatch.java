@@ -3,11 +3,12 @@ package com.cactus.RolandGarrosEE.entities;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "SINGLEMATCH")
-public class SingleMatch extends Match{
+public class SingleMatch extends Match implements Serializable {
     @ManyToOne(targetEntity=Player.class)
     private Player playerA;
     @ManyToOne(targetEntity=Player.class)

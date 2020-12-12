@@ -4,12 +4,13 @@ import com.sun.istack.NotNull;
 import com.sun.istack.Nullable;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name="TOURNAMENT")
-public class Tournament {
+public class Tournament implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @NotNull
@@ -47,6 +48,9 @@ public class Tournament {
         this.nbMatch = nbMatch;
         this.matchsSingle = matchsSingle;
         this.matchsDouble = matchsDouble;
+    }
+
+    public Tournament() {
     }
 
     public int getId() {

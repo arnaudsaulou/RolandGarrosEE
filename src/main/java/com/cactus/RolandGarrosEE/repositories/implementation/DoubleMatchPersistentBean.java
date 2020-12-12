@@ -1,23 +1,22 @@
 package com.cactus.RolandGarrosEE.repositories.implementation;
 
-import com.cactus.RolandGarrosEE.entities.User;
-import com.cactus.RolandGarrosEE.repositories.remotes.UserPeristentRemote;
+import com.cactus.RolandGarrosEE.entities.DoubleMatch;
+import com.cactus.RolandGarrosEE.repositories.remotes.DoubleMatchPersistentRemote;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.Optional;
 
 @Stateless
-public class UserPersistentBean implements UserPeristentRemote {
-    @PersistenceContext(unitName = "PersistentUnitPU")
+public class DoubleMatchPersistentBean implements DoubleMatchPersistentRemote {
+    @PersistenceContext(name = "PersistentUnitPU")
     EntityManager entityManager;
 
-    public void saveUser(User user) {
+    public void addDoubleMatch(DoubleMatch doubleMatch) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.persist(user);
+            entityManager.persist(doubleMatch);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
@@ -25,40 +24,40 @@ public class UserPersistentBean implements UserPeristentRemote {
         }
     }
 
-    public void deleteUser(User user) {
+    public void deleteDoubleMatch(DoubleMatch doubleMatch) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.remove(user);
-            entityManager.getTransaction().rollback();
+            entityManager.remove(doubleMatch);
+            entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             e.printStackTrace();
         }
     }
 
-    public User findUserById(int userId) {
-        User user = null;
+    public DoubleMatch findDoubleMatchById(int doubleMatchId) {
+        DoubleMatch match = null;
         try {
             entityManager.getTransaction().begin();
-            user = entityManager.find(User.class, userId);
+            match = entityManager.find(DoubleMatch.class, doubleMatchId);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             e.printStackTrace();
         }
-        return user;
+        return match;
     }
 
-    public List<User> allUser() {
-        List<User> users = null;
+    public List<DoubleMatch> allDoubleMatch() {
+        List<DoubleMatch> doubleMatches = null;
         try {
             entityManager.getTransaction().begin();
-            users = entityManager.createQuery("from User ", User.class).getResultList();
+            doubleMatches = entityManager.createQuery("from DoubleMatch", DoubleMatch.class).getResultList();
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             e.printStackTrace();
         }
-        return users;
+        return doubleMatches;
     }
 }

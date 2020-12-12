@@ -10,6 +10,6 @@ import java.util.Optional;
 public interface TeamPersistentRemote {
     void saveTeam(Team team);
     void deleteTeam(Team team);
-    Optional<Team> getTeamById(long teamId);
+    Optional<Team> getTeamById(int teamId);
     List<Team> allTeam();
 }

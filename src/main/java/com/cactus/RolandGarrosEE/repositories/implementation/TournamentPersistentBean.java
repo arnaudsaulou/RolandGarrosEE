@@ -20,7 +20,7 @@ public class TournamentPersistentBean implements TournamentPersistentRemote {
     public void deleteTournament(Tournament tournament) {
     }
 
-    public Optional<Tournament> getTournamentById(long tournamentId) {
+    public Optional<Tournament> getTournamentById(int tournamentId) {
         return Optional.empty();
     }
 

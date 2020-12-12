@@ -4,11 +4,12 @@ import com.sun.istack.NotNull;
 import com.sun.istack.Nullable;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "PLAYER")
-public class Player extends Member {
+public class Player extends Member implements Serializable {
     @Nullable
     @Column(name="CLASSEMENT", unique = true)
     private int classement;
@@ -16,7 +17,7 @@ public class Player extends Member {
     @Column(name="GENDER")
     @Enumerated(EnumType.STRING)
     private Gender gender;
-    @OneToMany
+    @OneToMany()
     private List<SingleMatch> matchsSingle;
     @OneToMany
     private List<DoubleMatch> matchsDouble;

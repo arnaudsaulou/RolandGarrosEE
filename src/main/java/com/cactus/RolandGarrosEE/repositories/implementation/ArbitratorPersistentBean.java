@@ -20,7 +20,7 @@ public class ArbitratorPersistentBean implements ArbitratorPersistentRemote {
     public void deleteArbitrator(Arbitrator arbitrator) {
     }
 
-    public Optional<Arbitrator> getArbitratorById(long arbitratorId) {
+    public Optional<Arbitrator> getArbitratorById(int arbitratorId) {
         return Optional.empty();
     }
 
