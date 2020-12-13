@@ -18,9 +18,9 @@ public abstract class Match implements Serializable {
     @Column(name="DATEEND")
     private Date dateEnd;
     @Column(name="SCOREA")
-    private int scoreA;
+    private Integer scoreA;
     @Column(name="SCOREB")
-    private int scoreB;
+    private Integer scoreB;
     @ManyToOne
     private Tournament tournament;
     @ManyToOne
