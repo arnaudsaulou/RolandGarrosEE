@@ -2,19 +2,24 @@ package com.cactus.RolandGarrosEE.controller.player;
 
 import com.cactus.RolandGarrosEE.controller.BaseServlet;
 import com.cactus.RolandGarrosEE.controller.Constantes;
+import com.cactus.RolandGarrosEE.entities.Gender;
 import com.cactus.RolandGarrosEE.entities.Player;
+import com.cactus.RolandGarrosEE.repositories.remotes.PlayerPersistentRemote;
 import com.cactus.RolandGarrosEE.utils.exceptions.InvalidActorException;
 import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserException;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Optional;
 
 @WebServlet(name = "ajouterJoueurServlet", value = "/joueurs/ajouterJoueur")
 public class AddPlayerServlet extends BaseServlet {
+
+    @EJB
+    PlayerPersistentRemote playerPersistentRemote;
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try{
@@ -25,6 +30,7 @@ public class AddPlayerServlet extends BaseServlet {
             resp.sendRedirect("../" + Constantes.URL_LOGIN);
         }
     }
+
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
@@ -38,6 +44,7 @@ public class AddPlayerServlet extends BaseServlet {
         }
     }
 
+
     private void setupViewAttributes(HttpServletRequest req) {
         this.resetBreadcrumbs();
         this.addToBreadcrumbs(Constantes.TITLE_PLAYERS);
@@ -46,19 +53,23 @@ public class AddPlayerServlet extends BaseServlet {
         this.propagateAttributesToRequest(req);
     }
 
+
     private void tryToSavePlayer(HttpServletRequest req) throws InvalidActorException {
         String firstname = this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_FIRSTNAME);
         String lastname = this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_LASTNAME);
         String nationality = this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_NATIONALITY);
-        int rankings = this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_RANKINGS);
-        this.validateNewPlayer(firstname, lastname, nationality, rankings);
-        Player newPlayer = new Player(firstname, lastname, nationality, rankings);
+        int rankings = Integer.parseInt(this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_RANKINGS));
+        Gender gender = Gender.valueOf(this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_GENDER));
+        this.validateNewPlayer(firstname, lastname, nationality, gender);
+        Player newPlayer = new Player(firstname, lastname, nationality, rankings, gender);
         playerPersistentRemote.savePlayer(newPlayer);
     }
 
-    private void validateNewPlayer(String s, String firstname, String lastname, String nationality, int rankings) throws InvalidActorException {
-        if (firstname == null || lastname == null || nationality == null || rankings == 0)
+    private void validateNewPlayer(String firstname, String lastname, String nationality, Gender gender) throws InvalidActorException {
+        if (firstname == null || lastname == null || nationality == null || gender == null)
             throw new InvalidActorException();
     }
+
+
 
 }

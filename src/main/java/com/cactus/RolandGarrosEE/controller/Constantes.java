@@ -1,5 +1,7 @@
 package com.cactus.RolandGarrosEE.controller;
 
+import com.cactus.RolandGarrosEE.entities.Gender;
+
 public class Constantes {
 
     //region Session
@@ -59,6 +61,7 @@ public class Constantes {
     public static final String NEW_ACTOR_FORM_FIELD_PASSWORD = "actorPassword";
     public static final String NEW_ACTOR_FORM_FIELD_STATUS = "actorStatus";
     public static final String NEW_ACTOR_FORM_FIELD_RANKINGS = "actorRankings";
+    public static final String NEW_ACTOR_FORM_FIELD_GENDER = "actorGender";
 
     //endregion
 
@@ -70,6 +73,7 @@ public class Constantes {
     public static final String REQUEST_ATTR_REFEREES_LIST = "refereesList";
     public static final String REQUEST_ATTR_USERS_LIST = "usersList";
     public static final String REQUEST_ATTR_PLAYERS_LIST = "playersList";
+    public static final String REQUEST_ATTR_TEAMS_LIST = "playersList";
 
     //endregion
 

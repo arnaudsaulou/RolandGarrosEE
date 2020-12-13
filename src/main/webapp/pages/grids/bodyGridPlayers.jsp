@@ -16,16 +16,18 @@
             <th class="text-center">Nom</th>
             <th class="text-center">Prénom</th>
             <th class="text-center">Nationalité</th>
+            <th class="text-center">Genre</th>
             <th class="text-center">Classement mondial</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${playersList}" var="player">
             <tr>
-                <td class="text-center">${player.number}</td>
+                <td class="text-center">${player.id}</td>
                 <td class="text-center">${player.lastname}</td>
                 <td class="text-center">${player.firstname}</td>
                 <td class="text-center">${player.nationality}</td>
+                <td class="text-center">${player.gender}</td>
                 <td class="text-center">${player.rankings}</td>
             </tr>
         </c:forEach>
