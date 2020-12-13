@@ -43,6 +43,12 @@ public class Player extends Member implements Serializable {
         this.teamsList = teamsList;
     }
 
+    public Player(String firstname, String lastname, String nationality, int rankings, @NotNull Gender gender) {
+        super(firstname, lastname, nationality);
+        this.rankings = rankings;
+        this.gender = gender;
+    }
+
     public int getRankings() {
         return rankings;
     }

@@ -7,13 +7,13 @@
         <div class="form-group row">
             <label class="col-3 col-form-label">Nom</label>
             <div class="col-9">
-                <input class="form-control" type="text" placeholder="Nom" required="required">
+                <input class="form-control" type="text" placeholder="Nom" name="actorLastname" required="required">
             </div>
         </div>
         <div class="form-group row">
             <label class="col-3 col-form-label">Prénom</label>
             <div class="col-9">
-                <input class="form-control" type="text" placeholder="Prénom" required="required">
+                <input class="form-control" type="text" placeholder="Prénom" name="actorFirstname" required="required">
             </div>
         </div>
         <div class="form-group row">
@@ -25,7 +25,16 @@
         <div class="form-group row">
             <label class="col-3 col-form-label">Classement</label>
             <div class="col-9">
-                <input class="form-control" type="text" placeholder="Classement mondial" required="required">
+                <input class="form-control" type="number" min="0" placeholder="Classement mondial" name="actorRankings" required="required">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-3 col-form-label">Genre</label>
+            <div class="col-9">
+                <select class="form-control" required="required" name="actorGender">
+                    <option value="HOMME">Homme</option>
+                    <option value="FEMME">Femme</option>
+                </select>
             </div>
         </div>
         <div class="form-group text-center mt-3 mb-0">
