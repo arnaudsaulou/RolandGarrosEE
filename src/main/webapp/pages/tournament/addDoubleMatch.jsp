@@ -14,25 +14,25 @@
         <div class="form-group row">
             <label class="col-3 col-form-label">Equipe A</label>
             <div class="col-8">
-                <input class="form-control" type="text" placeholder="Equipe A" required="required">
+                <%@include file="/includes/selectTeamDropdownlist.jsp"%>
             </div>
         </div>
         <div class="form-group row">
             <label class="col-3 col-form-label">Equipe B</label>
             <div class="col-8">
-                <input class="form-control" type="text" placeholder="Equipe A" required="required">
+                <%@include file="/includes/selectTeamDropdownlist.jsp"%>
             </div>
         </div>
         <div class="form-group row">
             <label class="col-3 col-form-label">Arbitre</label>
             <div class="col-8">
-                <input class="form-control" type="text" placeholder="Arbitre" required="required">
+                <%@include file="/includes/selectRefereeDropdownlist.jsp"%>
             </div>
         </div>
         <div class="form-group row">
             <label class="col-3 col-form-label">Terrain</label>
             <div class="col-8">
-                <input class="form-control" type="text" placeholder="Terrain" required="required">
+                <%@include file="/includes/selectTerrainDropdownlist.jsp"%>
             </div>
         </div>
         <div class="form-group text-center mt-3 mb-0">
