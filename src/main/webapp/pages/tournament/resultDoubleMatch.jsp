@@ -14,7 +14,7 @@
         <div class="form-group row">
             <label class="col-3 col-form-label">Score Equipe A</label>
             <div class="col-8">
-                <select id="scoreEquipeA" name="scoreEquipeA">
+                <select class="form-control" id="scoreEquipeA" name="scoreEquipeA">
                     <c:forEach var="i" begin="0" end="5" step="1">
                         <option value="${i}">${i}</option>
                     </c:forEach>>
@@ -24,7 +24,7 @@
         <div class="form-group row">
             <label class="col-3 col-form-label">Score Equipe B</label>
             <div class="col-8">
-                <select id="scoreEquipeB" name="scoreEquipeB">
+                <select class="form-control" id="scoreEquipeB" name="scoreEquipeB">
                     <c:forEach var="i" begin="0" end="5" step="1">
                         <option value="${i}">${i}</option>
                     </c:forEach>>
