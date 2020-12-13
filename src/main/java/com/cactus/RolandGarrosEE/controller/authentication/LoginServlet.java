@@ -5,6 +5,7 @@ import com.cactus.RolandGarrosEE.controller.Constantes;
 import com.cactus.RolandGarrosEE.entities.User;
 import com.cactus.RolandGarrosEE.repositories.remotes.UserPeristentRemote;
 import com.cactus.RolandGarrosEE.utils.PasswordUtils;
+import com.cactus.RolandGarrosEE.utils.enums.UserRole;
 import com.cactus.RolandGarrosEE.utils.exceptions.InvalidPasswordException;
 import com.cactus.RolandGarrosEE.utils.exceptions.UserNotFoundException;
 
@@ -66,7 +67,8 @@ public class LoginServlet extends BaseServlet {
     private void saveUserInfoIntoSession(HttpServletRequest request, User user) {
         HttpSession session = request.getSession();
         session.setAttribute(Constantes.SESSION_USER, user);
-        session.setAttribute(Constantes.SESSION_IS_ORGANIZER, user.getStatus() == 0);
+        session.setAttribute(Constantes.SESSION_IS_ADMIN, UserRole.ADMIN.equalsValue(user.getStatus()));
+        session.setAttribute(Constantes.SESSION_IS_ORGANIZER, UserRole.ORGANIZER.equalsValue(user.getStatus()));
     }
 
 

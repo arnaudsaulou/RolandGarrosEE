@@ -4,7 +4,7 @@
 
 <h3 class="text-center mb-5 mt-5">Liste des matchs doubles</h3>
 
-<c:if test="${isOrganizer}">
+<c:if test="${sessionScope.isAdmin} || ${sessionScope.isOrganizer}">
     <a href="${pageContext.request.contextPath}/tournoi/ajouterMatch?type=double">
         <button type="button" class="btn btn-secondary mt-2 mr-5" style="float:right;">Ajouter</button>
     </a>

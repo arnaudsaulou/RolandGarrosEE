@@ -6,6 +6,7 @@ public class Constantes {
 
     public static final String SESSION_USER = "userSession";
     public static final String SESSION_IS_ORGANIZER = "isOrganizer";
+    public static final String SESSION_IS_ADMIN = "isAdmin";
 
     //endregion
 
@@ -25,6 +26,8 @@ public class Constantes {
     public static final String VIEW_ADD_DOUBLE_MATCH = "/pages/tournament/addDoubleMatch.jsp";
     public static final String VIEW_RESULT_SINGLE_MATCH = "/pages/tournament/resultSingleMatch.jsp";
     public static final String VIEW_RESULT_DOUBLE_MATCH = "/pages/tournament/resultDoubleMatch.jsp";
+    public static final String VIEW_USERS = "/pages/admin/users.jsp";
+    public static final String VIEW_ADD_USER = "/pages/admin/addUser.jsp";
 
     //endregion
 
@@ -33,6 +36,7 @@ public class Constantes {
     public static final String URL_HOME = "tournoi?type=MatchSimple&genre=Femme";
     public static final String URL_LOGIN = "connexion";
     public static final String URL_REFEREES = "arbitres";
+    public static final String URL_USERS = "users";
 
     //endregion
 
@@ -50,6 +54,9 @@ public class Constantes {
     public static final String NEW_ACTOR_FORM_FIELD_FIRSTNAME = "actorFirstname";
     public static final String NEW_ACTOR_FORM_FIELD_LASTNAME = "actorLastname";
     public static final String NEW_ACTOR_FORM_FIELD_NATIONALITY = "actorNationality";
+    public static final String NEW_ACTOR_FORM_FIELD_MAIL = "actorMail";
+    public static final String NEW_ACTOR_FORM_FIELD_PASSWORD = "actorPassword";
+    public static final String NEW_ACTOR_FORM_FIELD_STATUS = "actorStatus";
 
     //endregion
 
@@ -59,6 +66,7 @@ public class Constantes {
     public static final String REQUEST_ATTR_CONNECTION_ERROR = "connectionError";
     public static final String REQUEST_ATTR_BREADCRUMBS = "breadcrumbs";
     public static final String REQUEST_ATTR_REFEREES_LIST = "refereesList";
+    public static final String REQUEST_ATTR_USERS_LIST = "usersList";
 
     //endregion
 
@@ -71,9 +79,11 @@ public class Constantes {
     public static final String TITLE_TEAMS = "Equipes";
     public static final String TITLE_ADD_TEAM = "Ajouter équipe";
     public static final String TITLE_REFEREES = "Arbitres";
-    public static final String TITLE_ADD_REFEREE= "Ajouter arbitre";
+    public static final String TITLE_ADD_REFEREE = "Ajouter arbitre";
     public static final String TITLE_ADD_MATCH = "Ajouter match";
-    public static final String TITLE_ADD_RESULT= "Ajouter résultat";
+    public static final String TITLE_ADD_RESULT = "Ajouter résultat";
+    public static final String TITLE_USERS = "Utilisateurs";
+    public static final String TITLE_ADD_USER= "Ajouter utilisateur";
 
     //endregion
 
