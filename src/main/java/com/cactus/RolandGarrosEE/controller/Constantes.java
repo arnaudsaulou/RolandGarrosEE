@@ -67,6 +67,7 @@ public class Constantes {
     public static final String REQUEST_ATTR_BREADCRUMBS = "breadcrumbs";
     public static final String REQUEST_ATTR_REFEREES_LIST = "refereesList";
     public static final String REQUEST_ATTR_USERS_LIST = "usersList";
+    public static final String REQUEST_ATTR_TEAMS_LIST = "teamsList";
 
     //endregion
 

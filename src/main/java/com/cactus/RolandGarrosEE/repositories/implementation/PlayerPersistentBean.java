@@ -44,7 +44,7 @@ public class PlayerPersistentBean implements PlayerPersistentRemote {
     public List<Player> allPlayer() {
         List<Player> players = null;
         try {
-            players = entityManager.createQuery("from Player ", Player.class)
+            players = entityManager.createQuery("SELECT DISTINCT P FROM Player P", Player.class)
                     .getResultList();
         } catch (NoResultException ignored) {
         }
