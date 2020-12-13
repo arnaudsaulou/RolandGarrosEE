@@ -1,7 +1,7 @@
 package com.cactus.RolandGarrosEE.controller.authentication;
 
 import com.cactus.RolandGarrosEE.controller.BaseServlet;
-import com.cactus.RolandGarrosEE.controller.Constantes;
+import com.cactus.RolandGarrosEE.utils.Constantes;
 import com.cactus.RolandGarrosEE.entities.User;
 import com.cactus.RolandGarrosEE.repositories.remotes.UserPeristentRemote;
 import com.cactus.RolandGarrosEE.utils.PasswordUtils;
@@ -10,12 +10,9 @@ import com.cactus.RolandGarrosEE.utils.exceptions.InvalidPasswordException;
 import com.cactus.RolandGarrosEE.utils.exceptions.UserNotFoundException;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;

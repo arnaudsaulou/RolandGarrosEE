@@ -1,8 +1,7 @@
 package com.cactus.RolandGarrosEE.controller.admin;
 
 import com.cactus.RolandGarrosEE.controller.BaseServlet;
-import com.cactus.RolandGarrosEE.controller.Constantes;
-import com.cactus.RolandGarrosEE.entities.Referee;
+import com.cactus.RolandGarrosEE.utils.Constantes;
 import com.cactus.RolandGarrosEE.entities.User;
 import com.cactus.RolandGarrosEE.repositories.remotes.UserPeristentRemote;
 import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserException;

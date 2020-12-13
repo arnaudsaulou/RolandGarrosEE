@@ -16,7 +16,6 @@ public class SingleMatch extends Match implements Serializable {
     }
 
     public SingleMatch(Date dateEnd, Date dateBegin, int scoreA, int scoreB, Tournament tournament, Fields fields, Referee referee) {
-
         super(dateEnd, dateBegin, scoreA, scoreB, tournament, fields, referee);
     }
 

@@ -35,10 +35,6 @@ public class Tournament implements Serializable {
     @NotNull
     @Column(name="NBMATCH")
     private int nbMatch;
-    @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE})
-    private List<SingleMatch> matchsSingle;
-    @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE})
-    private List<DoubleMatch> matchsDouble;
 
     public Tournament(TypeTournament typeTournament, Gender gender, Date dateBegin, Date dateEnd, int nbMatch, List<SingleMatch> matchsSingle, List<DoubleMatch> matchsDouble) {
         this.typeTournament = typeTournament;
@@ -46,8 +42,6 @@ public class Tournament implements Serializable {
         this.dateBegin = dateBegin;
         this.dateEnd = dateEnd;
         this.nbMatch = nbMatch;
-        this.matchsSingle = matchsSingle;
-        this.matchsDouble = matchsDouble;
     }
 
     public Tournament() {
@@ -101,19 +95,4 @@ public class Tournament implements Serializable {
         this.nbMatch = nbMatch;
     }
 
-    public List<SingleMatch> getMatchsSingle() {
-        return matchsSingle;
-    }
-
-    public void setMatchsSingle(List<SingleMatch> matchsSingle) {
-        this.matchsSingle = matchsSingle;
-    }
-
-    public List<DoubleMatch> getMatchsDouble() {
-        return matchsDouble;
-    }
-
-    public void setMatchsDouble(List<DoubleMatch> matchsDouble) {
-        this.matchsDouble = matchsDouble;
-    }
 }

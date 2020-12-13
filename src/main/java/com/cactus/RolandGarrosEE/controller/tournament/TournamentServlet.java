@@ -1,7 +1,7 @@
 package com.cactus.RolandGarrosEE.controller.tournament;
 
 import com.cactus.RolandGarrosEE.controller.BaseServlet;
-import com.cactus.RolandGarrosEE.controller.Constantes;
+import com.cactus.RolandGarrosEE.utils.Constantes;
 import com.cactus.RolandGarrosEE.utils.enums.MatchGender;
 import com.cactus.RolandGarrosEE.utils.enums.MatchType;
 import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserException;

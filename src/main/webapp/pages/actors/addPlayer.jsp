@@ -2,7 +2,7 @@
 
 <body>
 <div class="col-6 offset-3 mt-5 mb-0">
-    <form class="p-5 card bg-light text-dark mb-0" action="#" method="post">
+    <form class="p-5 card bg-light text-dark mb-0" action="${pageContext.request.contextPath}/tournoi/ajouterMatch" method="post">
         <h2 class="text-center mb-5">Ajouter Joueur</h2>
         <div class="form-group row">
             <label class="col-3 col-form-label">Nom</label>
