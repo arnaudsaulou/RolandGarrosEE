@@ -1,13 +1,12 @@
 package com.cactus.RolandGarrosEE.entities;
 
-import com.sun.istack.NotNull;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "FIELD")
-public class Fields implements Serializable {
+@Table(name = "COURT")
+public class Court implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @NotNull
@@ -17,10 +16,11 @@ public class Fields implements Serializable {
     @Column(name="NAME")
     private String name;
 
-    public Fields() {
+    public Court() {
     }
 
-    public Fields(String name) {
+    public Court(@NotNull int id, @NotNull String name) {
+        this.id = id;
         this.name = name;
     }
 

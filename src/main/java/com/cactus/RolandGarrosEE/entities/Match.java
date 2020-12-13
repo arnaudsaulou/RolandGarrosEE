@@ -1,9 +1,7 @@
 package com.cactus.RolandGarrosEE.entities;
 
-import com.sun.istack.NotNull;
-import com.sun.istack.Nullable;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -17,32 +15,29 @@ public abstract class Match implements Serializable {
     @NotNull
     @Column(name="DATEBEGIN")
     private Date dateBegin;
-    @Nullable
     @Column(name="DATEEND")
     private Date dateEnd;
-    @Nullable
     @Column(name="SCOREA")
     private int scoreA;
-    @Nullable
     @Column(name="SCOREB")
     private int scoreB;
     @ManyToOne
     private Tournament tournament;
     @ManyToOne
-    private Fields fields;
+    private Court court;
     @ManyToOne
     private Referee referee;
 
     public Match() {
     }
 
-    public Match(Date dateBegin, Date dateEnd, int scoreA, int scoreB, Tournament tournament, Fields fields, Referee referee) {
+    public Match(Date dateBegin, Date dateEnd, int scoreA, int scoreB, Tournament tournament, Court court, Referee referee) {
         this.dateBegin = dateBegin;
         this.dateEnd = dateEnd;
         this.scoreA = scoreA;
         this.scoreB = scoreB;
         this.tournament = tournament;
-        this.fields = fields;
+        this.court = court;
         this.referee = referee;
     }
 
@@ -94,12 +89,12 @@ public abstract class Match implements Serializable {
         this.tournament = tournament;
     }
 
-    public Fields getFields() {
-        return fields;
+    public Court getFields() {
+        return court;
     }
 
-    public void setFields(Fields fields) {
-        this.fields = fields;
+    public void setFields(Court court) {
+        this.court = court;
     }
 
     public Referee getArbitrator() {

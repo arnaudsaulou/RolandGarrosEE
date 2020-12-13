@@ -1,9 +1,7 @@
 package com.cactus.RolandGarrosEE.entities;
 
-import com.sun.istack.NotNull;
-import com.sun.istack.Nullable;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -20,7 +18,7 @@ public class Tournament implements Serializable {
     @Column(name="TYPE")
     @Enumerated(EnumType.STRING)
     private TypeTournament typeTournament;
-    @Nullable
+    @NotNull
     @Column(name="GENDER")
     @Enumerated(EnumType.STRING)
     private Gender gender;
@@ -35,19 +33,13 @@ public class Tournament implements Serializable {
     @NotNull
     @Column(name="NBMATCH")
     private int nbMatch;
-    @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE})
-    private List<SingleMatch> matchsSingle;
-    @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE})
-    private List<DoubleMatch> matchsDouble;
 
-    public Tournament(TypeTournament typeTournament, Gender gender, Date dateBegin, Date dateEnd, int nbMatch, List<SingleMatch> matchsSingle, List<DoubleMatch> matchsDouble) {
+    public Tournament(TypeTournament typeTournament, Gender gender, Date dateBegin, Date dateEnd, int nbMatch) {
         this.typeTournament = typeTournament;
         this.gender = gender;
         this.dateBegin = dateBegin;
         this.dateEnd = dateEnd;
         this.nbMatch = nbMatch;
-        this.matchsSingle = matchsSingle;
-        this.matchsDouble = matchsDouble;
     }
 
     public Tournament() {
@@ -99,21 +91,5 @@ public class Tournament implements Serializable {
 
     public void setNbMatch(int nbMatch) {
         this.nbMatch = nbMatch;
-    }
-
-    public List<SingleMatch> getMatchsSingle() {
-        return matchsSingle;
-    }
-
-    public void setMatchsSingle(List<SingleMatch> matchsSingle) {
-        this.matchsSingle = matchsSingle;
-    }
-
-    public List<DoubleMatch> getMatchsDouble() {
-        return matchsDouble;
-    }
-
-    public void setMatchsDouble(List<DoubleMatch> matchsDouble) {
-        this.matchsDouble = matchsDouble;
     }
 }

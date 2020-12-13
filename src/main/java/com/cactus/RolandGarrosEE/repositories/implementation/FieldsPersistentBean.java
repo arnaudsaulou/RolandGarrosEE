@@ -1,6 +1,6 @@
 package com.cactus.RolandGarrosEE.repositories.implementation;
 
-import com.cactus.RolandGarrosEE.entities.Fields;
+import com.cactus.RolandGarrosEE.entities.Court;
 import com.cactus.RolandGarrosEE.repositories.remotes.FieldsPersistentRemote;
 
 import javax.ejb.Stateless;
@@ -15,39 +15,39 @@ public class FieldsPersistentBean implements FieldsPersistentRemote {
     EntityManager entityManager;
 
     @Override
-    public void saveFields(Fields fields) {
+    public void saveFields(Court court) {
         try {
-            entityManager.persist(fields);
+            entityManager.persist(court);
         } catch (Exception ignored) {
         }
     }
 
     @Override
-    public void deleteFields(Fields fields) {
+    public void deleteFields(Court court) {
         try {
-            entityManager.remove(fields);
+            entityManager.remove(court);
         } catch (Exception ignored) {
         }
     }
 
     @Override
-    public Fields findFieldsById(int fieldsId) {
-        Fields fields = null;
+    public Court findFieldsById(int fieldsId) {
+        Court court = null;
         try {
-            fields = entityManager.find(Fields.class, fieldsId);
+            court = entityManager.find(Court.class, fieldsId);
         } catch (NoResultException ignored) {
         }
-        return fields;
+        return court;
     }
 
     @Override
-    public List<Fields> allFields() {
-        List<Fields> fieldsList = null;
+    public List<Court> allFields() {
+        List<Court> courtList = null;
         try {
-            fieldsList = entityManager.createQuery("from Fields", Fields.class)
+            courtList = entityManager.createQuery("from Court", Court.class)
                     .getResultList();
         } catch (NoResultException ignored) {
         }
-        return fieldsList;
+        return courtList;
     }
 }
