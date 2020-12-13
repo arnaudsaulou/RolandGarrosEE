@@ -25,7 +25,7 @@ public enum UserRole {
 
         for (UserRole roles: UserRole.values()) {
             if(roles.value == x)
-                break;
+                return;
         }
 
         throw new InvalidUserRoleException();

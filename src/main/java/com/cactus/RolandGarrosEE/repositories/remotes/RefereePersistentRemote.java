@@ -9,7 +9,10 @@ import java.util.Optional;
 @Remote
 public interface RefereePersistentRemote {
     void saveArbitrator(Referee referee);
+
     void deleteArbitrator(Referee referee);
+
     Optional<Referee> getArbitratorById(int arbitratorId);
-    List<Referee>  allArbitrator();
+
+    List<Referee> allArbitrator();
 }

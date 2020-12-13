@@ -26,8 +26,8 @@ public class Constantes {
     public static final String VIEW_ADD_DOUBLE_MATCH = "/pages/tournament/addDoubleMatch.jsp";
     public static final String VIEW_RESULT_SINGLE_MATCH = "/pages/tournament/resultSingleMatch.jsp";
     public static final String VIEW_RESULT_DOUBLE_MATCH = "/pages/tournament/resultDoubleMatch.jsp";
-    public static final String VIEW_USERS = "/pages/admin/users.jsp";
-    public static final String VIEW_ADD_USER = "/pages/admin/addUser.jsp";
+    public static final String VIEW_USERS = "/pages/grids/bodyGridUser.jsp";
+    public static final String VIEW_ADD_USER = "/pages/actors/addUser.jsp";
 
     //endregion
 
@@ -36,7 +36,7 @@ public class Constantes {
     public static final String URL_HOME = "tournoi?type=MatchSimple&genre=Femme";
     public static final String URL_LOGIN = "connexion";
     public static final String URL_REFEREES = "arbitres";
-    public static final String URL_USERS = "users";
+    public static final String URL_USERS = "utilisateurs";
 
     //endregion
 

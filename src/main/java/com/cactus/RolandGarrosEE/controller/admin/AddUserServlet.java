@@ -44,7 +44,7 @@ public class AddUserServlet extends BaseServlet {
         } catch (UnauthenticatedUserException e) {
             response.sendRedirect("../" + Constantes.URL_LOGIN);
         } catch (InvalidActorException e) {
-            this.getServletContext().getRequestDispatcher(Constantes.VIEW_ADD_USER).forward(request, response);
+            this.getServletContext().getRequestDispatcher(Constantes.VIEW_USERS).forward(request, response);
         }
     }
 
@@ -63,8 +63,14 @@ public class AddUserServlet extends BaseServlet {
         String password = this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_PASSWORD);
         int status = Integer.parseInt(this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_STATUS));
         this.validateNewReferee(firstname, lastname, mail, password, status);
-        User newUser = new User(firstname, lastname, mail, password, status);
-        userPeristentRemote.saveUser(newUser);
+
+        Optional<String> hashedPassword = PasswordUtils.hashPassword(password);
+        if (hashedPassword.isPresent()) {
+            User newUser = new User(firstname, lastname, mail, hashedPassword.get(), status);
+            userPeristentRemote.saveUser(newUser);
+        } else {
+            throw new InvalidActorException();
+        }
     }
 
     private void validateNewReferee(String firstname, String lastname, String mail, String password, int status) throws InvalidActorException {
