@@ -16,8 +16,8 @@ public class SingleMatch extends Match implements Serializable {
     public SingleMatch() {
     }
 
-    public SingleMatch(Date dateEnd, Date dateBegin, int scoreA, int scoreB, Tournament tournament, Court court, Referee referee, List<Player> playersList) {
-        super(dateEnd, dateBegin, scoreA, scoreB, tournament, court, referee);
+    public SingleMatch(Date dateBegin, Date dateEnd, int scoreA, int scoreB, Tournament tournament, Court court, Referee referee, List<Player> playersList) {
+        super(dateBegin, dateEnd, scoreA, scoreB, tournament, court, referee);
         this.playersList = playersList;
     }
 

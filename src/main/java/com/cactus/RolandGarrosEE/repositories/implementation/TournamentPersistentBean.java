@@ -41,12 +41,14 @@ public class TournamentPersistentBean implements TournamentPersistentRemote {
         return tournament;
     }
 
-    public Tournament getTournamentByTypeAndGender(TypeTournament typeTournament, Gender gender) {
+    public Tournament getTournamentByTypeAndGender(TypeTournament typeTournamentEnum, Gender genderEnum) {
         Tournament tournament = null;
         try {
-            tournament = entityManager.createQuery("from Tournament t where t.gender = :gender and t.typeTournament = :typeTournament", Tournament.class)
-                    .setParameter("gender", gender.toString())
-                    .setParameter("typeTournament", typeTournament.toString())
+            tournament = entityManager.createQuery(
+                    "from Tournament t where t.gender = :gender and t.typeTournament = :type"
+                    , Tournament.class)
+                    .setParameter("gender", genderEnum)
+                    .setParameter("type", typeTournamentEnum)
                     .getSingleResult();
         } catch (NoResultException ignored) {
         }

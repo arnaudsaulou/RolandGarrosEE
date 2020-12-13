@@ -13,15 +13,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @WebServlet(name = "ajouterMatch", value = "/tournoi/ajouterMatch")
 public class AddMatchServlet extends BaseServlet {
 
     @EJB
     SingleMatchRemote singleMatchRemote;
+
+    @EJB
     TournamentPersistentRemote tournamentPersistentRemote;
+
+    @EJB
     RefereePersistentRemote refereePersistentRemote;
+
+    @EJB
     CourtPersistentRemote courtPersistentRemote;
+
+    @EJB
     PlayerPersistentRemote playerPersistentRemote;
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -78,7 +88,7 @@ public class AddMatchServlet extends BaseServlet {
 
         //this.validateNewMatch(startDate, partA, partB, referee, court);
 
-        SingleMatch newSingleMatch = new SingleMatch(null, null, 0, 0, tournament, court, referee, playersList);
+        SingleMatch newSingleMatch = new SingleMatch(new Date(), new Date(), 0, 0, tournament, court, referee, playersList);
         singleMatchRemote.saveSingleMatch(newSingleMatch);
     }
 

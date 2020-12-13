@@ -29,8 +29,8 @@ public class TournamentServlet extends BaseServlet {
         String genderString = request.getParameter(Constantes.URL_PARAM_GENDER);
 
         try {
-            TypeTournament matchType = TypeTournament.valueOf(matchTypeString);
-            Gender matchGender = Gender.valueOf(genderString);
+            TypeTournament matchType = TypeTournament.getTypeTournamentFromString(matchTypeString);
+            Gender matchGender = Gender.getGenderFromString(genderString);
 
             request.setAttribute(Constantes.URL_PARAM_MATCH_TYPE, matchType);
             request.setAttribute(Constantes.URL_PARAM_GENDER, matchGender);
@@ -51,6 +51,7 @@ public class TournamentServlet extends BaseServlet {
             }
 
         } catch (IllegalArgumentException e) {
+            e.printStackTrace();
             this.notFoundPage(request, response);
         }
     }
