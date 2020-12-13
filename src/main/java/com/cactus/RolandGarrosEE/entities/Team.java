@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "TEAM")
@@ -18,16 +19,24 @@ public class Team implements Serializable {
     @NotNull
     @Column(name="NAME")
     private String name;
-    @ManyToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinTable(name="team_player",
             joinColumns = @JoinColumn(name = "team_id"),
             inverseJoinColumns = @JoinColumn(name = "player_id"))
     @Size(min=2, max=2)
-    private List<Player> playersList;
-    @ManyToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE}, mappedBy = "teamsList")
-    private List<DoubleMatch> matchsDouble;
+    private Set<Player> playersList;
+    @ManyToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE}, mappedBy = "teamsList", fetch = FetchType.LAZY)
+    private Set<DoubleMatch> matchsDouble;
 
-    public Team(@NotNull int id, @NotNull String name, @Size(min = 2, max = 2) List<Player> playersList, List<DoubleMatch> matchsDouble) {
+    public Team(){
+    }
+
+    public Team(@NotNull int id, @NotNull String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Team(@NotNull int id, @NotNull String name, @Size(min = 2, max = 2) Set<Player> playersList, Set<DoubleMatch> matchsDouble) {
         this.id = id;
         this.name = name;
         this.playersList = playersList;
@@ -50,19 +59,19 @@ public class Team implements Serializable {
         this.name = name;
     }
 
-    public List<Player> getPlayersList() {
+    public Set<Player> getPlayersList() {
         return playersList;
     }
 
-    public void setPlayersList(List<Player> playersList) {
+    public void setPlayersList(Set<Player> playersList) {
         this.playersList = playersList;
     }
 
-    public List<DoubleMatch> getMatchsDouble() {
+    public Set<DoubleMatch> getMatchsDouble() {
         return matchsDouble;
     }
 
-    public void setMatchsDouble(List<DoubleMatch> matchsDouble) {
+    public void setMatchsDouble(Set<DoubleMatch> matchsDouble) {
         this.matchsDouble = matchsDouble;
     }
 }

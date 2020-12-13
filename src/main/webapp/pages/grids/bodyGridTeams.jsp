@@ -21,10 +21,11 @@
         <tbody>
         <c:forEach items="${teamsList}" var="team">
             <tr class="d-flex">
-                <td class="col-3 text-center">${team.number}</td>
+                <td class="col-3 text-center">${team.id}</td>
                 <td class="col-3 text-center">${team.name}</td>
-                <td class="col-3 text-center">${team.playerA}</td>
-                <td class="col-3 text-center">${team.playerB}</td>
+                <c:forEach items="${team.playersList}" var="player">
+                    <td class="col-3 text-center">${player.lastname} ${player.firstname}</td>
+                </c:forEach>
             </tr>
         </c:forEach>
         </tbody>

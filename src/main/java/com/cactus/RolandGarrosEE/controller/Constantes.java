@@ -1,7 +1,5 @@
 package com.cactus.RolandGarrosEE.controller;
 
-import com.cactus.RolandGarrosEE.entities.Gender;
-
 public class Constantes {
 
     //region Session
@@ -72,8 +70,8 @@ public class Constantes {
     public static final String REQUEST_ATTR_BREADCRUMBS = "breadcrumbs";
     public static final String REQUEST_ATTR_REFEREES_LIST = "refereesList";
     public static final String REQUEST_ATTR_USERS_LIST = "usersList";
+    public static final String REQUEST_ATTR_TEAMS_LIST = "teamsList";
     public static final String REQUEST_ATTR_PLAYERS_LIST = "playersList";
-    public static final String REQUEST_ATTR_TEAMS_LIST = "playersList";
 
     //endregion
 
