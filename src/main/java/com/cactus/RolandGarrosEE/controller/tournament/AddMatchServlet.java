@@ -2,12 +2,8 @@ package com.cactus.RolandGarrosEE.controller.tournament;
 
 import com.cactus.RolandGarrosEE.controller.BaseServlet;
 import com.cactus.RolandGarrosEE.entities.*;
-import com.cactus.RolandGarrosEE.repositories.remotes.FieldsPersistentRemote;
-import com.cactus.RolandGarrosEE.repositories.remotes.RefereePersistentRemote;
-import com.cactus.RolandGarrosEE.repositories.remotes.SingleMatchRemote;
-import com.cactus.RolandGarrosEE.repositories.remotes.TournamentPersistentRemote;
+import com.cactus.RolandGarrosEE.repositories.remotes.*;
 import com.cactus.RolandGarrosEE.utils.Constantes;
-import com.cactus.RolandGarrosEE.utils.exceptions.InvalidActorException;
 import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserException;
 
 import javax.ejb.EJB;
@@ -16,7 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 @WebServlet(name = "ajouterMatch", value = "/tournoi/ajouterMatch")
 public class AddMatchServlet extends BaseServlet {
@@ -25,7 +22,8 @@ public class AddMatchServlet extends BaseServlet {
     SingleMatchRemote singleMatchRemote;
     TournamentPersistentRemote tournamentPersistentRemote;
     RefereePersistentRemote refereePersistentRemote;
-    FieldsPersistentRemote fieldsPersistentRemote;
+    CourtPersistentRemote courtPersistentRemote;
+    PlayerPersistentRemote playerPersistentRemote;
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
@@ -38,7 +36,15 @@ public class AddMatchServlet extends BaseServlet {
 
                 this.getServletContext().getRequestDispatcher(Constantes.VIEW_ADD_DOUBLE_MATCH).forward(req, resp);
             } else {
-                req.setAttribute(Constantes.URL_PARAM_GENDER, req.getParameter(Constantes.URL_PARAM_GENDER));
+
+                // TODO Remove
+                req.setAttribute(Constantes.URL_PARAM_GENDER, "Femme");
+                req.setAttribute(Constantes.URL_PARAM_MATCH_TYPE, "MatchSimple");
+
+                // TODO Add
+                // req.setAttribute(Constantes.URL_PARAM_GENDER, req.getParameter(Constantes.URL_PARAM_GENDER));
+                // req.setAttribute(Constantes.URL_PARAM_MATCH_TYPE, req.getParameter(Constantes.URL_PARAM_MATCH_TYPE));
+
                 this.getServletContext().getRequestDispatcher(Constantes.VIEW_ADD_SINGLE_MATCH).forward(req, resp);
             }
         } catch (UnauthenticatedUserException e) {
@@ -67,24 +73,35 @@ public class AddMatchServlet extends BaseServlet {
 
     private void tryToSaveMatch(HttpServletRequest req) {
         String startDate = this.getValue(req, Constantes.NEW_MATCH_FORM_FIELD_START_DATE);
-        String partA = this.getValue(req, Constantes.NEW_MATCH_FORM_FIELD_PART_A);
-        String partB = this.getValue(req, Constantes.NEW_MATCH_FORM_FIELD_PART_B);
 
         Tournament tournament = this.getTournament(req);
         Referee referee = this.getReferee(req);
-        Fields fields = this.getFields(req);
+        Court court = this.getCourt(req);
+        Player playerA = this.getPlayer(req, Constantes.NEW_MATCH_FORM_FIELD_PART_A);
+        Player playerB = this.getPlayer(req, Constantes.NEW_MATCH_FORM_FIELD_PART_B);
+
+        ArrayList<Player> playersList = new ArrayList<Player>();
+        playersList.add(playerA);
+        playersList.add(playerB);
+
         //Date dateStart = new Date(startDate);
 
         //this.validateNewMatch(startDate, partA, partB, referee, court);
 
-        SingleMatch newSingleMatch = new SingleMatch(null, null, 0, 0, tournament, fields, referee);
+        SingleMatch newSingleMatch = new SingleMatch(null, null, 0, 0, tournament, court, referee, playersList);
         singleMatchRemote.saveSingleMatch(newSingleMatch);
     }
 
-    private Fields getFields(HttpServletRequest req) {
-        int fieldId = Integer.parseInt(this.getValue(req, Constantes.NEW_MATCH_FORM_FIELD_COURT));
-        Fields fields = fieldsPersistentRemote.findFieldsById(fieldId);
-        return fields;
+    private Player getPlayer(HttpServletRequest req, String field) {
+        int courtId = Integer.parseInt(this.getValue(req, field));
+        Player player = playerPersistentRemote.findPlayerById(courtId);
+        return player;
+    }
+
+    private Court getCourt(HttpServletRequest req) {
+        int courtId = Integer.parseInt(this.getValue(req, Constantes.NEW_MATCH_FORM_FIELD_COURT));
+        Court court = courtPersistentRemote.findCourtById(courtId);
+        return court;
     }
 
     private Referee getReferee(HttpServletRequest req) {
@@ -94,8 +111,8 @@ public class AddMatchServlet extends BaseServlet {
     }
 
     private Tournament getTournament(HttpServletRequest req) {
-        TypeTournament type = TypeTournament.valueOf(this.getValue(req, Constantes.URL_PARAM_MATCH_TYPE));
-        Gender gender = Gender.valueOf(this.getValue(req, Constantes.URL_PARAM_GENDER));
+        TypeTournament type = TypeTournament.valueOf((String) req.getAttribute(Constantes.URL_PARAM_MATCH_TYPE));
+        Gender gender = Gender.valueOf((String) req.getAttribute(Constantes.URL_PARAM_GENDER));
         Tournament tournament = tournamentPersistentRemote.getTournamentByTypeAndGender(type, gender);
         return tournament;
     }
