@@ -1,9 +1,9 @@
 package com.cactus.RolandGarrosEE.entities;
 
 public enum Gender {
-    HOMME ("HOMME"),
-    FEMME ("FEMME"),
-    MIXTE ("MIXTE");
+    HOMME ("Homme"),
+    FEMME ("Femme"),
+    MIXTE ("Mixte");
 
     private final String name;
 

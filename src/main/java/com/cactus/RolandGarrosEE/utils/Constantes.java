@@ -33,7 +33,7 @@ public class Constantes {
 
     //region URL
 
-    public static final String URL_HOME = "tournoi?type=MatchSimple&genre=Femme";
+    public static final String URL_HOME = "tournoi?type=Simple&genre=Femme";
     public static final String URL_LOGIN = "connexion";
     public static final String URL_REFEREES = "arbitres";
     public static final String URL_USERS = "utilisateurs";

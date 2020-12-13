@@ -12,7 +12,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 @WebServlet(name = "ajouterMatch", value = "/tournoi/ajouterMatch")
@@ -32,19 +31,10 @@ public class AddMatchServlet extends BaseServlet {
 
             // TODO Remove hardcore code double => Replace with enum (discuss which one)
             if (req.getParameter(Constantes.URL_PARAM_MATCH_TYPE).equals("double")) {
-
-
                 this.getServletContext().getRequestDispatcher(Constantes.VIEW_ADD_DOUBLE_MATCH).forward(req, resp);
             } else {
-
-                // TODO Remove
-                req.setAttribute(Constantes.URL_PARAM_GENDER, "Femme");
-                req.setAttribute(Constantes.URL_PARAM_MATCH_TYPE, "MatchSimple");
-
-                // TODO Add
-                // req.setAttribute(Constantes.URL_PARAM_GENDER, req.getParameter(Constantes.URL_PARAM_GENDER));
-                // req.setAttribute(Constantes.URL_PARAM_MATCH_TYPE, req.getParameter(Constantes.URL_PARAM_MATCH_TYPE));
-
+                req.setAttribute(Constantes.URL_PARAM_GENDER, req.getParameter(Constantes.URL_PARAM_GENDER));
+                req.setAttribute(Constantes.URL_PARAM_MATCH_TYPE, req.getParameter(Constantes.URL_PARAM_MATCH_TYPE));
                 this.getServletContext().getRequestDispatcher(Constantes.VIEW_ADD_SINGLE_MATCH).forward(req, resp);
             }
         } catch (UnauthenticatedUserException e) {
@@ -111,8 +101,8 @@ public class AddMatchServlet extends BaseServlet {
     }
 
     private Tournament getTournament(HttpServletRequest req) {
-        TypeTournament type = TypeTournament.valueOf((String) req.getAttribute(Constantes.URL_PARAM_MATCH_TYPE));
-        Gender gender = Gender.valueOf((String) req.getAttribute(Constantes.URL_PARAM_GENDER));
+        TypeTournament type = TypeTournament.valueOf(req.getParameter(Constantes.URL_PARAM_MATCH_TYPE));
+        Gender gender = Gender.valueOf(req.getParameter(Constantes.URL_PARAM_GENDER));
         Tournament tournament = tournamentPersistentRemote.getTournamentByTypeAndGender(type, gender);
         return tournament;
     }
