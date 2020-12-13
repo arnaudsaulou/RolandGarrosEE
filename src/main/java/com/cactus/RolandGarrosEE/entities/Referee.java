@@ -8,9 +8,9 @@ import java.util.List;
 @Entity
 @Table(name = "REFEREE")
 public class Referee extends Member implements Serializable {
-    @ManyToMany
+    @OneToMany
     private List<SingleMatch> matchsSingle;
-    @ManyToMany
+    @OneToMany
     private List<DoubleMatch> matchsDouble;
 
     public Referee() {

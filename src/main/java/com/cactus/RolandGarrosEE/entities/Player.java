@@ -1,55 +1,53 @@
 package com.cactus.RolandGarrosEE.entities;
 
-import com.sun.istack.NotNull;
-import com.sun.istack.Nullable;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "PLAYER")
 public class Player extends Member implements Serializable {
-    @Nullable
-    @Column(name = "CLASSEMENT", unique = true)
-    private int classement;
+    @Column(name = "RANKINGS", unique = true)
+    private int rankings;
     @NotNull
     @Column(name = "GENDER")
     @Enumerated(EnumType.STRING)
     private Gender gender;
-    @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE})
+    @JoinTable(name="player_singlematch",
+            joinColumns = @JoinColumn(name = "player_id"),
+            inverseJoinColumns = @JoinColumn(name = "singlematch_id"))
     private List<SingleMatch> matchsSingle;
-    @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE})
-    private List<DoubleMatch> matchsDouble;
-    @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE})
-    private List<Team> teams;
+    @ManyToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE}, mappedBy = "playersList")
+    @Size(min=0, max=2)
+    private List<Team> teamsList;
 
     public Player() {
     }
 
-    public Player(int classement, Gender gender, List<SingleMatch> matchsSingle, List<DoubleMatch> matchsDouble, List<Team> teams) {
-        this.classement = classement;
+    public Player(int rankings, @NotNull Gender gender, List<SingleMatch> matchsSingle, @Size(min = 0, max = 2) List<Team> teamsList) {
+        this.rankings = rankings;
         this.gender = gender;
         this.matchsSingle = matchsSingle;
-        this.matchsDouble = matchsDouble;
-        this.teams = teams;
+        this.teamsList = teamsList;
     }
 
-    public Player(String firstname, String lastname, String nationality, int classement, Gender gender, List<SingleMatch> matchsSingle, List<DoubleMatch> matchsDouble, List<Team> teams) {
+    public Player(String firstname, String lastname, String nationality, int rankings, @NotNull Gender gender, List<SingleMatch> matchsSingle, @Size(min = 0, max = 2) List<Team> teamsList) {
         super(firstname, lastname, nationality);
-        this.classement = classement;
+        this.rankings = rankings;
         this.gender = gender;
         this.matchsSingle = matchsSingle;
-        this.matchsDouble = matchsDouble;
-        this.teams = teams;
+        this.teamsList = teamsList;
     }
 
-    public int getClassement() {
-        return classement;
+    public int getRankings() {
+        return rankings;
     }
 
-    public void setClassement(int classement) {
-        this.classement = classement;
+    public void setRankings(int rankings) {
+        this.rankings = rankings;
     }
 
     public Gender getGender() {
@@ -68,19 +66,11 @@ public class Player extends Member implements Serializable {
         this.matchsSingle = matchsSingle;
     }
 
-    public List<DoubleMatch> getMatchsDouble() {
-        return matchsDouble;
+    public List<Team> getTeamsList() {
+        return teamsList;
     }
 
-    public void setMatchsDouble(List<DoubleMatch> matchsDouble) {
-        this.matchsDouble = matchsDouble;
-    }
-
-    public List<Team> getTeams() {
-        return teams;
-    }
-
-    public void setTeams(List<Team> teams) {
-        this.teams = teams;
+    public void setTeamsList(List<Team> teamsList) {
+        this.teamsList = teamsList;
     }
 }

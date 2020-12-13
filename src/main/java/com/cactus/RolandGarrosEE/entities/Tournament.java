@@ -1,9 +1,7 @@
 package com.cactus.RolandGarrosEE.entities;
 
-import com.sun.istack.NotNull;
-import com.sun.istack.Nullable;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -20,7 +18,7 @@ public class Tournament implements Serializable {
     @Column(name="TYPE")
     @Enumerated(EnumType.STRING)
     private TypeTournament typeTournament;
-    @Nullable
+    @NotNull
     @Column(name="GENDER")
     @Enumerated(EnumType.STRING)
     private Gender gender;
@@ -36,7 +34,7 @@ public class Tournament implements Serializable {
     @Column(name="NBMATCH")
     private int nbMatch;
 
-    public Tournament(TypeTournament typeTournament, Gender gender, Date dateBegin, Date dateEnd, int nbMatch, List<SingleMatch> matchsSingle, List<DoubleMatch> matchsDouble) {
+    public Tournament(TypeTournament typeTournament, Gender gender, Date dateBegin, Date dateEnd, int nbMatch) {
         this.typeTournament = typeTournament;
         this.gender = gender;
         this.dateBegin = dateBegin;
@@ -94,5 +92,4 @@ public class Tournament implements Serializable {
     public void setNbMatch(int nbMatch) {
         this.nbMatch = nbMatch;
     }
-
 }

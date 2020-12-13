@@ -1,37 +1,31 @@
 package com.cactus.RolandGarrosEE.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "SINGLEMATCH")
 public class SingleMatch extends Match implements Serializable {
-    @ManyToOne(targetEntity=Player.class)
-    private Player playerA;
-    @ManyToOne(targetEntity=Player.class)
-    private Player playerB;
+    @ManyToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE} , mappedBy = "matchsSingle")
+    @Size(min=2, max=2)
+    private List<Player> playersList;
 
     public SingleMatch() {
     }
 
-    public SingleMatch(Date dateEnd, Date dateBegin, int scoreA, int scoreB, Tournament tournament, Fields fields, Referee referee) {
-        super(dateEnd, dateBegin, scoreA, scoreB, tournament, fields, referee);
+    public SingleMatch(Date dateEnd, Date dateBegin, int scoreA, int scoreB, Tournament tournament, Court court, Referee referee, List<Player> playersList) {
+        super(dateEnd, dateBegin, scoreA, scoreB, tournament, court, referee);
+        this.playersList = playersList;
     }
 
-    public Player getPlayerA() {
-        return playerA;
+    public List<Player> getPlayersList() {
+        return playersList;
     }
 
-    public void setPlayerA(Player playerA) {
-        this.playerA = playerA;
-    }
-
-    public Player getPlayerB() {
-        return playerB;
-    }
-
-    public void setPlayerB(Player playerB) {
-        this.playerB = playerB;
+    public void setPlayersList(List<Player> playersList) {
+        this.playersList = playersList;
     }
 }
