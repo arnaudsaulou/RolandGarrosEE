@@ -15,41 +15,28 @@ public class UserPersistentBean implements UserPeristentRemote {
     @PersistenceContext(unitName = "PersistentUnitPU")
     EntityManager entityManager;
 
+    @Override
     public void saveUser(User user) {
-        // TODO Transaction is not accessible when using JTA with JPA-compliant transaction access enabled
-
-        /*try {
-            entityManager.getTransaction().begin();
-            entityManager.persist(user);
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            e.printStackTrace();
-        }*/
-
-        entityManager.persist(user);
-    }
-
-    public void deleteUser(User user) {
         try {
-            entityManager.getTransaction().begin();
-            entityManager.remove(user);
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            e.printStackTrace();
+            entityManager.persist(user);
+        } catch (Exception ignored) {
         }
     }
 
+    @Override
+    public void deleteUser(User user) {
+        try {
+            entityManager.remove(user);
+        } catch (Exception ignored) {
+        }
+    }
+
+    @Override
     public User findUserById(int userId) {
         User user = null;
         try {
-            entityManager.getTransaction().begin();
             user = entityManager.find(User.class, userId);
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            e.printStackTrace();
+        } catch (NoResultException ignored) {
         }
         return user;
     }
@@ -57,49 +44,22 @@ public class UserPersistentBean implements UserPeristentRemote {
     @Override
     public User findUserByMail(String mail) {
         User user = null;
-
-        // TODO Transaction is not accessible when using JTA with JPA-compliant transaction access enabled
-
-        /*try {
-            entityManager.getTransaction().begin();
-            user = entityManager.createQuery("SELECT u FROM User u WHERE u.mail = :mail", User.class)
-                    .setParameter("mail", mail)
-                    .getSingleResult();
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            e.printStackTrace();
-        }*/
-
         try {
             user = entityManager.createQuery("SELECT u FROM User u WHERE u.mail = :mail", User.class)
                     .setParameter("mail", mail)
                     .getSingleResult();
         } catch (NoResultException ignored) {
         }
-
         return user;
     }
 
     public List<User> allUser() {
         List<User> users = null;
-
-        // TODO Transaction is not accessible when using JTA with JPA-compliant transaction access enabled
-        /*try {
-            entityManager.getTransaction().begin();
-            users = entityManager.createQuery("from User ", User.class).getResultList();
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            e.printStackTrace();
-        }*/
-
         try {
             users = entityManager.createQuery("from User ", User.class)
                     .getResultList();
         } catch (NoResultException ignored) {
         }
-
         return users;
     }
 }

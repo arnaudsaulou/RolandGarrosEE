@@ -5,6 +5,7 @@ import com.cactus.RolandGarrosEE.repositories.remotes.TeamPersistentRemote;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
@@ -13,50 +14,39 @@ public class TeamPersistentBean implements TeamPersistentRemote {
     @PersistenceContext(name = "PersistentUnitPU")
     EntityManager entityManager;
 
+    @Override
     public void saveTeam(Team team) {
         try {
-            entityManager.getTransaction().begin();
             entityManager.persist(team);
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            e.printStackTrace();
+        } catch (Exception ignored) {
         }
     }
 
+    @Override
     public void deleteTeam(Team team) {
         try {
-            entityManager.getTransaction().begin();
             entityManager.remove(team);
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            e.printStackTrace();
+        } catch (Exception ignored) {
         }
     }
 
+    @Override
     public Team getTeamById(int teamId) {
         Team team = null;
         try {
-            entityManager.getTransaction().begin();
             team = entityManager.find(Team.class, teamId);
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            e.printStackTrace();
+        } catch (NoResultException ignored) {
         }
         return team;
     }
 
+    @Override
     public List<Team> allTeam() {
         List<Team> teams = null;
         try {
-            entityManager.getTransaction().begin();
-            teams = entityManager.createQuery("FROM Team", Team.class).getResultList();
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            e.printStackTrace();
+            teams = entityManager.createQuery("FROM Team", Team.class)
+                    .getResultList();
+        } catch (NoResultException ignored) {
         }
         return teams;
     }

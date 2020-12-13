@@ -5,29 +5,48 @@ import com.cactus.RolandGarrosEE.repositories.remotes.RefereePersistentRemote;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.Optional;
 
 @Stateless
 public class RefereePersistentBean implements RefereePersistentRemote {
-
     @PersistenceContext(unitName = "PersistentUnitPU")
     EntityManager entityManager;
 
+    @Override
     public void saveArbitrator(Referee referee) {
-        entityManager.persist(referee);
+        try {
+            entityManager.persist(referee);
+        } catch (Exception ignored) {
+        }
     }
 
+    @Override
     public void deleteArbitrator(Referee referee) {
-        entityManager.remove(referee);
+        try {
+            entityManager.remove(referee);
+        } catch (Exception ignored) {
+        }
     }
 
-    public Optional<Referee> getArbitratorById(int arbitratorId) {
-        return Optional.empty();
+    @Override
+    public Referee getArbitratorById(int refereeId) {
+        Referee referee = null;
+        try {
+            referee = entityManager.find(Referee.class, refereeId);
+        } catch (NoResultException ignored) {
+        }
+        return referee;
     }
 
+    @Override
     public List<Referee> allArbitrator() {
-        return entityManager.createQuery("SELECT arbitrators FROM Referee arbitrators", Referee.class).getResultList();
+        List<Referee> referees = null;
+        try {
+            referees = entityManager.createQuery("SELECT arbitrators FROM Referee arbitrators", Referee.class).getResultList();
+        } catch (NoResultException ignored) {
+        }
+        return referees;
     }
 }
