@@ -3,7 +3,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="col-3 p-0">
         <a href="${pageContext.request.contextPath}/tournoi?type=MatchSimple&genre=Femme">
-            <img src="${pageContext.request.contextPath}/resources/svg/roland_garros_logo.svg" width="70" height="70" alt="Roland Garros Logo">
+            <img src="${pageContext.request.contextPath}/resources/svg/roland_garros_logo.svg" width="70" height="70"
+                 alt="Roland Garros Logo">
         </a>
         <h3 class="d-inline align-middle">Roland Garros Planer</h3>
     </div>
@@ -52,6 +53,13 @@
                         <button class="btn btn-outline-success btn-outline-success">Arbitres</button>
                     </a>
                 </li>
+                <c:if test="${sessionScope.isAdmin}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/utilisateurs">
+                            <button class="btn btn-outline-success btn-outline-success">Utilisateurs</button>
+                        </a>
+                    </li>
+                </c:if>
             </ul>
         </div>
 
@@ -59,7 +67,7 @@
             <a class="text-decoration-none" href="${pageContext.request.contextPath}/deconnexion">
                 <div>
                     <div class="d-inline align-middle text-right">
-                        <h4><c:out value='${sessionScope.userSession.firstname}' /></h4>
+                        <h4><c:out value='${sessionScope.userSession.firstname}'/></h4>
                         <h6>Deconnexion</h6>
                     </div>
                 </div>

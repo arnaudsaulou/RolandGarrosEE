@@ -7,9 +7,13 @@ import java.util.List;
 
 @Remote
 public interface UserPeristentRemote {
-   void saveUser(User user);
-   void deleteUser(User user);
-   User findUserById(int userId);
-   User findUserByMail(String mail);
-   List<User> allUser();
+    void saveUser(User user);
+
+    void deleteUser(User user);
+
+    User findUserById(int userId);
+
+    User findUserByMail(String mail);
+
+    List<User> allUser();
 }

@@ -2,8 +2,15 @@
 
 <body>
 <div class="col-4 offset-4 mt-5">
-    <form class="p-5 card card-block bg-light text-dark" action="${pageContext.request.contextPath}/connexion" method="post">
-        <h2 class="text-center mb-5">Connexion</h2>
+    <form class="p-5 card card-block bg-light text-dark" action="${pageContext.request.contextPath}/connexion"
+          method="post">
+
+        <%-- TODO Remove Bypass --%>
+        <a href="${pageContext.request.contextPath}/connexion?bypassConnection=true"><h2 class="text-center mb-5">
+            Connexion</h2></a>
+
+        <%-- TODO Add --%>
+        <%--<h2 class="text-center mb-5">Connexion</h2>--%>
 
         <div class="form-group">
             <input name="mail" type="email" class="form-control" placeholder="Email" required="required">

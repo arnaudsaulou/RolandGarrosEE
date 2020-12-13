@@ -5,6 +5,7 @@ import com.cactus.RolandGarrosEE.controller.Constantes;
 import com.cactus.RolandGarrosEE.entities.User;
 import com.cactus.RolandGarrosEE.repositories.remotes.UserPeristentRemote;
 import com.cactus.RolandGarrosEE.utils.PasswordUtils;
+import com.cactus.RolandGarrosEE.utils.enums.UserRole;
 import com.cactus.RolandGarrosEE.utils.exceptions.InvalidPasswordException;
 import com.cactus.RolandGarrosEE.utils.exceptions.UserNotFoundException;
 
@@ -26,12 +27,27 @@ public class LoginServlet extends BaseServlet {
     UserPeristentRemote userPeristentRemote;
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.getServletContext().getRequestDispatcher(Constantes.VIEW_LOGIN).forward(request, response);
+
+        //TODO Remove bypass
+        String bypassConnection = this.getValue(request, "bypassConnection");
+        if (bypassConnection != null) {
+            try {
+                this.saveUserInfoIntoSession(request, this.tryToLogUser(request, true));
+                response.sendRedirect(Constantes.URL_HOME);
+            } catch (UserNotFoundException | InvalidPasswordException e) {
+                e.printStackTrace();
+            }
+        } else {
+            this.getServletContext().getRequestDispatcher(Constantes.VIEW_LOGIN).forward(request, response);
+        }
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            User user = this.tryToLogUser(request);
+
+            //TODO Remove bypass
+            User user = this.tryToLogUser(request, false);
+
             this.saveUserInfoIntoSession(request, user);
             response.sendRedirect(Constantes.URL_HOME);
         } catch (UserNotFoundException | InvalidPasswordException e) {
@@ -41,15 +57,25 @@ public class LoginServlet extends BaseServlet {
 
     }
 
-    private User tryToLogUser(HttpServletRequest request) throws UserNotFoundException, InvalidPasswordException {
+    private User tryToLogUser(HttpServletRequest request, boolean bypassConnection) throws UserNotFoundException, InvalidPasswordException {
         String mail = this.getValue(request, Constantes.LOGIN_FORM_FIELD_MAIL);
         String password = this.getValue(request, Constantes.LOGIN_FORM_FIELD_PASSWORD);
-        return this.getUserFromDatabase(mail, password);
+
+        User user;
+
+        //TODO Remove bypass
+        if (bypassConnection)
+            user = new User("firstname", "lastname", "mail", "password", 0);
+        else
+            user = this.getUserFromDatabase(mail, password);
+
+        return user;
     }
 
     private User getUserFromDatabase(String mail, String password) throws UserNotFoundException, InvalidPasswordException {
         boolean connectionOk = false;
 
+        // TODO
         User user = userPeristentRemote.findUserByMail(mail);
 
         if (user == null)
@@ -66,7 +92,8 @@ public class LoginServlet extends BaseServlet {
     private void saveUserInfoIntoSession(HttpServletRequest request, User user) {
         HttpSession session = request.getSession();
         session.setAttribute(Constantes.SESSION_USER, user);
-        session.setAttribute(Constantes.SESSION_IS_ORGANIZER, user.getStatus() == 0);
+        session.setAttribute(Constantes.SESSION_IS_ADMIN, UserRole.ADMIN.equalsValue(user.getStatus()));
+        session.setAttribute(Constantes.SESSION_IS_ORGANIZER, UserRole.ORGANIZER.equalsValue(user.getStatus()));
     }
 
 
