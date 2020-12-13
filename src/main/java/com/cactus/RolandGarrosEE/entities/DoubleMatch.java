@@ -1,37 +1,35 @@
 package com.cactus.RolandGarrosEE.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "DOUBLEMATCH")
 public class DoubleMatch extends Match implements Serializable {
-    @ManyToOne(targetEntity=Team.class)
-    private Team teamA;
-    @ManyToOne(targetEntity=Team.class)
-    private Team teamB;
+    @ManyToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE})
+    @JoinTable(name="doublematch_team",
+            joinColumns = @JoinColumn(name = "doublematch_id"),
+            inverseJoinColumns = @JoinColumn(name = "team_id"))
+    @Size(min=2, max=2)
+    private List<Team> teamsList;
 
-    public DoubleMatch() {
+    public DoubleMatch(@Size(min = 2, max = 2) List<Team> teamsList) {
+        this.teamsList = teamsList;
     }
 
-    public DoubleMatch(Date dateEnd, Date dateBegin, int scoreA, int scoreB, Tournament tournament, Fields fields, Referee referee) {
-        super(dateEnd, dateBegin, scoreA, scoreB, tournament, fields, referee);
+    public DoubleMatch(Date dateBegin, Date dateEnd, int scoreA, int scoreB, Tournament tournament, Court court, Referee referee, @Size(min = 2, max = 2) List<Team> teamsList) {
+        super(dateBegin, dateEnd, scoreA, scoreB, tournament, court, referee);
+        this.teamsList = teamsList;
     }
 
-    public Team getTeamA() {
-        return teamA;
+    public List<Team> getTeamsList() {
+        return teamsList;
     }
 
-    public void setTeamA(Team teamA) {
-        this.teamA = teamA;
-    }
-
-    public Team getTeamB() {
-        return teamB;
-    }
-
-    public void setTeamB(Team teamB) {
-        this.teamB = teamB;
+    public void setTeamsList(List<Team> teamsList) {
+        this.teamsList = teamsList;
     }
 }
