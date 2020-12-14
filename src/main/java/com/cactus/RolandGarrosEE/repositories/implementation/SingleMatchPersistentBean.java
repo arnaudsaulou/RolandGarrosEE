@@ -49,4 +49,16 @@ public class SingleMatchPersistentBean implements SingleMatchRemote {
         }
         return singleMatches;
     }
+
+    @Override
+    public List<SingleMatch> allSingleMatchByTournamentId(int tournamentId) {
+        List<SingleMatch> singleMatches = null;
+        try {
+            singleMatches = entityManager.createQuery("from SingleMatch sm WHERE sm.tournament.id = :tournamentId", SingleMatch.class)
+                    .setParameter("tournamentId" , tournamentId)
+                    .getResultList();
+        } catch (NoResultException ignored) {
+        }
+        return singleMatches;
+    }
 }
