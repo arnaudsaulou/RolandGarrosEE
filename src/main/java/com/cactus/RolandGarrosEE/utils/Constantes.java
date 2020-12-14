@@ -38,6 +38,7 @@ public class Constantes {
     public static final String URL_REFEREES = "arbitres";
     public static final String URL_USERS = "utilisateurs";
     public static final String URL_PLAYERS = "joueurs";
+    public static final String URL_TEAM = "equipes";
 
     //endregion
 

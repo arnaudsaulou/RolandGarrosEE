@@ -41,6 +41,7 @@ public class AddTeamServlet extends BaseServlet {
         try {
             this.checkAuthentication(req);
             this.tryToTeamMatch(req);
+            resp.sendRedirect("../" + Constantes.URL_TEAM);
         } catch (UnauthenticatedUserException e) {
             resp.sendRedirect("../" + Constantes.URL_LOGIN);
         }
