@@ -1,3 +1,4 @@
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@include file="/includes/navbar.jsp" %>
 
 <body>
@@ -13,13 +14,23 @@
         <div class="form-group row">
             <label class="col-3 col-form-label">Joueur A</label>
             <div class="col-9">
-                <%@include file="/includes/selectPlayerDropdownlistA.jsp"%>
+                <select class="form-control" name="teamPlayerA">
+                    <option disabled selected value> -- selectionner un joueur -- </option>
+                    <c:forEach items="${playersList}" var="player">
+                        <option value="${player.id}">${player.firstname} ${fn:toUpperCase(player.lastname)}</option>
+                    </c:forEach>
+                </select>
             </div>
         </div>
         <div class="form-group row">
             <label class="col-3 col-form-label">Joueur B</label>
             <div class="col-9">
-                <%@include file="/includes/selectPlayerDropdownlistB.jsp"%>
+                <select class="form-control" name="teamPlayerB">
+                    <option disabled selected value> -- selectionner un joueur -- </option>
+                    <c:forEach items="${playersList}" var="player">
+                        <option value="${player.id}">${player.firstname} ${fn:toUpperCase(player.lastname)}</option>
+                    </c:forEach>
+                </select>
             </div>
         </div>
         <div class="form-group text-center mt-3 mb-0">
