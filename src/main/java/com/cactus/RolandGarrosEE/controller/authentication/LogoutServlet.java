@@ -1,6 +1,6 @@
 package com.cactus.RolandGarrosEE.controller.authentication;
 
-import com.cactus.RolandGarrosEE.controller.Constantes;
+import com.cactus.RolandGarrosEE.utils.Constantes;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

@@ -14,13 +14,13 @@
         <div class="form-group row">
             <label class="col-3 col-form-label">Equipe A</label>
             <div class="col-8">
-                <%@include file="/includes/selectTeamDropdownlist.jsp"%>
+                <%@include file="/includes/selectTeamDropdownlistA.jsp"%>
             </div>
         </div>
         <div class="form-group row">
             <label class="col-3 col-form-label">Equipe B</label>
             <div class="col-8">
-                <%@include file="/includes/selectTeamDropdownlist.jsp"%>
+                <%@include file="/includes/selectTeamDropdownlistA.jsp"%>
             </div>
         </div>
         <div class="form-group row">

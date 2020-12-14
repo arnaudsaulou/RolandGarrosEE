@@ -1,20 +1,29 @@
 package com.cactus.RolandGarrosEE.entities;
 
 public enum TypeTournament {
-    SINGLE ("SINGLE"),
-    DOUBLE ("DOUBLE");
+    SINGLE("Single"),
+    DOUBLE("Double");
 
     private final String name;
 
-    private TypeTournament(String s) {
-        name = s;
+    TypeTournament(String s) {
+        this.name = s;
     }
 
     public boolean equalsName(String otherName) {
-        return name.equals(otherName);
+        return this.name.equals(otherName);
     }
 
     public String toString() {
         return this.name;
+    }
+
+    public static TypeTournament getTypeTournamentFromString(String typeTournamentString){
+        for (TypeTournament typeTournament : TypeTournament.values()) {
+            if(typeTournament.equalsName(typeTournamentString)){
+                return typeTournament;
+            }
+        }
+        throw new IllegalArgumentException(typeTournamentString + "Not a valid tournament type");
     }
 }

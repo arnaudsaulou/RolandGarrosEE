@@ -1,9 +1,9 @@
 package com.cactus.RolandGarrosEE.controller.player;
 
 import com.cactus.RolandGarrosEE.controller.BaseServlet;
-import com.cactus.RolandGarrosEE.controller.Constantes;
 import com.cactus.RolandGarrosEE.entities.Player;
 import com.cactus.RolandGarrosEE.repositories.remotes.PlayerPersistentRemote;
+import com.cactus.RolandGarrosEE.utils.Constantes;
 import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserException;
 
 import javax.ejb.EJB;

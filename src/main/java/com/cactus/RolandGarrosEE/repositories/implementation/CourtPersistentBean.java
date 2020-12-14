@@ -1,7 +1,7 @@
 package com.cactus.RolandGarrosEE.repositories.implementation;
 
 import com.cactus.RolandGarrosEE.entities.Court;
-import com.cactus.RolandGarrosEE.repositories.remotes.FieldsPersistentRemote;
+import com.cactus.RolandGarrosEE.repositories.remotes.CourtPersistentRemote;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -10,12 +10,12 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Stateless
-public class FieldsPersistentBean implements FieldsPersistentRemote {
+public class CourtPersistentBean implements CourtPersistentRemote {
     @PersistenceContext(name = "PersistentUnitPU")
     EntityManager entityManager;
 
     @Override
-    public void saveFields(Court court) {
+    public void saveCourt(Court court) {
         try {
             entityManager.persist(court);
         } catch (Exception ignored) {
@@ -23,7 +23,7 @@ public class FieldsPersistentBean implements FieldsPersistentRemote {
     }
 
     @Override
-    public void deleteFields(Court court) {
+    public void deleteCourt(Court court) {
         try {
             entityManager.remove(court);
         } catch (Exception ignored) {
@@ -31,7 +31,7 @@ public class FieldsPersistentBean implements FieldsPersistentRemote {
     }
 
     @Override
-    public Court findFieldsById(int fieldsId) {
+    public Court findCourtById(int fieldsId) {
         Court court = null;
         try {
             court = entityManager.find(Court.class, fieldsId);
@@ -41,7 +41,7 @@ public class FieldsPersistentBean implements FieldsPersistentRemote {
     }
 
     @Override
-    public List<Court> allFields() {
+    public List<Court> allCourts() {
         List<Court> courtList = null;
         try {
             courtList = entityManager.createQuery("from Court", Court.class)

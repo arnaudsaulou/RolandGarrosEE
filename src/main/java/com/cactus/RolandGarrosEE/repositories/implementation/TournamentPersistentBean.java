@@ -1,6 +1,8 @@
 package com.cactus.RolandGarrosEE.repositories.implementation;
 
+import com.cactus.RolandGarrosEE.entities.Gender;
 import com.cactus.RolandGarrosEE.entities.Tournament;
+import com.cactus.RolandGarrosEE.entities.TypeTournament;
 import com.cactus.RolandGarrosEE.repositories.remotes.TournamentPersistentRemote;
 
 import javax.ejb.Stateless;
@@ -34,6 +36,20 @@ public class TournamentPersistentBean implements TournamentPersistentRemote {
         Tournament tournament = null;
         try {
             tournament = entityManager.find(Tournament.class, tournamentId);
+        } catch (NoResultException ignored) {
+        }
+        return tournament;
+    }
+
+    public Tournament getTournamentByTypeAndGender(TypeTournament typeTournamentEnum, Gender genderEnum) {
+        Tournament tournament = null;
+        try {
+            tournament = entityManager.createQuery(
+                    "from Tournament t where t.gender = :gender and t.typeTournament = :type"
+                    , Tournament.class)
+                    .setParameter("gender", genderEnum)
+                    .setParameter("type", typeTournamentEnum)
+                    .getSingleResult();
         } catch (NoResultException ignored) {
         }
         return tournament;

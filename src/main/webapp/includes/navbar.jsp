@@ -2,7 +2,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="col-3 p-0">
-        <a href="${pageContext.request.contextPath}/tournoi?type=MatchSimple&genre=Femme">
+        <a href="${pageContext.request.contextPath}/tournoi?type=Single&genre=Femme">
             <img src="${pageContext.request.contextPath}/resources/svg/roland_garros_logo.svg" width="70" height="70"
                  alt="Roland Garros Logo">
         </a>
@@ -14,22 +14,22 @@
         <div class="collapse navbar-collapse col-7 d-flex flex-row" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/tournoi?type=MatchSimple&genre=Femme">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/tournoi?type=Single&genre=Femme">
                         <button class="btn btn-outline-success btn-outline-success">Simple Femme</button>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/tournoi?type=MatchSimple&genre=Homme">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/tournoi?type=Single&genre=Homme">
                         <button class="btn btn-outline-success btn-outline-success">Simple Homme</button>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/tournoi?type=MatchDouble&genre=Femme">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/tournoi?type=Double&genre=Femme">
                         <button class="btn btn-outline-success btn-outline-success">Double Femme</button>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/tournoi?type=MatchDouble&genre=Homme">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/tournoi?type=Double&genre=Homme">
                         <button class="btn btn-outline-success btn-outline-success">Double Homme</button>
                     </a>
                 </li>

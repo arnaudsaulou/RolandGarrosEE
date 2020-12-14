@@ -1,4 +1,4 @@
-package com.cactus.RolandGarrosEE.controller;
+package com.cactus.RolandGarrosEE.utils;
 
 public class Constantes {
 
@@ -33,7 +33,7 @@ public class Constantes {
 
     //region URL
 
-    public static final String URL_HOME = "tournoi?type=MatchSimple&genre=Femme";
+    public static final String URL_HOME = "tournoi?type=Single&genre=Femme";
     public static final String URL_LOGIN = "connexion";
     public static final String URL_REFEREES = "arbitres";
     public static final String URL_USERS = "utilisateurs";
@@ -58,6 +58,11 @@ public class Constantes {
     public static final String NEW_ACTOR_FORM_FIELD_MAIL = "actorMail";
     public static final String NEW_ACTOR_FORM_FIELD_PASSWORD = "actorPassword";
     public static final String NEW_ACTOR_FORM_FIELD_STATUS = "actorStatus";
+    public static final String NEW_MATCH_FORM_FIELD_START_DATE = "matchStartDate";
+    public static final String NEW_MATCH_FORM_FIELD_PART_A = "matchPartA";
+    public static final String NEW_MATCH_FORM_FIELD_PART_B = "matchPartB";
+    public static final String NEW_MATCH_FORM_FIELD_REFEREE = "matchReferee";
+    public static final String NEW_MATCH_FORM_FIELD_COURT= "matchCourt";
     public static final String NEW_ACTOR_FORM_FIELD_RANKINGS = "actorRankings";
     public static final String NEW_ACTOR_FORM_FIELD_GENDER = "actorGender";
 
