@@ -60,10 +60,13 @@ public class Constantes {
     public static final String NEW_ACTOR_FORM_FIELD_PASSWORD = "actorPassword";
     public static final String NEW_ACTOR_FORM_FIELD_STATUS = "actorStatus";
     public static final String NEW_MATCH_FORM_FIELD_START_DATE = "matchStartDate";
+    public static final String NEW_MATCH_FORM_FIELD_END_DATE= "matchEndDate";
     public static final String NEW_MATCH_FORM_FIELD_PART_A = "matchPartA";
     public static final String NEW_MATCH_FORM_FIELD_PART_B = "matchPartB";
     public static final String NEW_MATCH_FORM_FIELD_REFEREE = "matchReferee";
     public static final String NEW_MATCH_FORM_FIELD_COURT= "matchCourt";
+    public static final String NEW_MATCH_FORM_FIELD_SCORE_A= "matchScoreA";
+    public static final String NEW_MATCH_FORM_FIELD_SCORE_B= "matchScoreB";
     public static final String NEW_ACTOR_FORM_FIELD_RANKINGS = "actorRankings";
     public static final String NEW_ACTOR_FORM_FIELD_GENDER = "actorGender";
     public static final String NEW_TEAM_FORM_FIELD_NAME = "teamName";

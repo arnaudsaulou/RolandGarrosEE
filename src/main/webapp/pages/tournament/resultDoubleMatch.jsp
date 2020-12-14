@@ -7,14 +7,14 @@
         <div class="form-group row">
             <label for="example-datetime-local-input" class="col-3 col-form-label">Date de fin</label>
             <div class="col-8">
-                <input class="form-control" type="datetime-local" value="2020-12-12T14:00:00"
+                <input class="form-control" type="datetime-local" value="2020-12-12T14:00:00" name="matchEndDate"
                        id="example-datetime-local-input">
             </div>
         </div>
         <div class="form-group row">
             <label class="col-3 col-form-label">Score Equipe A</label>
             <div class="col-8">
-                <select class="form-control" id="scoreEquipeA" name="scoreEquipeA">
+                <select class="form-control" id="matchScoreA" name="matchScoreA">
                     <c:forEach var="i" begin="0" end="5" step="1">
                         <option value="${i}">${i}</option>
                     </c:forEach>>
@@ -24,7 +24,7 @@
         <div class="form-group row">
             <label class="col-3 col-form-label">Score Equipe B</label>
             <div class="col-8">
-                <select class="form-control" id="scoreEquipeB" name="scoreEquipeB">
+                <select class="form-control" id="matchScoreB" name="matchScoreB">
                     <c:forEach var="i" begin="0" end="5" step="1">
                         <option value="${i}">${i}</option>
                     </c:forEach>>
