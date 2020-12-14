@@ -1,40 +1,40 @@
-INSERT INTO USER_ROLANDGARROS(firstname, lastname, mail, password, status)
+INSERT INTO USER(firstname, lastname, mail, password, status)
 VALUES ('Cloe', 'RICARD', 'cloericard@gmail.com', 'cloemp',  0);
 
-INSERT INTO USER_ROLANDGARROS(firstname, lastname, mail, password, status)
+INSERT INTO USER(firstname, lastname, mail, password, status)
 VALUES ('Arnaud', 'SAULOU', 'arnaudsauloud@gmail.com', 'arnaudmp',  1);
 
-INSERT INTO USER_ROLANDGARROS(firstname, lastname, mail, password, status)
+INSERT INTO USER(firstname, lastname, mail, password, status)
 VALUES ('Pierre', 'LEMAIGRE', 'pierrelemaigre@gmail.com', 'pierremp',  1);
 
-INSERT INTO USER_ROLANDGARROS(firstname, lastname, mail, password, status)
+INSERT INTO USER(firstname, lastname, mail, password, status)
 VALUES ('Enzo', 'CARVALHO', 'enzocarvalho@gmail.com', 'enzomp',  1);
 
 -- INSERT PLAYER --
 
 INSERT player(firstname, lastname, nationality, rankings, gender)
-VALUES ('Alizé', 'CORNET', 'FRA', null, 'FEMME');
+VALUES ('Alizé', 'CORNET', 'FRA', 1, 'FEMME');
 
 INSERT player(firstname, lastname, nationality, rankings, gender)
-VALUES ('Kaia ', 'KANEPI', 'EST', null, 'FEMME');
+VALUES ('Kaia ', 'KANEPI', 'EST', 2, 'FEMME');
 
 INSERT player(firstname, lastname, nationality, rankings, gender)
-VALUES ('Dominic', 'THIEM', 'ANG', null, 'HOMME');
+VALUES ('Dominic', 'THIEM', 'ANG', 3, 'HOMME');
 
 INSERT player(firstname, lastname, nationality, rankings, gender)
-VALUES ('Rafael', 'NADAL', 'AUT', null, 'HOMME');
+VALUES ('Rafael', 'NADAL', 'AUT', 4, 'HOMME');
 
 INSERT player(firstname, lastname, nationality, rankings, gender)
-VALUES ('Daniil', 'MEDVEDEV', 'RUS', null, 'HOMME');
+VALUES ('Daniil', 'MEDVEDEV', 'RUS', 5, 'HOMME');
 
 INSERT player(firstname, lastname, nationality, rankings, gender)
-VALUES ('Corentin', 'MOUTET', 'ANG', null, 'HOMME');
+VALUES ('Corentin', 'MOUTET', 'ANG', 6, 'HOMME');
 
 INSERT player(firstname, lastname, nationality, rankings, gender)
-VALUES ('Greet', 'MINNEN', 'BEL', null, 'FEMME');
+VALUES ('Greet', 'MINNEN', 'BEL', 7, 'FEMME');
 
 INSERT player(firstname, lastname, nationality, rankings, gender)
-VALUES ('Kaja', 'JUVAN', 'SLO', null, 'FEMME');
+VALUES ('Kaja', 'JUVAN', 'SLO', 8, 'FEMME');
 
 -- INSERT referee --
 
