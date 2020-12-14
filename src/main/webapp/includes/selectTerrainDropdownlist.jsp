@@ -3,7 +3,7 @@
 
 <select class="form-control" name="matchCourt">
     <option disabled selected value> -- selectionner un terrain -- </option>
-    <c:forEach items="${terrains}" var="terrain">
-        <option value="${terrain.id}">${terrain.firstname} ${fn:toUpperCase(terrain.lastname)}</option>
+    <c:forEach items="${matchCourt}" var="terrain">
+        <option value="${terrain.id}">${terrain.name}</option>
     </c:forEach>
 </select>

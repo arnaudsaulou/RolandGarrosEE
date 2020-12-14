@@ -20,7 +20,7 @@
         <div class="form-group row">
             <label class="col-3 col-form-label">Joueur B</label>
             <div class="col-8">
-                <%@include file="/includes/selectPlayerDropdownlistA.jsp"%>
+                <%@include file="/includes/selectPlayerDropdownlistB.jsp"%>
             </div>
         </div>
         <div class="form-group row">
