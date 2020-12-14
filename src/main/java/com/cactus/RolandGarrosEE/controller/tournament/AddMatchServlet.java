@@ -43,10 +43,11 @@ public class AddMatchServlet extends BaseServlet {
             if (req.getParameter(Constantes.URL_PARAM_MATCH_TYPE).equals("double")) {
                 this.getServletContext().getRequestDispatcher(Constantes.VIEW_ADD_DOUBLE_MATCH).forward(req, resp);
             } else {
+                Gender gender = Gender.valueOf(req.getParameter(Constantes.URL_PARAM_GENDER));
                 req.setAttribute(Constantes.URL_PARAM_GENDER, req.getParameter(Constantes.URL_PARAM_GENDER));
                 req.setAttribute(Constantes.URL_PARAM_MATCH_TYPE, req.getParameter(Constantes.URL_PARAM_MATCH_TYPE));
 
-                List<Player> players = playerPersistentRemote.allPlayer();
+                List<Player> players = playerPersistentRemote.allPlayerByGender(gender);
                 List<Referee> referees = refereePersistentRemote.allArbitrator();
                 List<Court> courts = courtPersistentRemote.allCourts();
 
