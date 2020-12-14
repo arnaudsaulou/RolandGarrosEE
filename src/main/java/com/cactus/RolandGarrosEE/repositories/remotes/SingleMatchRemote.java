@@ -11,4 +11,5 @@ public interface SingleMatchRemote {
    void deleteSingleMatch(SingleMatch singleMatch);
    SingleMatch findSingleMatchById(int singleMatchId);
    List<SingleMatch> allSingleMatch();
+   List<SingleMatch> allSingleMatchByTournamentId(int tournamentId);
 }

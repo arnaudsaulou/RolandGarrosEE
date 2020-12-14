@@ -4,6 +4,7 @@ import com.cactus.RolandGarrosEE.controller.BaseServlet;
 import com.cactus.RolandGarrosEE.entities.*;
 import com.cactus.RolandGarrosEE.repositories.remotes.*;
 import com.cactus.RolandGarrosEE.utils.Constantes;
+import com.cactus.RolandGarrosEE.utils.exceptions.InvalidMatchException;
 import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserException;
 
 import javax.ejb.EJB;
@@ -37,12 +38,23 @@ public class AddMatchServlet extends BaseServlet {
             this.checkAuthentication(req);
             this.setupViewAttributes(req);
 
+
             // TODO Remove hardcore code double => Replace with enum (discuss which one)
             if (req.getParameter(Constantes.URL_PARAM_MATCH_TYPE).equals("double")) {
                 this.getServletContext().getRequestDispatcher(Constantes.VIEW_ADD_DOUBLE_MATCH).forward(req, resp);
             } else {
                 req.setAttribute(Constantes.URL_PARAM_GENDER, req.getParameter(Constantes.URL_PARAM_GENDER));
                 req.setAttribute(Constantes.URL_PARAM_MATCH_TYPE, req.getParameter(Constantes.URL_PARAM_MATCH_TYPE));
+
+                List<Player> players = playerPersistentRemote.allPlayer();
+                List<Referee> referees = refereePersistentRemote.allArbitrator();
+                List<Court> courts = courtPersistentRemote.allCourts();
+
+                req.setAttribute(Constantes.NEW_MATCH_FORM_FIELD_PART_A, players);
+                req.setAttribute(Constantes.NEW_MATCH_FORM_FIELD_PART_B, players);
+                req.setAttribute(Constantes.NEW_MATCH_FORM_FIELD_REFEREE, referees);
+                req.setAttribute(Constantes.NEW_MATCH_FORM_FIELD_COURT, courts);
+
                 this.getServletContext().getRequestDispatcher(Constantes.VIEW_ADD_SINGLE_MATCH).forward(req, resp);
             }
         } catch (UnauthenticatedUserException e) {
@@ -50,12 +62,15 @@ public class AddMatchServlet extends BaseServlet {
         }
     }
 
-    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         try {
             this.checkAuthentication(req);
             this.tryToSaveMatch(req);
+            resp.sendRedirect("../" + Constantes.URL_HOME);
         } catch (UnauthenticatedUserException e) {
             resp.sendRedirect("../" + Constantes.URL_LOGIN);
+        } catch (InvalidMatchException e) {
+            this.getServletContext().getRequestDispatcher(Constantes.VIEW_ADD_SINGLE_MATCH).forward(req, resp);
         }
     }
 
@@ -69,24 +84,24 @@ public class AddMatchServlet extends BaseServlet {
         this.propagateAttributesToRequest(req);
     }
 
-    private void tryToSaveMatch(HttpServletRequest req) {
-        String startDate = this.getValue(req, Constantes.NEW_MATCH_FORM_FIELD_START_DATE);
-
+    private void tryToSaveMatch(HttpServletRequest req) throws InvalidMatchException {
+        // TODO
+        // String startDate = this.getValue(req, Constantes.NEW_MATCH_FORM_FIELD_START_DATE);
+        Date startDate = new Date();
         Tournament tournament = this.getTournament(req);
         Referee referee = this.getReferee(req);
         Court court = this.getCourt(req);
         Player playerA = this.getPlayer(req, Constantes.NEW_MATCH_FORM_FIELD_PART_A);
         Player playerB = this.getPlayer(req, Constantes.NEW_MATCH_FORM_FIELD_PART_B);
 
-        Set<Player> playersList = new HashSet<>();
+        List<Player> playersList = new ArrayList<>();
         playersList.add(playerA);
         playersList.add(playerB);
 
-        //Date dateStart = new Date(startDate);
+        this.validateNewMatch(startDate, tournament, referee, court, playerA, playerB);
 
-        //this.validateNewMatch(startDate, partA, partB, referee, court);
-
-        SingleMatch newSingleMatch = new SingleMatch(new Date(), new Date(), 0, 0, tournament, court, referee, playersList);
+        // TODO startDate / endDate
+        SingleMatch newSingleMatch = new SingleMatch(startDate, startDate, 0, 0, tournament, court, referee, playersList);
         singleMatchRemote.saveSingleMatch(newSingleMatch);
     }
 
@@ -115,9 +130,10 @@ public class AddMatchServlet extends BaseServlet {
         return tournament;
     }
 
-    /*private void validateNewMatch(String startDate, String partA, String partB, String referee, String court) throws InvalidActorException {
-        if (startDate == null || partA == null || partB == null || referee == null || court == null)
-            throw new InvalidActorException();
-    }*/
+    private void validateNewMatch(Date startDate, Tournament tournament, Referee referee, Court court, Player playerA, Player playerB)
+            throws InvalidMatchException {
+        if (startDate == null || tournament == null || referee == null || court == null || playerA == null || playerB == null)
+            throw new InvalidMatchException();
+    }
 
 }

@@ -16,11 +16,10 @@ public class Player extends Member implements Serializable {
     @Column(name = "GENDER")
     @Enumerated(EnumType.STRING)
     private Gender gender;
-    @ManyToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE}, fetch = FetchType.LAZY)
-    @JoinTable(name="player_singlematch",
-            joinColumns = @JoinColumn(name = "player_id"),
-            inverseJoinColumns = @JoinColumn(name = "singlematch_id"))
-    private Set<SingleMatch> matchsSingle;
+
+    @ManyToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE}, mappedBy = "playersList", fetch = FetchType.LAZY)
+    private List<SingleMatch> matchsSingle;
+
     @ManyToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE}, mappedBy = "playersList", fetch = FetchType.LAZY)
     @Size(min=0, max=2)
     private Set<Team> teamsList;
@@ -28,14 +27,14 @@ public class Player extends Member implements Serializable {
     public Player() {
     }
 
-    public Player(int rankings, @NotNull Gender gender, Set<SingleMatch> matchsSingle, @Size(min = 0, max = 2) Set<Team> teamsList) {
+    public Player(int rankings, @NotNull Gender gender, List<SingleMatch> matchsSingle, @Size(min = 0, max = 2) Set<Team> teamsList) {
         this.rankings = rankings;
         this.gender = gender;
         this.matchsSingle = matchsSingle;
         this.teamsList = teamsList;
     }
 
-    public Player(String firstname, String lastname, String nationality, int rankings, @NotNull Gender gender, Set<SingleMatch> matchsSingle, @Size(min = 0, max = 2) Set<Team> teamsList) {
+    public Player(String firstname, String lastname, String nationality, int rankings, @NotNull Gender gender, List<SingleMatch> matchsSingle, @Size(min = 0, max = 2) Set<Team> teamsList) {
         super(firstname, lastname, nationality);
         this.rankings = rankings;
         this.gender = gender;
@@ -65,11 +64,11 @@ public class Player extends Member implements Serializable {
         this.gender = gender;
     }
 
-    public Set<SingleMatch> getMatchsSingle() {
+    public List<SingleMatch> getMatchsSingle() {
         return matchsSingle;
     }
 
-    public void setMatchsSingle(Set<SingleMatch> matchsSingle) {
+    public void setMatchsSingle(List<SingleMatch> matchsSingle) {
         this.matchsSingle = matchsSingle;
     }
 

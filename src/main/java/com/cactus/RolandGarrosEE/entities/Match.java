@@ -89,19 +89,19 @@ public abstract class Match implements Serializable {
         this.tournament = tournament;
     }
 
-    public Court getFields() {
+    public Court getCourt() {
         return court;
     }
 
-    public void setFields(Court court) {
+    public void setCourt(Court court) {
         this.court = court;
     }
 
-    public Referee getArbitrator() {
+    public Referee getReferee() {
         return referee;
     }
 
-    public void setArbitrator(Referee referee) {
+    public void setReferee(Referee referee) {
         this.referee = referee;
     }
 }

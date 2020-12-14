@@ -3,7 +3,7 @@
 
 <select class="form-control" name="matchReferee">
     <option disabled selected value> -- selectionner un arbitre -- </option>
-    <c:forEach items="${referees}" var="referee">
+    <c:forEach items="${matchReferee}" var="referee">
         <option value="${referee.id}">${referee.firstname} ${fn:toUpperCase(referee.lastname)}</option>
     </c:forEach>
 </select>
