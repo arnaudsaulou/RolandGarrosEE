@@ -94,7 +94,7 @@ public class AddMatchServlet extends BaseServlet {
         Player playerA = this.getPlayer(req, Constantes.NEW_MATCH_FORM_FIELD_PART_A);
         Player playerB = this.getPlayer(req, Constantes.NEW_MATCH_FORM_FIELD_PART_B);
 
-        Set<Player> playersList = new HashSet<>();
+        List<Player> playersList = new ArrayList<>();
         playersList.add(playerA);
         playersList.add(playerB);
 

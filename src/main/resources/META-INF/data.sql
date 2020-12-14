@@ -115,6 +115,14 @@ VALUES ('2020-12-01', '2020-12-30', 'HOMME', 12, 'SINGLE');
 INSERT INTO TOURNAMENT(datebegin, dateend, gender, nbmatch, type)
 VALUES ('2020-12-01', '2020-12-30', 'MIXTE', 8, 'DOUBLE');
 
+INSERT INTO TOURNAMENT(datebegin, dateend, gender, nbmatch, type)
+VALUES ('2020-12-01', '2020-12-30', 'FEMME', 12, 'SINGLE');
+
+INSERT INTO TOURNAMENT(datebegin, dateend, gender, nbmatch, type)
+VALUES ('2020-12-01', '2020-12-30', 'FEMME', 12, 'DOUBLE');
+
+INSERT INTO TOURNAMENT(datebegin, dateend, gender, nbmatch, type)
+VALUES ('2020-12-01', '2020-12-30', 'HOMME', 12, 'DOUBLE');
 -- INSERT INTO SINGLEMATCH --
 
 INSERT INTO SINGLEMATCH(datebegin, dateend, scorea, scoreb, referee_id, court_ID, tournament_id)
@@ -124,12 +132,15 @@ INSERT INTO SINGLEMATCH(datebegin, dateend, scorea, scoreb, referee_id, court_ID
 VALUES ('2020-12-10 02:55:05', '2020-12-10 06:55:05',2, 3, 2, 3, 1);
 
 INSERT INTO SINGLEMATCH(datebegin, dateend, scorea, scoreb, referee_id, court_ID, tournament_id)
-VALUES ('2020-12-14 02:55:05', null, null, null, 1, 2, 1);
+VALUES ('2020-12-14 02:55:05', null, 1, 2, 1, 2, 1);
 
 -- INSERT INTO PLAYER_SINGLEMATCH --
 
 INSERT INTO player_singlematch(player_id, singlematch_id)
 VALUES (3, 1);
+
+INSERT INTO player_singlematch(player_id, singlematch_id)
+VALUES (1, 1);
 
 INSERT INTO player_singlematch(player_id, singlematch_id)
 VALUES (5, 2);
