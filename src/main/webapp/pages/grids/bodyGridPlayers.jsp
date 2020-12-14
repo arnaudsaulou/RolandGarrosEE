@@ -21,7 +21,7 @@
         </thead>
         <tbody>
         <c:forEach items="${playersList}" var="player">
-            <tr>
+            <tr class="d-flex" onclick="document.location = '${pageContext.request.contextPath}/players/${player.id}'">
                 <td class="text-center">${player.number}</td>
                 <td class="text-center">${player.lastname}</td>
                 <td class="text-center">${player.firstname}</td>

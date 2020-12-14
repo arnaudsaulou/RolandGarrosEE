@@ -20,7 +20,7 @@
         </thead>
         <tbody>
         <c:forEach items="${teamsList}" var="team">
-            <tr class="d-flex">
+            <tr class="d-flex" onclick="document.location = '${pageContext.request.contextPath}/equipes/${team.id}'">
                 <td class="col-3 text-center">${team.number}</td>
                 <td class="col-3 text-center">${team.name}</td>
                 <td class="col-3 text-center">${team.playerA}</td>
