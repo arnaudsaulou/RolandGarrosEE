@@ -70,6 +70,7 @@ public class AddMatchServlet extends BaseServlet {
         } catch (UnauthenticatedUserException e) {
             resp.sendRedirect("../" + Constantes.URL_LOGIN);
         } catch (InvalidMatchException e) {
+            req.setAttribute("errorMessage",  e.getMessage());
             this.getServletContext().getRequestDispatcher(Constantes.VIEW_ADD_SINGLE_MATCH).forward(req, resp);
         }
     }
@@ -134,6 +135,8 @@ public class AddMatchServlet extends BaseServlet {
             throws InvalidMatchException {
         if (startDate == null || tournament == null || referee == null || court == null || playerA == null || playerB == null)
             throw new InvalidMatchException();
+        if (playerA.getId() == playerB.getId())
+            throw new InvalidMatchException("Les joueurs rentrés sont les mêmes");
     }
 
 }
