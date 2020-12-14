@@ -9,7 +9,7 @@
 </a>
 
 <div class="container">
-    <table class="table">
+    <table class="table table-hover">
         <thead class="thead-light">
         <tr class="d-flex">
             <th class="col-3 text-center">Numéro</th>
