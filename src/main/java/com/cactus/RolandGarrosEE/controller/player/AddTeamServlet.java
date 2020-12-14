@@ -1,22 +1,32 @@
 package com.cactus.RolandGarrosEE.controller.player;
 
 import com.cactus.RolandGarrosEE.controller.BaseServlet;
+import com.cactus.RolandGarrosEE.entities.Player;
+import com.cactus.RolandGarrosEE.entities.Team;
+import com.cactus.RolandGarrosEE.repositories.remotes.PlayerPersistentRemote;
+import com.cactus.RolandGarrosEE.repositories.remotes.TeamPersistentRemote;
 import com.cactus.RolandGarrosEE.utils.Constantes;
 import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserException;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "addEquipeServlet", value = "/equipes/ajouterEquipe")
 public class AddTeamServlet extends BaseServlet {
+
+    @EJB
+    PlayerPersistentRemote playerPersistentRemote;
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             this.checkAuthentication(req);
             this.setupViewAttributes(req);
+            this.getPlayersList(req);
             this.getServletContext().getRequestDispatcher(Constantes.VIEW_ADD_TEAM).forward(req, resp);
         } catch (UnauthenticatedUserException e) {
             resp.sendRedirect("../" + Constantes.URL_LOGIN);
@@ -29,5 +39,10 @@ public class AddTeamServlet extends BaseServlet {
         this.addToBreadcrumbs(Constantes.TITLE_ADD_TEAM);
         this.attributes.put(Constantes.REQUEST_ATTR_TITLE, Constantes.TITLE_ADD_TEAM);
         this.propagateAttributesToRequest(req);
+    }
+
+    private void getPlayersList(HttpServletRequest request){
+        List<Player> playersList = playerPersistentRemote.allPlayer();
+        request.setAttribute(Constantes.REQUEST_ATTR_PLAYERS_LIST, playersList);
     }
 }

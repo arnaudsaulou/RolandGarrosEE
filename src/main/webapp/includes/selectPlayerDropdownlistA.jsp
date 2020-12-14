@@ -3,7 +3,7 @@
 
 <select class="form-control" name="matchPartA">
     <option disabled selected value> -- selectionner un joueur -- </option>
-    <c:forEach items="${players}" var="player">
+    <c:forEach items="${playersList}" var="player">
         <option value="${player.id}">${player.firstname} ${fn:toUpperCase(player.lastname)}</option>
     </c:forEach>
 </select>
