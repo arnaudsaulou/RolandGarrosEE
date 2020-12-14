@@ -15,13 +15,13 @@ public class DoubleMatch extends Match implements Serializable {
             joinColumns = @JoinColumn(name = "doublematch_id"),
             inverseJoinColumns = @JoinColumn(name = "team_id"))
     @Size(min=2, max=2)
-    private Set<Team> teamsList;
+    private List<Team> teamsList;
 
-    public DoubleMatch(@Size(min = 2, max = 2) Set<Team> teamsList) {
+    public DoubleMatch(@Size(min = 2, max = 2) List<Team> teamsList) {
         this.teamsList = teamsList;
     }
 
-    public DoubleMatch(Date dateBegin, Date dateEnd, int scoreA, int scoreB, Tournament tournament, Court court, Referee referee, @Size(min = 2, max = 2) Set<Team> teamsList) {
+    public DoubleMatch(Date dateBegin, Date dateEnd, int scoreA, int scoreB, Tournament tournament, Court court, Referee referee, @Size(min = 2, max = 2) List<Team> teamsList) {
         super(dateBegin, dateEnd, scoreA, scoreB, tournament, court, referee);
         this.teamsList = teamsList;
     }
@@ -30,11 +30,11 @@ public class DoubleMatch extends Match implements Serializable {
 
     }
 
-    public Set<Team> getTeamsList() {
+    public List<Team> getTeamsList() {
         return teamsList;
     }
 
-    public void setTeamsList(Set<Team> teamsList) {
+    public void setTeamsList(List<Team> teamsList) {
         this.teamsList = teamsList;
     }
 }

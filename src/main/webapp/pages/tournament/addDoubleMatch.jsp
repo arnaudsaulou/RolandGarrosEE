@@ -16,8 +16,8 @@
             <div class="col-8">
                 <select class="form-control" name="matchPartA">
                     <option disabled selected value> -- selectionner une équipe -- </option>
-                    <c:forEach items="${teams}" var="team">
-                        <option value="${team.id}">${team.firstname} ${fn:toUpperCase(team.lastname)}</option>
+                    <c:forEach items="${matchPartA}" var="team">
+                        <option value="${team.id}">${team.name}</option>
                     </c:forEach>
                 </select>
             </div>
@@ -27,8 +27,8 @@
             <div class="col-8">
                 <select class="form-control" name="matchPartB">
                     <option disabled selected value> -- selectionner une équipe -- </option>
-                    <c:forEach items="${teams}" var="team">
-                        <option value="${team.id}">${team.firstname} ${fn:toUpperCase(team.lastname)}</option>
+                    <c:forEach items="${matchPartB}" var="team">
+                        <option value="${team.id}">${team.name}</option>
                     </c:forEach>
                 </select>
             </div>

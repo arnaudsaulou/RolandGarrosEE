@@ -32,15 +32,15 @@
         <tbody>
         <c:forEach items="${doubleMatchList}" var="doubleMatch">
             <tr>
-                <td class="text-center">${doubleMatchList.number}</td>
-                <td class="text-center">${doubleMatchList.date}</td>
-                <td class="text-center">${doubleMatchList.duration}</td>
-                <td class="text-center">${doubleMatchList.teamA}</td>
-                <td class="text-center">${doubleMatchList.scoreA}</td>
-                <td class="text-center">${doubleMatchList.teamB}</td>
-                <td class="text-center">${doubleMatchList.scoreB}</td>
-                <td class="text-center">${doubleMatchList.referee}</td>
-                <td class="text-center">${doubleMatchList.ground}</td>
+                <td class="text-center">${doubleMatch.id}</td>
+                <td class="text-center">${doubleMatch.dateBegin}</td>
+                <td class="text-center">${doubleMatch.dateEnd}</td>
+                <td class="text-center">${doubleMatch.teamsList[0].name}</td>
+                <td class="text-center">${doubleMatch.scoreA}</td>
+                <td class="text-center">${doubleMatch.teamsList[1].name}</td>
+                <td class="text-center">${doubleMatch.scoreB}</td>
+                <td class="text-center">${doubleMatch.referee.firstname} ${doubleMatch.referee.lastname}</td>
+                <td class="text-center">${doubleMatch.court.name}</td>
             </tr>
         </c:forEach>
         </tbody>

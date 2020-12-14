@@ -1,10 +1,8 @@
 package com.cactus.RolandGarrosEE.controller.tournament;
 
 import com.cactus.RolandGarrosEE.controller.BaseServlet;
-import com.cactus.RolandGarrosEE.entities.Gender;
-import com.cactus.RolandGarrosEE.entities.SingleMatch;
-import com.cactus.RolandGarrosEE.entities.Tournament;
-import com.cactus.RolandGarrosEE.entities.TypeTournament;
+import com.cactus.RolandGarrosEE.entities.*;
+import com.cactus.RolandGarrosEE.repositories.remotes.DoubleMatchPersistentRemote;
 import com.cactus.RolandGarrosEE.repositories.remotes.SingleMatchRemote;
 import com.cactus.RolandGarrosEE.repositories.remotes.TournamentPersistentRemote;
 import com.cactus.RolandGarrosEE.utils.Constantes;
@@ -26,6 +24,9 @@ public class TournamentServlet extends BaseServlet {
 
     @EJB
     SingleMatchRemote singleMatchRemote;
+
+    @EJB
+    DoubleMatchPersistentRemote doubleMatchPersistentRemote;
 
     private Tournament currentTournament;
 
@@ -86,6 +87,8 @@ public class TournamentServlet extends BaseServlet {
 
     private void doubleMatch(HttpServletRequest request, HttpServletResponse response, Gender matchGender) throws ServletException, IOException {
         this.attributes.put(Constantes.REQUEST_ATTR_TITLE, Constantes.TITLE_DOUBLE_MATCH_BASE + "-" + matchGender.toString());
+        List<DoubleMatch> doubleMatch = doubleMatchPersistentRemote.allDoubleMatchByTournamentId(currentTournament.getId());
+        this.attributes.put(Constantes.REQUEST_ATTR_DOUBLE_MATCH_LIST, doubleMatch);
         this.propagateAttributesToRequest(request);
         this.getServletContext().getRequestDispatcher(Constantes.VIEW_DOUBLE_MATCH).forward(request, response);
     }

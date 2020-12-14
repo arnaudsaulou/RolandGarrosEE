@@ -1,6 +1,7 @@
 package com.cactus.RolandGarrosEE.repositories.implementation;
 
 import com.cactus.RolandGarrosEE.entities.DoubleMatch;
+import com.cactus.RolandGarrosEE.entities.SingleMatch;
 import com.cactus.RolandGarrosEE.repositories.remotes.DoubleMatchPersistentRemote;
 
 import javax.ejb.Stateless;
@@ -45,6 +46,18 @@ public class DoubleMatchPersistentBean implements DoubleMatchPersistentRemote {
         List<DoubleMatch> doubleMatches = null;
         try {
             doubleMatches = entityManager.createQuery("from DoubleMatch", DoubleMatch.class).getResultList();
+        } catch (NoResultException ignored) {
+        }
+        return doubleMatches;
+    }
+
+    @Override
+    public List<DoubleMatch> allDoubleMatchByTournamentId(int tournamentId) {
+        List<DoubleMatch> doubleMatches = null;
+        try {
+            doubleMatches = entityManager.createQuery("from DoubleMatch dm WHERE dm.tournament.id = :tournamentId", DoubleMatch.class)
+                    .setParameter("tournamentId" , tournamentId)
+                    .getResultList();
         } catch (NoResultException ignored) {
         }
         return doubleMatches;
