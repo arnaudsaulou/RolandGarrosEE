@@ -1,8 +1,7 @@
 package com.cactus.RolandGarrosEE.controller.player;
 
 import com.cactus.RolandGarrosEE.controller.BaseServlet;
-import com.cactus.RolandGarrosEE.entities.Player;
-import com.cactus.RolandGarrosEE.entities.Team;
+import com.cactus.RolandGarrosEE.entities.*;
 import com.cactus.RolandGarrosEE.repositories.remotes.PlayerPersistentRemote;
 import com.cactus.RolandGarrosEE.repositories.remotes.TeamPersistentRemote;
 import com.cactus.RolandGarrosEE.utils.Constantes;
@@ -14,11 +13,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @WebServlet(name = "addEquipeServlet", value = "/equipes/ajouterEquipe")
 public class AddTeamServlet extends BaseServlet {
 
+    @EJB
+    TeamPersistentRemote teamPersistentRemote;
     @EJB
     PlayerPersistentRemote playerPersistentRemote;
 
@@ -31,6 +35,32 @@ public class AddTeamServlet extends BaseServlet {
         } catch (UnauthenticatedUserException e) {
             resp.sendRedirect("../" + Constantes.URL_LOGIN);
         }
+    }
+
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        try {
+            this.checkAuthentication(req);
+            this.tryToTeamMatch(req);
+        } catch (UnauthenticatedUserException e) {
+            resp.sendRedirect("../" + Constantes.URL_LOGIN);
+        }
+    }
+
+    private void tryToTeamMatch(HttpServletRequest req) {
+        String nameTeam = this.getValue(req, Constantes.NEW_TEAM_FORM_FIELD_NAME);
+        String idFirstPlayer = req.getParameter(Constantes.NEW_TEAM_FORM_FIELD_PLAYER_A);
+        String idSecondPlayer = req.getParameter(Constantes.NEW_TEAM_FORM_FIELD_PLAYER_B);
+
+        Player playerA = playerPersistentRemote.findPlayerById(Integer.parseInt(idFirstPlayer));
+        Player playerB = playerPersistentRemote.findPlayerById(Integer.parseInt(idSecondPlayer));
+
+        Set<Player> players = new HashSet<>();
+        players.add(playerA);
+        players.add(playerB);
+
+        Team team = new Team(0, nameTeam, players, new HashSet<>());
+
+        teamPersistentRemote.saveTeam(team);
     }
 
     private void setupViewAttributes(HttpServletRequest req) {

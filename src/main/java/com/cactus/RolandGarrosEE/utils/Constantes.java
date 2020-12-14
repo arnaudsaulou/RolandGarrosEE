@@ -65,6 +65,9 @@ public class Constantes {
     public static final String NEW_MATCH_FORM_FIELD_COURT= "matchCourt";
     public static final String NEW_ACTOR_FORM_FIELD_RANKINGS = "actorRankings";
     public static final String NEW_ACTOR_FORM_FIELD_GENDER = "actorGender";
+    public static final String NEW_TEAM_FORM_FIELD_NAME = "teamName";
+    public static final String NEW_TEAM_FORM_FIELD_PLAYER_A = "teamPlayerA";
+    public static final String NEW_TEAM_FORM_FIELD_PLAYER_B = "teamPlayerB";
 
     //endregion
 
