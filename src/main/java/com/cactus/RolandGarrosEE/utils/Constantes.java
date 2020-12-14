@@ -37,6 +37,7 @@ public class Constantes {
     public static final String URL_LOGIN = "connexion";
     public static final String URL_REFEREES = "arbitres";
     public static final String URL_USERS = "utilisateurs";
+    public static final String URL_PLAYERS = "joueurs";
 
     //endregion
 
@@ -62,6 +63,8 @@ public class Constantes {
     public static final String NEW_MATCH_FORM_FIELD_PART_B = "matchPartB";
     public static final String NEW_MATCH_FORM_FIELD_REFEREE = "matchReferee";
     public static final String NEW_MATCH_FORM_FIELD_COURT= "matchCourt";
+    public static final String NEW_ACTOR_FORM_FIELD_RANKINGS = "actorRankings";
+    public static final String NEW_ACTOR_FORM_FIELD_GENDER = "actorGender";
 
     //endregion
 
@@ -72,6 +75,8 @@ public class Constantes {
     public static final String REQUEST_ATTR_BREADCRUMBS = "breadcrumbs";
     public static final String REQUEST_ATTR_REFEREES_LIST = "refereesList";
     public static final String REQUEST_ATTR_USERS_LIST = "usersList";
+    public static final String REQUEST_ATTR_TEAMS_LIST = "teamsList";
+    public static final String REQUEST_ATTR_PLAYERS_LIST = "playersList";
 
     //endregion
 

@@ -12,9 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @WebServlet(name = "ajouterMatch", value = "/tournoi/ajouterMatch")
 public class AddMatchServlet extends BaseServlet {
@@ -80,7 +78,7 @@ public class AddMatchServlet extends BaseServlet {
         Player playerA = this.getPlayer(req, Constantes.NEW_MATCH_FORM_FIELD_PART_A);
         Player playerB = this.getPlayer(req, Constantes.NEW_MATCH_FORM_FIELD_PART_B);
 
-        ArrayList<Player> playersList = new ArrayList<Player>();
+        Set<Player> playersList = new HashSet<>();
         playersList.add(playerA);
         playersList.add(playerB);
 

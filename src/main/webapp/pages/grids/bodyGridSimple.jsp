@@ -5,8 +5,11 @@
 <h3 class="text-center mb-5 mt-5">Liste des matchs simples</h3>
 
 <c:if test="${sessionScope.isAdmin || sessionScope.isOrganizer}">
-    <a href="${pageContext.request.contextPath}/tournoi/ajouterMatch?type=${type}&genre=${genre}">
-        <button type="button" class="btn btn-secondary mt-2 mr-5" style="float:right;">Ajouter</button>
+    <a href="${pageContext.request.contextPath}/tournoi/ajouterResultat?type=simple">
+        <button type="button" class="btn btn-secondary mt-2 mr-5 mb-2" style="float:right;">Ajouter Résultat</button>
+    </a>
+    <a href="${pageContext.request.contextPath}/tournoi/ajouterMatch?type=simple">
+        <button type="button" class="btn btn-secondary mt-2 mr-5 mb-2" style="float:right;">Ajouter Match</button>
     </a>
 </c:if>
 
