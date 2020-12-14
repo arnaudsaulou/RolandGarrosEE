@@ -1,4 +1,4 @@
-<select class="form-control" id="country" name="country">
+<select class="form-control" name="actorNationality">
     <option disabled selected value> -- selectionner un pays -- </option>
     <option value="Afganistan">Afghanistan</option>
     <option value="Albania">Albania</option>

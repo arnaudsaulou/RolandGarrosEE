@@ -132,9 +132,6 @@ INSERT player_singlematch(player_id, singlematch_id)
 VALUES (3, 1);
 
 INSERT player_singlematch(player_id, singlematch_id)
-VALUES (3, 1);
-
-INSERT player_singlematch(player_id, singlematch_id)
 VALUES (5, 2);
 
 INSERT player_singlematch(player_id, singlematch_id)
