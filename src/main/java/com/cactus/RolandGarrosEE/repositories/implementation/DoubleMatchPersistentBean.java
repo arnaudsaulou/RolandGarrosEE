@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import java.util.Date;
 import java.util.List;
 
 @Stateless
@@ -16,12 +17,13 @@ public class DoubleMatchPersistentBean implements DoubleMatchPersistentRemote {
     EntityManager entityManager;
 
     @Override
-    public void updateScore(int id, String scoreA, String scoreB) {
+    public void updateScore(int id, String scoreA, String scoreB, Date dateEnd) {
         try {
-            entityManager.createQuery("update DoubleMatch sm set scoreA = :scoreA, scoreB = :scoreB WHERE sm.tournament.id = :id", DoubleMatch.class)
+            entityManager.createQuery("update DoubleMatch sm set scoreA = :scoreA, scoreB = :scoreB, dateEnd = :dateEnd WHERE sm.tournament.id = :id", DoubleMatch.class)
                     .setParameter("id" , id)
                     .setParameter("scoreA" , Integer.parseInt(scoreA))
                     .setParameter("scoreB" , Integer.parseInt(scoreB))
+                    .setParameter("dateEnd" , dateEnd)
                     .executeUpdate();
         } catch (NoResultException ignored) {
             ignored.printStackTrace();

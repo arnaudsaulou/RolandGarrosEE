@@ -60,8 +60,8 @@ public class AddPlayerServlet extends BaseServlet {
         String lastname = this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_LASTNAME);
         String nationality = this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_NATIONALITY);
         int rankings = Integer.parseInt(this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_RANKINGS));
-        Gender gender = Gender.valueOf(this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_GENDER));
-        this.validateNewPlayer(firstname, lastname, nationality, rankings, gender);
+        Gender gender = Gender.getGenderFromString(this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_GENDER));
+        this.validateNewPlayer(firstname, lastname, nationality, gender);
         Player newPlayer = new Player(firstname, lastname, nationality, rankings, gender);
         playerPersistentRemote.savePlayer(newPlayer);
     }
