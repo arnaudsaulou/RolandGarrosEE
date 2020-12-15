@@ -56,7 +56,15 @@ public class AddMatchServlet extends BaseServlet {
             Gender gender = Gender.valueOf(this.getValue(req, Constantes.URL_PARAM_GENDER));
 
             if (type.equals(TypeTournament.DOUBLE)) {
-                List<Team> teams = teamPersistentRemote.allTeam();
+
+                List<Team> teams;
+
+                if(gender.equals(Gender.MIXTE)){
+                    teams = teamPersistentRemote.allTeam();
+                } else {
+                   teams = teamPersistentRemote.allTeamByGender(gender);
+                }
+
                 req.setAttribute(Constantes.NEW_MATCH_FORM_FIELD_PART_A, teams);
                 req.setAttribute(Constantes.NEW_MATCH_FORM_FIELD_PART_B, teams);
                 this.getServletContext().getRequestDispatcher(Constantes.VIEW_ADD_DOUBLE_MATCH).forward(req, resp);

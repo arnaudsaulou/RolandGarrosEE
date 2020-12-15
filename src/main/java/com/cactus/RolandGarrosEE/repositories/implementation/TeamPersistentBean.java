@@ -1,5 +1,6 @@
 package com.cactus.RolandGarrosEE.repositories.implementation;
 
+import com.cactus.RolandGarrosEE.entities.Gender;
 import com.cactus.RolandGarrosEE.entities.Player;
 import com.cactus.RolandGarrosEE.entities.Team;
 import com.cactus.RolandGarrosEE.repositories.remotes.TeamPersistentRemote;
@@ -46,6 +47,23 @@ public class TeamPersistentBean implements TeamPersistentRemote {
         List<Team> teams = null;
         try {
             teams = entityManager.createQuery("SELECT DISTINCT T FROM Team T join fetch T.playersList left join fetch T.matchsDouble ORDER BY T.id", Team.class)
+                    .getResultList();
+        } catch (NoResultException ignored) {
+        }
+        return teams;
+    }
+
+    @Override
+    public List<Team> allTeamByGender(Gender gender) {
+        List<Team> teams = null;
+        try {
+            teams = entityManager.createQuery(
+                    "SELECT DISTINCT T FROM Team t " +
+                            "INNER JOIN t.playersList tp on t.id = tp.id " +
+                            "LEFT JOIN Player p on tp.id = p.id " +
+                            "WHERE p.gender = :gender"
+                    , Team.class)
+                    .setParameter("gender", gender)
                     .getResultList();
         } catch (NoResultException ignored) {
         }

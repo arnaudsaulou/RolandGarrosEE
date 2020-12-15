@@ -1,5 +1,6 @@
 package com.cactus.RolandGarrosEE.repositories.remotes;
 
+import com.cactus.RolandGarrosEE.entities.Gender;
 import com.cactus.RolandGarrosEE.entities.Team;
 
 import javax.ejb.Remote;
@@ -11,4 +12,5 @@ public interface TeamPersistentRemote {
     void deleteTeam(Team team);
     Team getTeamById(int teamId);
     List<Team> allTeam();
+    List<Team> allTeamByGender(Gender gender);
 }
