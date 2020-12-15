@@ -1,17 +1,20 @@
 <%@include file="/includes/header.jsp" %>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="col-3 p-0">
+<nav class="navbar navbar-expand-xl navbar-light bg-light">
+    <div class="navbar-brand">
         <a href="${pageContext.request.contextPath}/tournoi?type=MatchSimple&genre=Femme">
             <img src="${pageContext.request.contextPath}/resources/svg/roland_garros_logo.svg" width="70" height="70"
                  alt="Roland Garros Logo">
         </a>
         <h3 class="d-inline align-middle">Roland Garros Planer</h3>
     </div>
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
     <c:if test="${sessionScope.userSession != null}">
 
-        <div class="collapse navbar-collapse col-7 d-flex flex-row" id="navbarSupportedContent">
+        <div class="navbar-collapse collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="${pageContext.request.contextPath}/tournoi?type=MatchSimple&genre=Femme">
@@ -60,24 +63,20 @@
                         </a>
                     </li>
                 </c:if>
+                <li class="nav-item">
+                    <a class="text-decoration-none" href="${pageContext.request.contextPath}/deconnexion">
+                        <div>
+                            <div class="d-inline align-middle text-right">
+                                <h4><c:out value='${sessionScope.userSession.firstname}'/></h4>
+                                <h6>Deconnexion</h6>
+                            </div>
+                        </div>
+                    </a>
+                </li>
             </ul>
         </div>
-
-        <div class="col-2 d-flex flex-row-reverse">
-            <a class="text-decoration-none" href="${pageContext.request.contextPath}/deconnexion">
-                <div>
-                    <div class="d-inline align-middle text-right">
-                        <h4><c:out value='${sessionScope.userSession.firstname}'/></h4>
-                        <h6>Deconnexion</h6>
-                    </div>
-                </div>
-            </a>
-        </div>
-
     </c:if>
-
 </nav>
-
 <c:if test="${sessionScope.userSession != null}">
 
     <nav aria-label="breadcrumb">
@@ -87,5 +86,6 @@
             </c:forEach>
         </ol>
     </nav>
-
 </c:if>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
