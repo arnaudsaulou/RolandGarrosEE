@@ -22,7 +22,7 @@
         </thead>
         <tbody>
         <c:forEach items="${playersList}" var="player">
-            <tr onclick="document.location = '${pageContext.request.contextPath}/players/${player.id}'">
+            <tr onclick="document.location = '${pageContext.request.contextPath}/joueur?id=${player.id}'">
                 <td class="text-center">${player.id}</td>
                 <td class="text-center">${player.lastname}</td>
                 <td class="text-center">${player.firstname}</td>
