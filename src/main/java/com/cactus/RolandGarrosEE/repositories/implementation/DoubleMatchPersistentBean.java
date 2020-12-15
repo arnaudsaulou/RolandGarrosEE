@@ -16,6 +16,28 @@ public class DoubleMatchPersistentBean implements DoubleMatchPersistentRemote {
     EntityManager entityManager;
 
     @Override
+    public void updateScore(int id, String scoreA, String scoreB) {
+        try {
+            entityManager.createQuery("update DoubleMatch sm set scoreA = :scoreA, scoreB = :scoreB WHERE sm.tournament.id = :id", DoubleMatch.class)
+                    .setParameter("id" , id)
+                    .setParameter("scoreA" , Integer.parseInt(scoreA))
+                    .setParameter("scoreB" , Integer.parseInt(scoreB))
+                    .executeUpdate();
+        } catch (NoResultException ignored) {
+            ignored.printStackTrace();
+        }
+    }
+
+    @Override
+    public void saveDoubleMatch(DoubleMatch doubleMatch) {
+        try {
+            entityManager.persist(doubleMatch);
+        } catch (Exception ignored) {
+            ignored.printStackTrace();
+        }
+    }
+
+    @Override
     public void addDoubleMatch(DoubleMatch doubleMatch) {
         try {
             entityManager.persist(doubleMatch);

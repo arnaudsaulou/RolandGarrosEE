@@ -45,9 +45,14 @@
                 <%@include file="/includes/selectTerrainDropdownlist.jsp"%>
             </div>
         </div>
-        <div class="form-group text-center mt-3 mb-0">
+        <div class="form-group text-center mt-3 mb-1">
             <button type="submit" class="btn btn-primary">Ajouter</button>
         </div>
+        <c:if test="${errorMessage != null}">
+        <div class="alert alert-danger" role="alert">
+            ${errorMessage}
+        </div>
+        </c:if>
 
     </form>
 

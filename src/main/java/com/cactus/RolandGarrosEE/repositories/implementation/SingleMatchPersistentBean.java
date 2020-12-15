@@ -15,6 +15,19 @@ public class SingleMatchPersistentBean implements SingleMatchRemote {
     EntityManager entityManager;
 
     @Override
+    public void updateScore(int id, String scoreA, String scoreB) {
+        try {
+            entityManager.createQuery("update SingleMatch sm set sm.scoreA = :scoreA, sm.scoreB = :scoreB WHERE sm.id = :id")
+                    .setParameter("id" , id)
+                    .setParameter("scoreA" , Integer.parseInt(scoreA))
+                    .setParameter("scoreB" , Integer.parseInt(scoreB))
+                    .executeUpdate();
+        } catch (NoResultException ignored) {
+            ignored.printStackTrace();
+        }
+    }
+
+    @Override
     public void saveSingleMatch(SingleMatch singleMatch) {
         try {
             entityManager.persist(singleMatch);

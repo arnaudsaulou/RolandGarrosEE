@@ -53,13 +53,15 @@ public class AddMatchServlet extends BaseServlet {
             req.setAttribute(Constantes.NEW_MATCH_FORM_FIELD_COURT, courts);
 
             TypeTournament type = TypeTournament.valueOf(this.getValue(req, Constantes.URL_PARAM_MATCH_TYPE));
+            Gender gender = Gender.valueOf(this.getValue(req, Constantes.URL_PARAM_GENDER));
+
             if (type.equals(TypeTournament.DOUBLE)) {
                 List<Team> teams = teamPersistentRemote.allTeam();
                 req.setAttribute(Constantes.NEW_MATCH_FORM_FIELD_PART_A, teams);
                 req.setAttribute(Constantes.NEW_MATCH_FORM_FIELD_PART_B, teams);
                 this.getServletContext().getRequestDispatcher(Constantes.VIEW_ADD_DOUBLE_MATCH).forward(req, resp);
             } else {
-                List<Player> players = playerPersistentRemote.allPlayer();
+                List<Player> players = playerPersistentRemote.allPlayerByGender(gender);
                 req.setAttribute(Constantes.NEW_MATCH_FORM_FIELD_PART_A, players);
                 req.setAttribute(Constantes.NEW_MATCH_FORM_FIELD_PART_B, players);
                 this.getServletContext().getRequestDispatcher(Constantes.VIEW_ADD_SINGLE_MATCH).forward(req, resp);
@@ -77,6 +79,7 @@ public class AddMatchServlet extends BaseServlet {
         } catch (UnauthenticatedUserException e) {
             resp.sendRedirect("../" + Constantes.URL_LOGIN);
         } catch (InvalidMatchException e) {
+            req.setAttribute("errorMessage",  e.getMessage());
             this.getServletContext().getRequestDispatcher(Constantes.VIEW_ADD_SINGLE_MATCH).forward(req, resp);
         }
     }
@@ -170,6 +173,8 @@ public class AddMatchServlet extends BaseServlet {
             throws InvalidMatchException {
         if (startDate == null || tournament == null || referee == null || court == null || playerA == null || playerB == null)
             throw new InvalidMatchException();
+        if (playerA.getId() == playerB.getId())
+            throw new InvalidMatchException("Les joueurs rentrés sont les mêmes");
     }
 
     private void validateNewMatchBase(Date startDate, Tournament tournament, Referee referee, Court court)
