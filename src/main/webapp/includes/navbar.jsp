@@ -41,21 +41,23 @@
                         <button class="btn btn-outline-success btn-outline-success">Double Mixte</button>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/joueurs">
-                        <button class="btn btn-outline-success btn-outline-success">Joueurs</button>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/equipes">
-                        <button class="btn btn-outline-success btn-outline-success">Equipes</button>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/arbitres">
-                        <button class="btn btn-outline-success btn-outline-success">Arbitres</button>
-                    </a>
-                </li>
+                <c:if test="${sessionScope.isOrganizer || sessionScope.isAdmin}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/joueurs">
+                            <button class="btn btn-outline-success btn-outline-success">Joueurs</button>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/equipes">
+                            <button class="btn btn-outline-success btn-outline-success">Equipes</button>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/arbitres">
+                            <button class="btn btn-outline-success btn-outline-success">Arbitres</button>
+                        </a>
+                    </li>
+                </c:if>
                 <c:if test="${sessionScope.isAdmin}">
                     <li class="nav-item">
                         <a class="nav-link" href="${pageContext.request.contextPath}/utilisateurs">
