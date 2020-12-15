@@ -1,5 +1,6 @@
 package com.cactus.RolandGarrosEE.repositories.remotes;
 
+import com.cactus.RolandGarrosEE.entities.Gender;
 import com.cactus.RolandGarrosEE.entities.Player;
 
 import javax.ejb.Remote;
@@ -12,4 +13,5 @@ public interface PlayerPersistentRemote {
     void deletePlayer(Player player);
     Player findPlayerById(int playerId);
     List<Player> allPlayer();
+    List<Player> allPlayerByGender(Gender gender);
 }

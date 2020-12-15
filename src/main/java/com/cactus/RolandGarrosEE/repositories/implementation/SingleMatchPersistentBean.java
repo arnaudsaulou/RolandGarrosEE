@@ -15,10 +15,24 @@ public class SingleMatchPersistentBean implements SingleMatchRemote {
     EntityManager entityManager;
 
     @Override
+    public void updateScore(int id, String scoreA, String scoreB) {
+        try {
+            entityManager.createQuery("update SingleMatch sm set sm.scoreA = :scoreA, sm.scoreB = :scoreB WHERE sm.id = :id")
+                    .setParameter("id" , id)
+                    .setParameter("scoreA" , Integer.parseInt(scoreA))
+                    .setParameter("scoreB" , Integer.parseInt(scoreB))
+                    .executeUpdate();
+        } catch (NoResultException ignored) {
+            ignored.printStackTrace();
+        }
+    }
+
+    @Override
     public void saveSingleMatch(SingleMatch singleMatch) {
         try {
             entityManager.persist(singleMatch);
         } catch (Exception ignored) {
+            ignored.printStackTrace();
         }
     }
 
@@ -45,6 +59,18 @@ public class SingleMatchPersistentBean implements SingleMatchRemote {
         List<SingleMatch> singleMatches = null;
         try {
             singleMatches = entityManager.createQuery("from SingleMatch", SingleMatch.class).getResultList();
+        } catch (NoResultException ignored) {
+        }
+        return singleMatches;
+    }
+
+    @Override
+    public List<SingleMatch> allSingleMatchByTournamentId(int tournamentId) {
+        List<SingleMatch> singleMatches = null;
+        try {
+            singleMatches = entityManager.createQuery("from SingleMatch sm WHERE sm.tournament.id = :tournamentId", SingleMatch.class)
+                    .setParameter("tournamentId" , tournamentId)
+                    .getResultList();
         } catch (NoResultException ignored) {
         }
         return singleMatches;

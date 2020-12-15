@@ -62,4 +62,14 @@ public class UserPersistentBean implements UserPeristentRemote {
         }
         return users;
     }
+
+    public List<String> allMails() {
+        List<String> mails = null;
+        try{
+            mails = entityManager.createQuery("SELECT u.mail FROM User u ", String.class)
+                    .getResultList();
+        } catch (NoResultException ignored) {
+    }
+        return mails;
+    }
 }

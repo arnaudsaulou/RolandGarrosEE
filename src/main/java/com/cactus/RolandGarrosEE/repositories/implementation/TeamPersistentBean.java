@@ -1,5 +1,6 @@
 package com.cactus.RolandGarrosEE.repositories.implementation;
 
+import com.cactus.RolandGarrosEE.entities.Player;
 import com.cactus.RolandGarrosEE.entities.Team;
 import com.cactus.RolandGarrosEE.repositories.remotes.TeamPersistentRemote;
 
@@ -44,7 +45,7 @@ public class TeamPersistentBean implements TeamPersistentRemote {
     public List<Team> allTeam() {
         List<Team> teams = null;
         try {
-            teams = entityManager.createQuery("FROM Team", Team.class)
+            teams = entityManager.createQuery("SELECT DISTINCT T FROM Team T join fetch T.playersList ORDER BY T.id", Team.class)
                     .getResultList();
         } catch (NoResultException ignored) {
         }

@@ -4,11 +4,11 @@
 
 <h3 class="text-center mb-5 mt-5">Liste des matchs doubles</h3>
 
-<c:if test="${sessionScope.isAdmin} || ${sessionScope.isOrganizer}">
-    <a href="${pageContext.request.contextPath}/tournoi/ajouterResultat?type=double">
+<c:if test="${sessionScope.isAdmin || sessionScope.isOrganizer}">
+    <a href="${pageContext.request.contextPath}/tournoi/ajouterResultat?type=${type}&genre=${genre}">
         <button type="button" class="btn btn-secondary mt-2 mr-5 mb-2" style="float:right;">Ajouter Résultat</button>
     </a>
-    <a href="${pageContext.request.contextPath}/tournoi/ajouterMatch?type=double">
+    <a href="${pageContext.request.contextPath}/tournoi/ajouterMatch?type=${type}&genre=${genre}">
         <button type="button" class="btn btn-secondary mt-2 mr-5 mb-2" style="float:right;">Ajouter Match</button>
     </a>
 </c:if>
@@ -32,15 +32,15 @@
         <tbody>
         <c:forEach items="${doubleMatchList}" var="doubleMatch">
             <tr>
-                <td class="text-center">${doubleMatchList.number}</td>
-                <td class="text-center">${doubleMatchList.date}</td>
-                <td class="text-center">${doubleMatchList.duration}</td>
-                <td class="text-center">${doubleMatchList.teamA}</td>
-                <td class="text-center">${doubleMatchList.scoreA}</td>
-                <td class="text-center">${doubleMatchList.teamB}</td>
-                <td class="text-center">${doubleMatchList.scoreB}</td>
-                <td class="text-center">${doubleMatchList.referee}</td>
-                <td class="text-center">${doubleMatchList.ground}</td>
+                <td class="text-center">${doubleMatch.id}</td>
+                <td class="text-center">${doubleMatch.dateBegin}</td>
+                <td class="text-center">${doubleMatch.dateEnd}</td>
+                <td class="text-center">${doubleMatch.teamsList[0].name}</td>
+                <td class="text-center">${doubleMatch.scoreA}</td>
+                <td class="text-center">${doubleMatch.teamsList[1].name}</td>
+                <td class="text-center">${doubleMatch.scoreB}</td>
+                <td class="text-center">${doubleMatch.referee.firstname} ${doubleMatch.referee.lastname}</td>
+                <td class="text-center">${doubleMatch.court.name}</td>
             </tr>
         </c:forEach>
         </tbody>

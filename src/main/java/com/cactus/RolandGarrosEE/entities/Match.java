@@ -18,9 +18,9 @@ public abstract class Match implements Serializable {
     @Column(name="DATEEND")
     private Date dateEnd;
     @Column(name="SCOREA")
-    private int scoreA;
+    private Integer scoreA;
     @Column(name="SCOREB")
-    private int scoreB;
+    private Integer scoreB;
     @ManyToOne
     private Tournament tournament;
     @ManyToOne
@@ -89,19 +89,19 @@ public abstract class Match implements Serializable {
         this.tournament = tournament;
     }
 
-    public Court getFields() {
+    public Court getCourt() {
         return court;
     }
 
-    public void setFields(Court court) {
+    public void setCourt(Court court) {
         this.court = court;
     }
 
-    public Referee getArbitrator() {
+    public Referee getReferee() {
         return referee;
     }
 
-    public void setArbitrator(Referee referee) {
+    public void setReferee(Referee referee) {
         this.referee = referee;
     }
 }

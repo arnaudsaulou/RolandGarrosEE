@@ -1,6 +1,7 @@
 package com.cactus.RolandGarrosEE.repositories.implementation;
 
 import com.cactus.RolandGarrosEE.entities.DoubleMatch;
+import com.cactus.RolandGarrosEE.entities.SingleMatch;
 import com.cactus.RolandGarrosEE.repositories.remotes.DoubleMatchPersistentRemote;
 
 import javax.ejb.Stateless;
@@ -13,6 +14,28 @@ import java.util.List;
 public class DoubleMatchPersistentBean implements DoubleMatchPersistentRemote {
     @PersistenceContext(name = "PersistentUnitPU")
     EntityManager entityManager;
+
+    @Override
+    public void updateScore(int id, String scoreA, String scoreB) {
+        try {
+            entityManager.createQuery("update DoubleMatch sm set scoreA = :scoreA, scoreB = :scoreB WHERE sm.tournament.id = :id", DoubleMatch.class)
+                    .setParameter("id" , id)
+                    .setParameter("scoreA" , Integer.parseInt(scoreA))
+                    .setParameter("scoreB" , Integer.parseInt(scoreB))
+                    .executeUpdate();
+        } catch (NoResultException ignored) {
+            ignored.printStackTrace();
+        }
+    }
+
+    @Override
+    public void saveDoubleMatch(DoubleMatch doubleMatch) {
+        try {
+            entityManager.persist(doubleMatch);
+        } catch (Exception ignored) {
+            ignored.printStackTrace();
+        }
+    }
 
     @Override
     public void addDoubleMatch(DoubleMatch doubleMatch) {
@@ -45,6 +68,18 @@ public class DoubleMatchPersistentBean implements DoubleMatchPersistentRemote {
         List<DoubleMatch> doubleMatches = null;
         try {
             doubleMatches = entityManager.createQuery("from DoubleMatch", DoubleMatch.class).getResultList();
+        } catch (NoResultException ignored) {
+        }
+        return doubleMatches;
+    }
+
+    @Override
+    public List<DoubleMatch> allDoubleMatchByTournamentId(int tournamentId) {
+        List<DoubleMatch> doubleMatches = null;
+        try {
+            doubleMatches = entityManager.createQuery("from DoubleMatch dm WHERE dm.tournament.id = :tournamentId", DoubleMatch.class)
+                    .setParameter("tournamentId" , tournamentId)
+                    .getResultList();
         } catch (NoResultException ignored) {
         }
         return doubleMatches;

@@ -1,4 +1,4 @@
-package com.cactus.RolandGarrosEE.controller;
+package com.cactus.RolandGarrosEE.utils;
 
 public class Constantes {
 
@@ -33,10 +33,13 @@ public class Constantes {
 
     //region URL
 
-    public static final String URL_HOME = "tournoi?type=MatchSimple&genre=Femme";
+    public static final String URL_HOME = "tournoi?type=Single&genre=Femme";
     public static final String URL_LOGIN = "connexion";
     public static final String URL_REFEREES = "arbitres";
     public static final String URL_USERS = "utilisateurs";
+    public static final String URL_PLAYERS = "joueurs";
+    public static final String URL_ADD_USER = "ajouterUtilisateur";
+    public static final String URL_TEAM = "equipes";
 
     //endregion
 
@@ -57,6 +60,19 @@ public class Constantes {
     public static final String NEW_ACTOR_FORM_FIELD_MAIL = "actorMail";
     public static final String NEW_ACTOR_FORM_FIELD_PASSWORD = "actorPassword";
     public static final String NEW_ACTOR_FORM_FIELD_STATUS = "actorStatus";
+    public static final String NEW_MATCH_FORM_FIELD_START_DATE = "matchStartDate";
+    public static final String NEW_MATCH_FORM_FIELD_END_DATE= "matchEndDate";
+    public static final String NEW_MATCH_FORM_FIELD_PART_A = "matchPartA";
+    public static final String NEW_MATCH_FORM_FIELD_PART_B = "matchPartB";
+    public static final String NEW_MATCH_FORM_FIELD_REFEREE = "matchReferee";
+    public static final String NEW_MATCH_FORM_FIELD_COURT= "matchCourt";
+    public static final String NEW_MATCH_FORM_FIELD_SCORE_A= "matchScoreA";
+    public static final String NEW_MATCH_FORM_FIELD_SCORE_B= "matchScoreB";
+    public static final String NEW_ACTOR_FORM_FIELD_RANKINGS = "actorRankings";
+    public static final String NEW_ACTOR_FORM_FIELD_GENDER = "actorGender";
+    public static final String NEW_TEAM_FORM_FIELD_NAME = "teamName";
+    public static final String NEW_TEAM_FORM_FIELD_PLAYER_A = "teamPlayerA";
+    public static final String NEW_TEAM_FORM_FIELD_PLAYER_B = "teamPlayerB";
 
     //endregion
 
@@ -67,6 +83,10 @@ public class Constantes {
     public static final String REQUEST_ATTR_BREADCRUMBS = "breadcrumbs";
     public static final String REQUEST_ATTR_REFEREES_LIST = "refereesList";
     public static final String REQUEST_ATTR_USERS_LIST = "usersList";
+    public static final String REQUEST_ATTR_TEAMS_LIST = "teamsList";
+    public static final String REQUEST_ATTR_PLAYERS_LIST = "playersList";
+    public static final String REQUEST_ATTR_SINGLE_MATCH_LIST = "singleMatchList";
+    public static final String REQUEST_ATTR_DOUBLE_MATCH_LIST = "doubleMatchList";
 
     //endregion
 

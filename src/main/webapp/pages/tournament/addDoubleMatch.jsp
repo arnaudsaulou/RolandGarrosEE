@@ -14,13 +14,23 @@
         <div class="form-group row">
             <label class="col-3 col-form-label">Equipe A</label>
             <div class="col-8">
-                <%@include file="/includes/selectTeamDropdownlist.jsp"%>
+                <select class="form-control" name="matchPartA">
+                    <option disabled selected value> -- selectionner une équipe -- </option>
+                    <c:forEach items="${matchPartA}" var="team">
+                        <option value="${team.id}">${team.name}</option>
+                    </c:forEach>
+                </select>
             </div>
         </div>
         <div class="form-group row">
             <label class="col-3 col-form-label">Equipe B</label>
             <div class="col-8">
-                <%@include file="/includes/selectTeamDropdownlist.jsp"%>
+                <select class="form-control" name="matchPartB">
+                    <option disabled selected value> -- selectionner une équipe -- </option>
+                    <c:forEach items="${matchPartB}" var="team">
+                        <option value="${team.id}">${team.name}</option>
+                    </c:forEach>
+                </select>
             </div>
         </div>
         <div class="form-group row">

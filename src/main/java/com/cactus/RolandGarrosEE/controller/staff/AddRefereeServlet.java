@@ -1,7 +1,7 @@
 package com.cactus.RolandGarrosEE.controller.staff;
 
 import com.cactus.RolandGarrosEE.controller.BaseServlet;
-import com.cactus.RolandGarrosEE.controller.Constantes;
+import com.cactus.RolandGarrosEE.utils.Constantes;
 import com.cactus.RolandGarrosEE.entities.Referee;
 import com.cactus.RolandGarrosEE.repositories.remotes.RefereePersistentRemote;
 import com.cactus.RolandGarrosEE.utils.exceptions.InvalidActorException;

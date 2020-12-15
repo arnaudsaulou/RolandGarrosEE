@@ -5,41 +5,47 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "PLAYER")
 public class Player extends Member implements Serializable {
-    @Column(name = "RANKINGS", unique = true)
-    private int rankings;
+    @Column(name = "RANKINGS")
+    private Integer rankings;
     @NotNull
     @Column(name = "GENDER")
     @Enumerated(EnumType.STRING)
     private Gender gender;
-    @ManyToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE})
-    @JoinTable(name="player_singlematch",
-            joinColumns = @JoinColumn(name = "player_id"),
-            inverseJoinColumns = @JoinColumn(name = "singlematch_id"))
+
+    @ManyToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE}, mappedBy = "playersList", fetch = FetchType.LAZY)
     private List<SingleMatch> matchsSingle;
-    @ManyToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE}, mappedBy = "playersList")
+
+    @ManyToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE}, mappedBy = "playersList", fetch = FetchType.LAZY)
     @Size(min=0, max=2)
-    private List<Team> teamsList;
+    private Set<Team> teamsList;
 
     public Player() {
     }
 
-    public Player(int rankings, @NotNull Gender gender, List<SingleMatch> matchsSingle, @Size(min = 0, max = 2) List<Team> teamsList) {
+    public Player(int rankings, @NotNull Gender gender, List<SingleMatch> matchsSingle, @Size(min = 0, max = 2) Set<Team> teamsList) {
         this.rankings = rankings;
         this.gender = gender;
         this.matchsSingle = matchsSingle;
         this.teamsList = teamsList;
     }
 
-    public Player(String firstname, String lastname, String nationality, int rankings, @NotNull Gender gender, List<SingleMatch> matchsSingle, @Size(min = 0, max = 2) List<Team> teamsList) {
+    public Player(String firstname, String lastname, String nationality, int rankings, @NotNull Gender gender, List<SingleMatch> matchsSingle, @Size(min = 0, max = 2) Set<Team> teamsList) {
         super(firstname, lastname, nationality);
         this.rankings = rankings;
         this.gender = gender;
         this.matchsSingle = matchsSingle;
         this.teamsList = teamsList;
+    }
+
+    public Player(String firstname, String lastname, String nationality, int rankings, @NotNull Gender gender) {
+        super(firstname, lastname, nationality);
+        this.rankings = rankings;
+        this.gender = gender;
     }
 
     public int getRankings() {
@@ -66,11 +72,11 @@ public class Player extends Member implements Serializable {
         this.matchsSingle = matchsSingle;
     }
 
-    public List<Team> getTeamsList() {
+    public Set<Team> getTeamsList() {
         return teamsList;
     }
 
-    public void setTeamsList(List<Team> teamsList) {
+    public void setTeamsList(Set<Team> teamsList) {
         this.teamsList = teamsList;
     }
 }

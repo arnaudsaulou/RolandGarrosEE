@@ -13,7 +13,14 @@
         </tr>
         <tr>
             <th class="text-center">Nouveau joueur 1</th>
-            <th class="text-center"><%@include file="/includes/selectPlayerDropdownlist.jsp"%></th>
+            <th class="text-center">
+                <select class="form-control" name="teamPlayerA">
+                    <option disabled selected value> -- selectionner un joueur -- </option>
+                    <c:forEach items="${playersList}" var="player">
+                        <option value="${player.id}">${player.firstname} ${fn:toUpperCase(player.lastname)}</option>
+                    </c:forEach>
+                </select>
+            </th>
         </tr>
         <tr>
             <th class="text-center">Ancien joueur 2</th>
@@ -21,7 +28,14 @@
         </tr>
         <tr>
             <th class="text-center">Nouveau joueur 2</th>
-            <th class="text-center"><%@include file="/includes/selectPlayerDropdownlist.jsp"%></th>
+            <th class="text-center">
+                <select class="form-control" name="teamPlayerB">
+                    <option disabled selected value> -- selectionner un joueur -- </option>
+                    <c:forEach items="${playersList}" var="player">
+                        <option value="${player.id}">${player.firstname} ${fn:toUpperCase(player.lastname)}</option>
+                    </c:forEach>
+                </select>
+            </th>
         </tr>
     </table>
     <a href="${pageContext.request.contextPath}/equipes">
