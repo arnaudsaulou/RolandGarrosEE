@@ -9,11 +9,11 @@
     <table class="table table-bordered">
         <tr>
             <th class="text-center">Prénom</th>
-            <th class="text-center"><input type="text" value="${joueur.firstname}" name="firstname" placeholder="Prénom"/></th>
+            <th class="text-center"><input type="text" value="${joueur.firstname}" name="firstname" placeholder="Prénom" required/></th>
         </tr>
         <tr>
             <td class="text-center">Nom</td>
-            <td class="text-center"><input type="text" value="${fn:toUpperCase(joueur.lastname)}" name="lastname" placeholder="Nom"/></td>
+            <td class="text-center"><input type="text" value="${fn:toUpperCase(joueur.lastname)}" name="lastname" placeholder="Nom" required/></td>
         </tr>
         <tr>
             <td class="text-center">Nationalité</td>
@@ -21,7 +21,7 @@
         </tr>
         <tr>
             <td class="text-center">Classement Mondial</td>
-            <td class="text-center"><input type="text" value="${joueur.rankings}" name="ranking" placeholder="Classement mondial"/></td>
+            <td class="text-center"><input type="text" value="${joueur.rankings}" name="ranking" placeholder="Classement mondial" required/></td>
         </tr>
     </table>
     <a href="${pageContext.request.contextPath}/joueurs">

@@ -9,11 +9,11 @@
     <table class="table table-bordered">
         <tr>
             <th class="text-center">Prénom</th>
-            <th class="text-center"><input type="text" value="${referee.firstname}" name="firstname" placeholder="Prénom"/></th>
+            <th class="text-center"><input type="text" value="${referee.firstname}" name="firstname" placeholder="Prénom" required/></th>
         </tr>
         <tr>
             <td class="text-center">Nom</td>
-            <td class="text-center"><input type="text" value="${fn:toUpperCase(referee.lastname)}" name="lastname" placeholder="Nom"/></td>
+            <td class="text-center"><input type="text" value="${fn:toUpperCase(referee.lastname)}" name="lastname" placeholder="Nom" required/></td>
         </tr>
         <tr>
             <td class="text-center">Nationalité</td>
