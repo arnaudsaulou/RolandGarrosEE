@@ -10,7 +10,7 @@
 
 
 <div class="container col-6 offset-3 mt-5 mb-0">
-    <table class="table">
+    <table class="table table-hover">
         <thead class="thead-light">
         <tr class="d-flex">
             <th class="col-3 text-center">Numéro</th>
@@ -21,7 +21,7 @@
         </thead>
         <tbody>
         <c:forEach items="${refereesList}" var="referee">
-            <tr class="d-flex">
+            <tr class="d-flex"  onclick="document.location = '${pageContext.request.contextPath}/arbitres/${referee.id}'">
                 <td class="col-3 text-center">${referee.id}</td>
                 <td class="col-3 text-center">${referee.lastname}</td>
                 <td class="col-3 text-center">${referee.firstname}</td>

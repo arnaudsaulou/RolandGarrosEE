@@ -7,13 +7,13 @@
         <div class="form-group row">
             <label class="col-3 col-form-label">Nom</label>
             <div class="col-9">
-                <input class="form-control" name="actorLastname" type="text" placeholder="Nom" required="required">
+                <input class="form-control" name="actorLastname" type="text" placeholder="Nom" required>
             </div>
         </div>
         <div class="form-group row">
             <label class="col-3 col-form-label">Prénom</label>
             <div class="col-9">
-                <input class="form-control" name="actorFirstname" type="text" placeholder="Prénom" required="required">
+                <input class="form-control" name="actorFirstname" type="text" placeholder="Prénom" required>
             </div>
         </div>
         <div class="form-group row">

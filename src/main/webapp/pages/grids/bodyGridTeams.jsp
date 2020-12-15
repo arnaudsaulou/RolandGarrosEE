@@ -9,7 +9,7 @@
 </a>
 
 <div class="container">
-    <table class="table">
+    <table class="table table-hover">
         <thead class="thead-light">
         <tr class="d-flex">
             <th class="col-3 text-center">Numéro</th>
@@ -20,7 +20,7 @@
         </thead>
         <tbody>
         <c:forEach items="${teamsList}" var="team">
-            <tr class="d-flex">
+            <tr class="d-flex" onclick="document.location = '${pageContext.request.contextPath}/equipes/${team.id}'">
                 <td class="col-3 text-center">${team.id}</td>
                 <td class="col-3 text-center">${team.name}</td>
                 <c:forEach items="${team.playersList}" var="player">
