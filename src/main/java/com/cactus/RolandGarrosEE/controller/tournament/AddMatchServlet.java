@@ -132,8 +132,15 @@ public class AddMatchServlet extends BaseServlet {
 
     private void tryToSaveMatch(HttpServletRequest req) throws InvalidMatchException {
         // TODO
-        // String startDate = this.getValue(req, Constantes.NEW_MATCH_FORM_FIELD_START_DATE);
-        Date startDate = new Date();
+        String startDateString = this.getValue(req, Constantes.NEW_MATCH_FORM_FIELD_START_DATE);
+
+        Date startDate = null;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        try {
+            startDate = formatter.parse(startDateString.replace("T"," "));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         Tournament tournament = this.getTournament(req);
         Referee referee = this.getReferee(req);
         Court court = this.getCourt(req);

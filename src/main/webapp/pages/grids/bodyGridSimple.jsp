@@ -18,8 +18,8 @@
         <thead class="thead-light">
         <tr>
             <th class="text-center">Numéro</th>
-            <th class="text-center">Date</th>
-            <th class="text-center">Durée</th>
+            <th class="text-center">Date Début</th>
+            <th class="text-center">Date Fin</th>
             <th class="text-center">Joueur A</th>
             <th class="text-center">Score A</th>
             <th class="text-center">Joueur B</th>
@@ -33,7 +33,7 @@
             <tr>
                 <td class="text-center">${singleMatch.id}</td>
                 <td class="text-center">${singleMatch.dateBegin}</td>
-                <td class="text-center">${singleMatch.dateBegin}</td><%-- TODO Duration --%>
+                <td class="text-center">${singleMatch.dateEnd}</td>
                 <td class="text-center">${singleMatch.playersList[0].firstname} ${singleMatch.playersList[0].lastname}</td>
                 <td class="text-center">${singleMatch.scoreA}</td>
                 <td class="text-center">${singleMatch.playersList[1].firstname} ${singleMatch.playersList[1].lastname}</td>

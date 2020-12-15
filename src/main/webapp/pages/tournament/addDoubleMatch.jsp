@@ -7,8 +7,8 @@
         <div class="form-group row">
             <label for="example-datetime-local-input" class="col-3 col-form-label">Date de début</label>
             <div class="col-8">
-                <input class="form-control" type="datetime-local" value="2020-12-12T12:00:00"
-                       id="example-datetime-local-input">
+                <input class="form-control" type="datetime-local" value="2020-12-12T12:00"
+                       name="matchStartDate" id="example-datetime-local-input">
             </div>
         </div>
         <div class="form-group row">
