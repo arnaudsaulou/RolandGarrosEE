@@ -18,9 +18,9 @@ public enum TypeTournament {
         return this.name;
     }
 
-    public static TypeTournament getTypeTournamentFromString(String typeTournamentString){
+    public static TypeTournament getTypeTournamentFromString(String typeTournamentString) throws IllegalArgumentException {
         for (TypeTournament typeTournament : TypeTournament.values()) {
-            if(typeTournament.equalsName(typeTournamentString)){
+            if (typeTournament.equalsName(typeTournamentString)) {
                 return typeTournament;
             }
         }

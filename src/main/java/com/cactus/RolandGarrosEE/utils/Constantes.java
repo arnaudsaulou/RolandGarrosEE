@@ -40,6 +40,8 @@ public class Constantes {
     public static final String URL_PLAYERS = "joueurs";
     public static final String URL_ADD_USER = "ajouterUtilisateur";
     public static final String URL_TEAM = "equipes";
+    public static final String URL_ADD_MATCH = "ajouterMatch";
+    public static final String URL_TOURNAMENT = "tournoi";
 
     //endregion
 
@@ -61,13 +63,13 @@ public class Constantes {
     public static final String NEW_ACTOR_FORM_FIELD_PASSWORD = "actorPassword";
     public static final String NEW_ACTOR_FORM_FIELD_STATUS = "actorStatus";
     public static final String NEW_MATCH_FORM_FIELD_START_DATE = "matchStartDate";
-    public static final String NEW_MATCH_FORM_FIELD_END_DATE= "matchEndDate";
+    public static final String NEW_MATCH_FORM_FIELD_END_DATE = "matchEndDate";
     public static final String NEW_MATCH_FORM_FIELD_PART_A = "matchPartA";
     public static final String NEW_MATCH_FORM_FIELD_PART_B = "matchPartB";
     public static final String NEW_MATCH_FORM_FIELD_REFEREE = "matchReferee";
-    public static final String NEW_MATCH_FORM_FIELD_COURT= "matchCourt";
-    public static final String NEW_MATCH_FORM_FIELD_SCORE_A= "matchScoreA";
-    public static final String NEW_MATCH_FORM_FIELD_SCORE_B= "matchScoreB";
+    public static final String NEW_MATCH_FORM_FIELD_COURT = "matchCourt";
+    public static final String NEW_MATCH_FORM_FIELD_SCORE_A = "matchScoreA";
+    public static final String NEW_MATCH_FORM_FIELD_SCORE_B = "matchScoreB";
     public static final String NEW_ACTOR_FORM_FIELD_RANKINGS = "actorRankings";
     public static final String NEW_ACTOR_FORM_FIELD_GENDER = "actorGender";
     public static final String NEW_TEAM_FORM_FIELD_NAME = "teamName";
@@ -87,6 +89,8 @@ public class Constantes {
     public static final String REQUEST_ATTR_PLAYERS_LIST = "playersList";
     public static final String REQUEST_ATTR_SINGLE_MATCH_LIST = "singleMatchList";
     public static final String REQUEST_ATTR_DOUBLE_MATCH_LIST = "doubleMatchList";
+    public static final String REQUEST_ATTR__ERROR_MSG = "errorMsg";
+
 
     //endregion
 
@@ -103,7 +107,8 @@ public class Constantes {
     public static final String TITLE_ADD_MATCH = "Ajouter match";
     public static final String TITLE_ADD_RESULT = "Ajouter résultat";
     public static final String TITLE_USERS = "Utilisateurs";
-    public static final String TITLE_ADD_USER= "Ajouter utilisateur";
+    public static final String TITLE_ADD_USER = "Ajouter utilisateur";
+    public static final String TITLE_TOURNAMENT = "Tournois";
 
     //endregion
 
