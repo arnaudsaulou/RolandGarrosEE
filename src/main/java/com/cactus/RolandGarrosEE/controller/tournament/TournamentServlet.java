@@ -40,18 +40,18 @@ public class TournamentServlet extends BaseServlet {
     }
 
     private void selectMatchType(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String matchTypeString = request.getParameter(Constantes.URL_PARAM_MATCH_TYPE);
-        String genderString = request.getParameter(Constantes.URL_PARAM_GENDER);
 
         try {
-            TypeTournament matchType = TypeTournament.getTypeTournamentFromString(matchTypeString);
-            Gender matchGender = Gender.getGenderFromString(genderString);
+            TypeTournament matchType = this.getTournamentTypeFromURL(request);
+            Gender matchGender = this.getGenderFromURL(request);
+
             this.currentTournament = tournamentPersistentRemote.getTournamentByTypeAndGender(matchType, matchGender);
 
+            // Pass attribute to setup the add button
+            this.attributes.put(Constantes.URL_PARAM_MATCH_TYPE, matchType.toString());
+            this.attributes.put(Constantes.URL_PARAM_GENDER, matchGender.toString());
 
-            request.setAttribute(Constantes.URL_PARAM_MATCH_TYPE, matchType);
-            request.setAttribute(Constantes.URL_PARAM_GENDER, matchGender);
-
+            // Add breadcrumbs
             this.resetBreadcrumbs();
             this.addToBreadcrumbs(matchType.toString());
             this.addToBreadcrumbs(matchGender.toString());
@@ -69,27 +69,46 @@ public class TournamentServlet extends BaseServlet {
 
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
-            this.notFoundPage(request, response);
+            this.notFoundPage(request, response, e.getMessage());
         }
     }
 
-    private void notFoundPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private Gender getGenderFromURL(HttpServletRequest request) throws IllegalArgumentException {
+        String genderString = this.getValue(request, Constantes.URL_PARAM_GENDER);
+        if (genderString == null)
+            throw new IllegalArgumentException("Genre non renseigné");
+        return Gender.getGenderFromString(genderString);
+    }
+
+    private TypeTournament getTournamentTypeFromURL(HttpServletRequest request) throws IllegalArgumentException {
+        String matchTypeString = this.getValue(request, Constantes.URL_PARAM_MATCH_TYPE);
+        if (matchTypeString == null)
+            throw new IllegalArgumentException("Type de tournois non renseigné");
+        return TypeTournament.getTypeTournamentFromString(matchTypeString);
+    }
+
+    private void notFoundPage(HttpServletRequest request, HttpServletResponse response, String errorMessage) throws ServletException, IOException {
+        request.setAttribute(Constantes.REQUEST_ATTR__ERROR_MSG, errorMessage);
         this.getServletContext().getRequestDispatcher(Constantes.VIEW_NOT_FOUND).forward(request, response);
     }
 
     private void simpleMatch(HttpServletRequest request, HttpServletResponse response, Gender matchGender) throws ServletException, IOException {
-        this.attributes.put(Constantes.REQUEST_ATTR_TITLE, Constantes.TITLE_SINGLE_MATCH_BASE + " - " + matchGender.toString());
         List<SingleMatch> singleMatch = singleMatchRemote.allSingleMatchByTournamentId(currentTournament.getId());
+
+        this.attributes.put(Constantes.REQUEST_ATTR_TITLE, Constantes.TITLE_SINGLE_MATCH_BASE + " - " + matchGender.toString());
         this.attributes.put(Constantes.REQUEST_ATTR_SINGLE_MATCH_LIST, singleMatch);
         this.propagateAttributesToRequest(request);
+
         this.getServletContext().getRequestDispatcher(Constantes.VIEW_SINGLE_MATCH).forward(request, response);
     }
 
     private void doubleMatch(HttpServletRequest request, HttpServletResponse response, Gender matchGender) throws ServletException, IOException {
-        this.attributes.put(Constantes.REQUEST_ATTR_TITLE, Constantes.TITLE_DOUBLE_MATCH_BASE + "-" + matchGender.toString());
         List<DoubleMatch> doubleMatch = doubleMatchPersistentRemote.allDoubleMatchByTournamentId(currentTournament.getId());
+
+        this.attributes.put(Constantes.REQUEST_ATTR_TITLE, Constantes.TITLE_DOUBLE_MATCH_BASE + "-" + matchGender.toString());
         this.attributes.put(Constantes.REQUEST_ATTR_DOUBLE_MATCH_LIST, doubleMatch);
         this.propagateAttributesToRequest(request);
+
         this.getServletContext().getRequestDispatcher(Constantes.VIEW_DOUBLE_MATCH).forward(request, response);
     }
 

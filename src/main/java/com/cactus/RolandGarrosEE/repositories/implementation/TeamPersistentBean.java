@@ -57,12 +57,7 @@ public class TeamPersistentBean implements TeamPersistentRemote {
     public List<Team> allTeamByGender(Gender gender) {
         List<Team> teams = null;
         try {
-            teams = entityManager.createQuery(
-                    "SELECT DISTINCT T FROM Team t " +
-                            "INNER JOIN t.playersList tp on t.id = tp.id " +
-                            "LEFT JOIN Player p on tp.id = p.id " +
-                            "WHERE p.gender = :gender"
-                    , Team.class)
+            teams = entityManager.createQuery("SELECT DISTINCT T FROM Team t WHERE t.gender = :gender", Team.class)
                     .setParameter("gender", gender)
                     .getResultList();
         } catch (NoResultException ignored) {
