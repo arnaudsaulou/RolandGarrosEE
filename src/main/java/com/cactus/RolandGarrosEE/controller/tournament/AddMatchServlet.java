@@ -43,10 +43,11 @@ public class AddMatchServlet extends BaseServlet {
             if (req.getParameter(Constantes.URL_PARAM_MATCH_TYPE).equals("double")) {
                 this.getServletContext().getRequestDispatcher(Constantes.VIEW_ADD_DOUBLE_MATCH).forward(req, resp);
             } else {
+                Gender gender = Gender.valueOf(req.getParameter(Constantes.URL_PARAM_GENDER));
                 req.setAttribute(Constantes.URL_PARAM_GENDER, req.getParameter(Constantes.URL_PARAM_GENDER));
                 req.setAttribute(Constantes.URL_PARAM_MATCH_TYPE, req.getParameter(Constantes.URL_PARAM_MATCH_TYPE));
 
-                List<Player> players = playerPersistentRemote.allPlayer();
+                List<Player> players = playerPersistentRemote.allPlayerByGender(gender);
                 List<Referee> referees = refereePersistentRemote.allArbitrator();
                 List<Court> courts = courtPersistentRemote.allCourts();
 
@@ -70,6 +71,7 @@ public class AddMatchServlet extends BaseServlet {
         } catch (UnauthenticatedUserException e) {
             resp.sendRedirect("../" + Constantes.URL_LOGIN);
         } catch (InvalidMatchException e) {
+            req.setAttribute("errorMessage",  e.getMessage());
             this.getServletContext().getRequestDispatcher(Constantes.VIEW_ADD_SINGLE_MATCH).forward(req, resp);
         }
     }
@@ -94,7 +96,7 @@ public class AddMatchServlet extends BaseServlet {
         Player playerA = this.getPlayer(req, Constantes.NEW_MATCH_FORM_FIELD_PART_A);
         Player playerB = this.getPlayer(req, Constantes.NEW_MATCH_FORM_FIELD_PART_B);
 
-        Set<Player> playersList = new HashSet<>();
+        List<Player> playersList = new ArrayList<>();
         playersList.add(playerA);
         playersList.add(playerB);
 
@@ -134,6 +136,8 @@ public class AddMatchServlet extends BaseServlet {
             throws InvalidMatchException {
         if (startDate == null || tournament == null || referee == null || court == null || playerA == null || playerB == null)
             throw new InvalidMatchException();
+        if (playerA.getId() == playerB.getId())
+            throw new InvalidMatchException("Les joueurs rentrés sont les mêmes");
     }
 
 }

@@ -19,6 +19,7 @@ public class SingleMatchPersistentBean implements SingleMatchRemote {
         try {
             entityManager.persist(singleMatch);
         } catch (Exception ignored) {
+            ignored.printStackTrace();
         }
     }
 

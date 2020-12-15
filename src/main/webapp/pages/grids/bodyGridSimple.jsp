@@ -34,15 +34,9 @@
                 <td class="text-center">${singleMatch.id}</td>
                 <td class="text-center">${singleMatch.dateBegin}</td>
                 <td class="text-center">${singleMatch.dateBegin}</td><%-- TODO Duration --%>
-                <td class="text-center">MDR</td>
-<%--
-                <td class="text-center">${singleMatch.playersList[0]}</td>
---%>
+                <td class="text-center">${singleMatch.playersList[0].firstname} ${singleMatch.playersList[0].lastname}</td>
                 <td class="text-center">${singleMatch.scoreA}</td>
-                <td class="text-center">TRO LOLOL</td>
-<%--
-                <td class="text-center">${singleMatch.playersList[1]}</td>
---%>
+                <td class="text-center">${singleMatch.playersList[1].firstname} ${singleMatch.playersList[1].lastname}</td>
                 <td class="text-center">${singleMatch.scoreB}</td>
                 <td class="text-center">${singleMatch.referee.firstname} ${singleMatch.referee.lastname}</td>
                 <td class="text-center">${singleMatch.court.name}</td>

@@ -14,13 +14,23 @@
         <div class="form-group row">
             <label class="col-3 col-form-label">Joueur A</label>
             <div class="col-8">
-                <%@include file="/includes/selectPlayerDropdownlistA.jsp"%>
+                <select class="form-control" name="matchPartA">
+                    <option disabled selected value> -- selectionner un joueur -- </option>
+                    <c:forEach items="${matchPartA}" var="player">
+                        <option value="${player.id}">${player.firstname} ${fn:toUpperCase(player.lastname)}</option>
+                    </c:forEach>
+                </select>
             </div>
         </div>
         <div class="form-group row">
             <label class="col-3 col-form-label">Joueur B</label>
             <div class="col-8">
-                <%@include file="/includes/selectPlayerDropdownlistB.jsp"%>
+                <select class="form-control" name="matchPartB">
+                    <option disabled selected value> -- selectionner un joueur -- </option>
+                    <c:forEach items="${matchPartB}" var="player">
+                        <option value="${player.id}">${player.firstname} ${fn:toUpperCase(player.lastname)}</option>
+                    </c:forEach>
+                </select>
             </div>
         </div>
         <div class="form-group row">
@@ -35,9 +45,14 @@
                 <%@include file="/includes/selectTerrainDropdownlist.jsp"%>
             </div>
         </div>
-        <div class="form-group text-center mt-3 mb-0">
+        <div class="form-group text-center mt-3 mb-1">
             <button type="submit" class="btn btn-primary">Ajouter</button>
         </div>
+        <c:if test="${errorMessage != null}">
+        <div class="alert alert-danger" role="alert">
+            ${errorMessage}
+        </div>
+        </c:if>
 
     </form>
 

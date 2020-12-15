@@ -45,7 +45,7 @@ public class TeamPersistentBean implements TeamPersistentRemote {
     public List<Team> allTeam() {
         List<Team> teams = null;
         try {
-            teams = entityManager.createQuery("SELECT DISTINCT T FROM Team T join fetch T.playersList join fetch T.matchsDouble", Team.class)
+            teams = entityManager.createQuery("SELECT DISTINCT T FROM Team T join fetch T.playersList left join fetch T.matchsDouble ORDER BY T.id", Team.class)
                     .getResultList();
         } catch (NoResultException ignored) {
         }
