@@ -40,7 +40,8 @@ public class AddPlayerServlet extends BaseServlet {
         } catch (UnauthenticatedUserException e) {
             response.sendRedirect("../" + Constantes.URL_LOGIN);
         } catch (InvalidActorException e) {
-            this.getServletContext().getRequestDispatcher(Constantes.VIEW_PLAYERS).forward(request, response);
+            request.setAttribute("errorMessage", e.getMessage());
+            this.getServletContext().getRequestDispatcher(Constantes.VIEW_ADD_PLAYER).forward(request, response);
         }
     }
 
@@ -60,14 +61,18 @@ public class AddPlayerServlet extends BaseServlet {
         String nationality = this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_NATIONALITY);
         int rankings = Integer.parseInt(this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_RANKINGS));
         Gender gender = Gender.valueOf(this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_GENDER));
-        this.validateNewPlayer(firstname, lastname, nationality, gender);
+        this.validateNewPlayer(firstname, lastname, nationality, rankings, gender);
         Player newPlayer = new Player(firstname, lastname, nationality, rankings, gender);
         playerPersistentRemote.savePlayer(newPlayer);
     }
 
-    private void validateNewPlayer(String firstname, String lastname, String nationality, Gender gender) throws InvalidActorException {
+    private void validateNewPlayer(String firstname, String lastname, String nationality, int rankings, Gender gender) throws InvalidActorException {
         if (firstname == null || lastname == null || nationality == null || gender == null)
             throw new InvalidActorException();
+        if (playerPersistentRemote.allRankingsByGender(gender).contains(rankings)){
+            throw new InvalidActorException("Ce classement est déjà attribué à un autre joueur");
+        }
+
     }
 
 

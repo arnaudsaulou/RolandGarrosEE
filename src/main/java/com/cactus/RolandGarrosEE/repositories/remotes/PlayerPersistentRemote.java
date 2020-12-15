@@ -14,4 +14,5 @@ public interface PlayerPersistentRemote {
     Player findPlayerById(int playerId);
     List<Player> allPlayer();
     List<Player> allPlayerByGender(Gender gender);
+    List<Integer> allRankingsByGender(Gender gender);
 }
