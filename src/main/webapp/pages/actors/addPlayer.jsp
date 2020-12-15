@@ -40,6 +40,11 @@
         <div class="form-group text-center mt-3 mb-0">
             <button type="submit" class="btn btn-primary">Ajouter</button>
         </div>
+        <c:if test="${errorMessage != null}">
+            <div class="alert alert-danger mt-3" role="alert">
+                    ${errorMessage}
+            </div>
+        </c:if>
 
     </form>
 

@@ -60,7 +60,7 @@ public class AddUserServlet extends BaseServlet {
         String mail = this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_MAIL);
         String password = this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_PASSWORD);
         int status = Integer.parseInt(this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_STATUS));
-        this.validateNewReferee(firstname, lastname, mail, password, status);
+        this.validateNewUser(firstname, lastname, mail, password, status);
         if (userPeristentRemote.allMails().contains(mail)){
             throw new InvalidActorException("Ce mail est déjà utilisé");
         }
@@ -73,7 +73,7 @@ public class AddUserServlet extends BaseServlet {
         }
     }
 
-    private void validateNewReferee(String firstname, String lastname, String mail, String password, int status) throws InvalidActorException {
+    private void validateNewUser(String firstname, String lastname, String mail, String password, int status) throws InvalidActorException {
         try {
             UserRole.checkUserRole(status);
             if (firstname == null || lastname == null || mail == null || password == null)

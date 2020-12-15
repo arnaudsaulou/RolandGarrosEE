@@ -63,4 +63,15 @@ public class PlayerPersistentBean implements PlayerPersistentRemote {
         }
         return players;
     }
+
+    public List<Integer> allRankingsByGender(Gender gender){
+        List<Integer> rankings = null;
+        try {
+            rankings = entityManager.createQuery("SELECT DISTINCT P.rankings FROM Player P WHERE P.gender = :gender", Integer.class)
+                    .setParameter("gender", gender)
+                    .getResultList();
+        } catch (NoResultException ignored) {
+        }
+        return rankings;
+    }
 }
