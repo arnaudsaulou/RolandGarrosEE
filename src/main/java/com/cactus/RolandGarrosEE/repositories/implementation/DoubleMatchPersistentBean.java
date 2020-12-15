@@ -72,4 +72,16 @@ public class DoubleMatchPersistentBean implements DoubleMatchPersistentRemote {
         }
         return doubleMatches;
     }
+
+    @Override
+    public List<DoubleMatch> allDoubleMatchByTournamentId(int tournamentId) {
+        List<DoubleMatch> doubleMatches = null;
+        try {
+            doubleMatches = entityManager.createQuery("from DoubleMatch dm WHERE dm.tournament.id = :tournamentId", DoubleMatch.class)
+                    .setParameter("tournamentId" , tournamentId)
+                    .getResultList();
+        } catch (NoResultException ignored) {
+        }
+        return doubleMatches;
+    }
 }

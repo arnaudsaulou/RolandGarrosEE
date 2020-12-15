@@ -14,4 +14,5 @@ public interface DoubleMatchPersistentRemote {
     void deleteDoubleMatch(DoubleMatch doubleMatch);
     DoubleMatch findDoubleMatchById(int doubleMatchId);
     List<DoubleMatch> allDoubleMatch();
+    List<DoubleMatch> allDoubleMatchByTournamentId(int tournamentId);
 }

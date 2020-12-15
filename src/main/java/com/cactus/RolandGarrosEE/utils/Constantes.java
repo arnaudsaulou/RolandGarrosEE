@@ -86,6 +86,7 @@ public class Constantes {
     public static final String REQUEST_ATTR_TEAMS_LIST = "teamsList";
     public static final String REQUEST_ATTR_PLAYERS_LIST = "playersList";
     public static final String REQUEST_ATTR_SINGLE_MATCH_LIST = "singleMatchList";
+    public static final String REQUEST_ATTR_DOUBLE_MATCH_LIST = "doubleMatchList";
 
     //endregion
 
