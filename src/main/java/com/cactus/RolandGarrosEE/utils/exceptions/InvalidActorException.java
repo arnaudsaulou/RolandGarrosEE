@@ -5,4 +5,8 @@ public class InvalidActorException extends Exception{
     public InvalidActorException() {
         super("Connexion requise pour afficher cette page");
     }
+
+    public InvalidActorException(String message) {
+        super(message);
+    }
 }

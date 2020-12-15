@@ -16,4 +16,6 @@ public interface UserPeristentRemote {
     User findUserByMail(String mail);
 
     List<User> allUser();
+
+    List<String> allMails();
 }
