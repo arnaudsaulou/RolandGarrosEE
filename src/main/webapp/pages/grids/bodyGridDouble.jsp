@@ -19,8 +19,8 @@
         <thead class="thead-light">
         <tr>
             <th class="text-center">Numéro</th>
-            <th class="text-center">Date</th>
-            <th class="text-center">Durée</th>
+            <th class="text-center">Date Début</th>
+            <th class="text-center">Date Fin</th>
             <th class="text-center">Equipe A</th>
             <th class="text-center">Score A</th>
             <th class="text-center">Equipe B</th>

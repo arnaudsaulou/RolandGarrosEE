@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import java.util.Date;
 import java.util.List;
 
 @Stateless
@@ -15,12 +16,13 @@ public class SingleMatchPersistentBean implements SingleMatchRemote {
     EntityManager entityManager;
 
     @Override
-    public void updateScore(int id, String scoreA, String scoreB) {
+    public void updateScore(int id, String scoreA, String scoreB, Date dateEnd) {
         try {
-            entityManager.createQuery("update SingleMatch sm set sm.scoreA = :scoreA, sm.scoreB = :scoreB WHERE sm.id = :id")
+            entityManager.createQuery("update SingleMatch sm set sm.scoreA = :scoreA, sm.scoreB = :scoreB, dateEnd = :dateEnd WHERE sm.id = :id")
                     .setParameter("id" , id)
                     .setParameter("scoreA" , Integer.parseInt(scoreA))
                     .setParameter("scoreB" , Integer.parseInt(scoreB))
+                    .setParameter("dateEnd" , dateEnd)
                     .executeUpdate();
         } catch (NoResultException ignored) {
             ignored.printStackTrace();

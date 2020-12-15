@@ -14,8 +14,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -81,9 +83,10 @@ public class AddResultServlet extends BaseServlet {
             match = doubleMatchPersistentRemote.findDoubleMatchById(Integer.parseInt(id));
         }
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         try {
-            match.setDateEnd(formatter.parse(dateEndMatch));
+            Date date = formatter.parse(dateEndMatch.replace("T"," "));
+            match.setDateEnd(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -92,9 +95,9 @@ public class AddResultServlet extends BaseServlet {
         match.setScoreB(Integer.parseInt(scoreB));
 
         if(match instanceof SingleMatch){
-            singleMatchRemote.updateScore(Integer.parseInt(id), scoreA, scoreB);
+            singleMatchRemote.updateScore(Integer.parseInt(id), scoreA, scoreB, match.getDateEnd());
         } else {
-            doubleMatchPersistentRemote.updateScore(Integer.parseInt(id), scoreA, scoreB);
+            doubleMatchPersistentRemote.updateScore(Integer.parseInt(id), scoreA, scoreB, match.getDateEnd());
         }
     }
 }

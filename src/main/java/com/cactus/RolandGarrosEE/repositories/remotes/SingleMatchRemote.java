@@ -3,11 +3,12 @@ package com.cactus.RolandGarrosEE.repositories.remotes;
 import com.cactus.RolandGarrosEE.entities.SingleMatch;
 
 import javax.ejb.Remote;
+import java.util.Date;
 import java.util.List;
 
 @Remote
 public interface SingleMatchRemote {
-   void updateScore(int id, String scoreA, String B);
+   void updateScore(int id, String scoreA, String B, Date dateEnd);
    void saveSingleMatch(SingleMatch singleMatch);
    void deleteSingleMatch(SingleMatch singleMatch);
    SingleMatch findSingleMatchById(int singleMatchId);
