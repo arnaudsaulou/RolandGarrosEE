@@ -63,7 +63,6 @@ public class AddMatchServlet extends BaseServlet {
         } catch (InvalidMatchException e) {
             req.setAttribute(Constantes.REQUEST_ATTR__ERROR_MSG, e.getMessage());
             this.initViewData(req, resp);
-            //resp.sendRedirect("../" + Constantes.URL_ADD_MATCH + "?" + Constantes.URL_PARAM_MATCH_TYPE + "=" + this.type + "&" + Constantes.URL_PARAM_GENDER + "=" + this.gender);
         }
     }
 
@@ -105,14 +104,7 @@ public class AddMatchServlet extends BaseServlet {
     }
 
     private void populateTeams() {
-        List<Team> teams;
-
-        if (gender.equals(Gender.MIXTE)) {
-            teams = teamPersistentRemote.allTeam();
-        } else {
-            teams = teamPersistentRemote.allTeamByGender(this.gender);
-        }
-
+        List<Team> teams = teamPersistentRemote.allTeamByGender(this.gender);
         this.attributes.put(Constantes.NEW_MATCH_FORM_FIELD_PART_A, teams);
         this.attributes.put(Constantes.NEW_MATCH_FORM_FIELD_PART_B, teams);
     }
@@ -133,16 +125,11 @@ public class AddMatchServlet extends BaseServlet {
     }
 
     private void tryToSaveMatch(HttpServletRequest req) throws InvalidMatchException {
-        // TODO
+
         String startDateString = this.getValue(req, Constantes.NEW_MATCH_FORM_FIELD_START_DATE);
 
-        Date startDate = null;
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        try {
-            startDate = formatter.parse(startDateString.replace("T"," "));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        Date startDate = this.getDateBegin(startDateString);
+
         Tournament tournament = this.getTournament(req);
         Referee referee = this.getReferee(req);
         Court court = this.getCourt(req);
@@ -164,7 +151,7 @@ public class AddMatchServlet extends BaseServlet {
 
         this.validateNewDoubleMatch(startDate, tournament, referee, court, teamList.get(0), teamList.get(1));
 
-        return new DoubleMatch(startDate, startDate, 0, 0, tournament, court, referee, teamList);
+        return new DoubleMatch(startDate, null, 0, 0, tournament, court, referee, teamList);
     }
 
     private SingleMatch constructSingleMatch(HttpServletRequest req, Date startDate, Tournament tournament, Referee referee, Court court) throws InvalidMatchException {
@@ -172,7 +159,18 @@ public class AddMatchServlet extends BaseServlet {
 
         this.validateNewSingleMatch(startDate, tournament, referee, court, playersList.get(0), playersList.get(1));
 
-        return new SingleMatch(startDate, startDate, 0, 0, tournament, court, referee, playersList);
+        return new SingleMatch(startDate, null, 0, 0, tournament, court, referee, playersList);
+    }
+
+    private Date getDateBegin(String startDateString) {
+        Date startDate = null;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        try {
+            startDate = formatter.parse(startDateString.replace("T"," "));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return startDate;
     }
 
     private Team getTeam(HttpServletRequest req, String field) throws InvalidMatchException, IllegalArgumentException {
