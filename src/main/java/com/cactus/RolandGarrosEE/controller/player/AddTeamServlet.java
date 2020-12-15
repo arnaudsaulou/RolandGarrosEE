@@ -13,10 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @WebServlet(name = "addEquipeServlet", value = "/equipes/ajouterEquipe")
 public class AddTeamServlet extends BaseServlet {
@@ -55,11 +52,26 @@ public class AddTeamServlet extends BaseServlet {
         Player playerA = playerPersistentRemote.findPlayerById(Integer.parseInt(idFirstPlayer));
         Player playerB = playerPersistentRemote.findPlayerById(Integer.parseInt(idSecondPlayer));
 
-        Set<Player> players = new HashSet<>();
+        List<Player> players = new ArrayList<>();
         players.add(playerA);
         players.add(playerB);
 
-        Team team = new Team(0, nameTeam, players, new HashSet<>());
+        Gender gender;
+        if(players.get(0).getGender() == Gender.HOMME){
+            if(players.get(1).getGender() == Gender.HOMME){
+                gender = Gender.HOMME;
+            } else {
+                gender = Gender.MIXTE;
+            }
+        } else {
+            if(players.get(1).getGender() == Gender.FEMME){
+                gender = Gender.FEMME;
+            } else {
+                gender = Gender.MIXTE;
+            }
+        }
+
+        Team team = new Team(0, nameTeam, gender, players);
 
         teamPersistentRemote.saveTeam(team);
     }
