@@ -1,5 +1,6 @@
 package com.cactus.RolandGarrosEE.repositories.implementation;
 
+import com.cactus.RolandGarrosEE.entities.Gender;
 import com.cactus.RolandGarrosEE.entities.Player;
 import com.cactus.RolandGarrosEE.repositories.remotes.PlayerPersistentRemote;
 
@@ -45,6 +46,18 @@ public class PlayerPersistentBean implements PlayerPersistentRemote {
         List<Player> players = null;
         try {
             players = entityManager.createQuery("SELECT DISTINCT P FROM Player P", Player.class)
+                    .getResultList();
+        } catch (NoResultException ignored) {
+        }
+        return players;
+    }
+
+    @Override
+    public List<Player> allPlayerByGender(Gender gender) {
+        List<Player> players = null;
+        try {
+            players = entityManager.createQuery("SELECT DISTINCT P FROM Player P WHERE P.gender = :gender", Player.class)
+                    .setParameter("gender", gender)
                     .getResultList();
         } catch (NoResultException ignored) {
         }
