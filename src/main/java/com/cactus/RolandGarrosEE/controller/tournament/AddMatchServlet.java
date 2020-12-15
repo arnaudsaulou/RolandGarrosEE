@@ -13,6 +13,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @WebServlet(name = "ajouterMatch", value = "/tournoi/ajouterMatch")
@@ -96,8 +98,15 @@ public class AddMatchServlet extends BaseServlet {
 
     private void tryToSaveMatch(HttpServletRequest req) throws InvalidMatchException {
         // TODO
-        // String startDate = this.getValue(req, Constantes.NEW_MATCH_FORM_FIELD_START_DATE);
-        Date startDate = new Date();
+        String startDateString = this.getValue(req, Constantes.NEW_MATCH_FORM_FIELD_START_DATE);
+
+        Date startDate = null;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        try {
+            startDate = formatter.parse(startDateString.replace("T"," "));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         Tournament tournament = this.getTournament(req);
         Referee referee = this.getReferee(req);
         Court court = this.getCourt(req);
@@ -116,9 +125,8 @@ public class AddMatchServlet extends BaseServlet {
 
             // TODO Replace after merge
             //this.validateNewSingleMatch(startDate, tournament, referee, court, playerA, playerB);
-
-            // TODO startDate / endDate
-            SingleMatch newSingleMatch = new SingleMatch(startDate, startDate, 0, 0, tournament, court, referee, playersList);
+            
+            SingleMatch newSingleMatch = new SingleMatch(startDate, null, 0, 0, tournament, court, referee, playersList);
             singleMatchRemote.saveSingleMatch(newSingleMatch);
         } else {
             Team teamA = this.getTeam(req, Constantes.NEW_MATCH_FORM_FIELD_PART_A);
@@ -130,8 +138,7 @@ public class AddMatchServlet extends BaseServlet {
 
             this.validateNewDoubleMatch(startDate, tournament, referee, court, teamA, teamB);
 
-            // TODO startDate / endDate
-            DoubleMatch newDoubleMatch = new DoubleMatch(startDate, startDate, 0, 0, tournament, court, referee, teamList);
+            DoubleMatch newDoubleMatch = new DoubleMatch(startDate, null, 0, 0, tournament, court, referee, teamList);
             doubleMatchPersistentRemote.addDoubleMatch(newDoubleMatch);
         }
 
