@@ -25,7 +25,7 @@
         <div class="form-group row">
             <label class="col-3 col-form-label">Classement</label>
             <div class="col-9">
-                <input class="form-control" type="number" min="0" placeholder="Classement mondial" name="actorRankings" required="required">
+                <input class="form-control" type="number" min="1" placeholder="Classement mondial" name="actorRankings" required="required">
             </div>
         </div>
         <div class="form-group row">
