@@ -157,10 +157,10 @@ VALUES (3, 3);
 -- INSERT INTO DOUBLEMATCH --
 
 INSERT INTO DOUBLEMATCH(datebegin, dateend, scorea, scoreb, referee_id, court_ID, tournament_id)
-VALUES ('2020-12-13 02:55:05', null, null, null, 4, 4, 2);
+VALUES ('2020-12-13 02:55:05', null, 0, 0, 4, 4, 2);
 
 INSERT INTO DOUBLEMATCH(datebegin, dateend, scorea, scoreb, referee_id, court_ID, tournament_id)
-VALUES ('2020-12-18 02:55:05', null, null, null, 2, 4, 2);
+VALUES ('2020-12-18 02:55:05', null, 0, 0, 2, 4, 2);
 
 -- INSERT INTO DOUBLEMATCH_TEAM --
 

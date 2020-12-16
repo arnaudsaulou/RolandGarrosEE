@@ -19,7 +19,7 @@ public class DoubleMatchPersistentBean implements DoubleMatchPersistentRemote {
     @Override
     public void updateScore(int id, String scoreA, String scoreB, Date dateEnd) {
         try {
-            entityManager.createQuery("update DoubleMatch dm set dm.scoreA = :scoreA, dm.scoreB = :scoreB, dm.dateEnd = :dateEnd WHERE dm.tournament.id = :id")
+            entityManager.createQuery("update DoubleMatch dm set dm.scoreA = :scoreA, dm.scoreB = :scoreB, dm.dateEnd = :dateEnd WHERE dm.id = :id")
                     .setParameter("id" , id)
                     .setParameter("scoreA" , Integer.parseInt(scoreA))
                     .setParameter("scoreB" , Integer.parseInt(scoreB))
