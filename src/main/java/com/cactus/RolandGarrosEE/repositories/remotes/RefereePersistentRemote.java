@@ -7,9 +7,10 @@ import java.util.List;
 
 @Remote
 public interface RefereePersistentRemote {
-    void saveArbitrator(Referee referee);
-    void deleteArbitrator(Referee referee);
-    Referee getArbitratorById(int referee);
-    List<Referee> allArbitrator();
+    void saveReferee(Referee referee);
+    void updateReferee(Referee referee);
+    void deleteReferee(Referee referee);
+    Referee findRefereeById(int referee);
+    List<Referee> allReferee();
     Referee getRefereeWithLastnameAndFirstname(String lastname, String firstname);
 }

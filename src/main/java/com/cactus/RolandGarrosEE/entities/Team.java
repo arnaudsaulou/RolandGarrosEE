@@ -1,5 +1,8 @@
 package com.cactus.RolandGarrosEE.entities;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,25 +15,29 @@ import java.util.Set;
 @Table(name = "TEAM")
 public class Team implements Serializable {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
-    @Column(name="ID")
+    @Column(name = "ID")
     private int id;
     @NotNull
-    @Column(name="NAME")
+    @Column(name = "NAME")
     private String name;
     @NotNull
     @Column(name = "GENDER")
     @Enumerated(EnumType.STRING)
     private Gender gender;
-    @ManyToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE}, fetch = FetchType.LAZY)
-    @JoinTable(name="team_player",
+    @ManyToMany(cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY)
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @JoinTable(name = "team_player",
             joinColumns = @JoinColumn(name = "team_id"),
             inverseJoinColumns = @JoinColumn(name = "player_id"))
-    @Size(min=2, max=2)
+    @Size(min = 2, max = 2)
     private List<Player> playersList;
+    @ManyToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE}, mappedBy = "teamsList", fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<DoubleMatch> doubleMatches;
 
-    public Team(){
+    public Team() {
     }
 
     public Team(@NotNull int id, @NotNull String name) {
@@ -75,5 +82,13 @@ public class Team implements Serializable {
 
     public void setPlayersList(List<Player> playersList) {
         this.playersList = playersList;
+    }
+
+    public List<DoubleMatch> getDoubleMatches() {
+        return doubleMatches;
+    }
+
+    public void setDoubleMatches(List<DoubleMatch> doubleMatches) {
+        this.doubleMatches = doubleMatches;
     }
 }

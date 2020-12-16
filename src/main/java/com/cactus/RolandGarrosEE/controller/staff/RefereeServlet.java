@@ -40,7 +40,7 @@ public class RefereeServlet extends BaseServlet {
     }
 
     private void getRefereesList(HttpServletRequest req){
-        List<Referee> refereesList = refereePersistentRemote.allArbitrator();
+        List<Referee> refereesList = refereePersistentRemote.allReferee();
         req.setAttribute(Constantes.REQUEST_ATTR_REFEREES_LIST,refereesList);
     }
 

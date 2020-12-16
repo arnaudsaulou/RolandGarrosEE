@@ -10,7 +10,8 @@ import java.util.List;
 public interface TeamPersistentRemote {
     void saveTeam(Team team);
     void deleteTeam(Team team);
-    Team getTeamById(int teamId);
+    void updateTeam(Team team);
+    Team findTeamById(int teamId);
     List<Team> allTeam();
     List<Team> allTeamByGender(Gender gender);
 }

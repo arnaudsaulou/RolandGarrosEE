@@ -58,7 +58,7 @@ public class AddRefereeServlet extends BaseServlet {
         String nationality = this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_NATIONALITY);
         this.validateNewReferee(firstname, lastname, nationality);
         Referee newReferee = new Referee(firstname, lastname, nationality);
-        refereePersistentRemote.saveArbitrator(newReferee);
+        refereePersistentRemote.saveReferee(newReferee);
     }
 
     private void validateNewReferee(String firstname, String lastname, String nationality) throws InvalidActorException {

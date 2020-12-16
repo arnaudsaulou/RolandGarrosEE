@@ -20,8 +20,10 @@ public class Constantes {
     public static final String VIEW_ADD_TEAM = "/pages/actors/addTeam.jsp";
     public static final String VIEW_PLAYERS = "/pages/grids/bodyGridPlayers.jsp";
     public static final String VIEW_TEAMS = "/pages/grids/bodyGridTeams.jsp";
+    public static final String VIEW_DETAILS_TEAM = "/pages/infosViews/infosTeam.jsp";
     public static final String VIEW_ADD_REFEREE = "/pages/actors/addReferee.jsp";
     public static final String VIEW_REFEREES = "/pages/grids/bodyGridReferees.jsp";
+    public static final String VIEW_DETAILS_REFEREE = "/pages/infosViews/infosReferee.jsp";
     public static final String VIEW_ADD_SINGLE_MATCH = "/pages/tournament/addSingleMatch.jsp";
     public static final String VIEW_ADD_DOUBLE_MATCH = "/pages/tournament/addDoubleMatch.jsp";
     public static final String VIEW_RESULT_SINGLE_MATCH = "/pages/tournament/resultSingleMatch.jsp";
@@ -79,10 +81,12 @@ public class Constantes {
     public static final String NEW_TEAM_FORM_FIELD_NAME = "teamName";
     public static final String NEW_TEAM_FORM_FIELD_PLAYER_A = "teamPlayerA";
     public static final String NEW_TEAM_FORM_FIELD_PLAYER_B = "teamPlayerB";
+    public static final String NEW_DETAILS_TEAM = "team";
     public static final String NEW_DETAILS_FORM_PLAYER = "joueur";
     public static final String NEW_DETAILS_UPDATE = "update";
     public static final String NEW_MATCH_ADD = "add";
     public static final String NEW_DETAILS_DELETE = "delete";
+    public static final String NEW_DETAILS_REFEREE = "referee";
 
     //endregion
 
@@ -111,8 +115,10 @@ public class Constantes {
     public static final String TITLE_PLAYER_DETAILS = "Details joueur";
     public static final String TITLE_ADD_PLAYER = "Ajouter joueur";
     public static final String TITLE_TEAMS = "Equipes";
+    public static final String TITLE_TEAMS_DETAILS = "Details Equipe";
     public static final String TITLE_ADD_TEAM = "Ajouter équipe";
     public static final String TITLE_REFEREES = "Arbitres";
+    public static final String TITLE_REFEREE_DETAILS = "Details Arbitre";
     public static final String TITLE_ADD_REFEREE = "Ajouter arbitre";
     public static final String TITLE_ADD_MATCH = "Ajouter match";
     public static final String TITLE_ADD_RESULT = "Ajouter résultat";
