@@ -1,5 +1,6 @@
 package com.cactus.RolandGarrosEE.repositories.implementation;
 
+import com.cactus.RolandGarrosEE.entities.Player;
 import com.cactus.RolandGarrosEE.entities.Referee;
 import com.cactus.RolandGarrosEE.repositories.remotes.RefereePersistentRemote;
 
@@ -48,5 +49,16 @@ public class RefereePersistentBean implements RefereePersistentRemote {
         } catch (NoResultException ignored) {
         }
         return referees;
+    }
+
+    public Referee getRefereeWithLastnameAndFirstname(String lastname, String firstname) {
+        Referee referee = null;
+        try {
+            referee = entityManager.createQuery("SELECT DISTINCT R FROM Referee R WHERE R.lastname = :lastname AND R.firstname = :firstname", Referee.class)
+                    .setParameter("lastname",lastname).setParameter("firstname", firstname)
+                    .getSingleResult();
+        } catch (NoResultException ignored) {
+        }
+        return referee;
     }
 }
