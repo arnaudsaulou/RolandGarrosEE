@@ -28,6 +28,7 @@ public class Constantes {
     public static final String VIEW_RESULT_DOUBLE_MATCH = "/pages/tournament/resultDoubleMatch.jsp";
     public static final String VIEW_USERS = "/pages/grids/bodyGridUser.jsp";
     public static final String VIEW_ADD_USER = "/pages/actors/addUser.jsp";
+    public static final String VIEW_DETAILS_PLAYER = "/pages/infosViews/infosPlayer.jsp";
 
     //endregion
 
@@ -42,6 +43,7 @@ public class Constantes {
     public static final String URL_TEAM = "equipes";
     public static final String URL_ADD_MATCH = "ajouterMatch";
     public static final String URL_TOURNAMENT = "tournoi";
+    public static final String URL_DETAILS_PLAYER = "joueur";
 
     //endregion
 
@@ -75,6 +77,9 @@ public class Constantes {
     public static final String NEW_TEAM_FORM_FIELD_NAME = "teamName";
     public static final String NEW_TEAM_FORM_FIELD_PLAYER_A = "teamPlayerA";
     public static final String NEW_TEAM_FORM_FIELD_PLAYER_B = "teamPlayerB";
+    public static final String NEW_DETAILS_FORM_PLAYER = "joueur";
+    public static final String NEW_DETAILS_UPDATE = "update";
+    public static final String NEW_DETAILS_DELETE = "delete";
 
     //endregion
 
@@ -87,6 +92,7 @@ public class Constantes {
     public static final String REQUEST_ATTR_USERS_LIST = "usersList";
     public static final String REQUEST_ATTR_TEAMS_LIST = "teamsList";
     public static final String REQUEST_ATTR_PLAYERS_LIST = "playersList";
+    public static final String REQUEST_ATTR_ID = "id";
     public static final String REQUEST_ATTR_SINGLE_MATCH_LIST = "singleMatchList";
     public static final String REQUEST_ATTR_DOUBLE_MATCH_LIST = "doubleMatchList";
     public static final String REQUEST_ATTR__ERROR_MSG = "errorMessage";
