@@ -5,6 +5,7 @@ import com.cactus.RolandGarrosEE.entities.Gender;
 import com.cactus.RolandGarrosEE.entities.Player;
 import com.cactus.RolandGarrosEE.repositories.remotes.PlayerPersistentRemote;
 import com.cactus.RolandGarrosEE.utils.Constantes;
+import com.cactus.RolandGarrosEE.utils.enums.UserRole;
 import com.cactus.RolandGarrosEE.utils.exceptions.InvalidActorException;
 import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserException;
 
@@ -23,22 +24,22 @@ public class AddPlayerServlet extends BaseServlet {
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            this.checkAuthentication(req);
+            this.checkAuthentication(req, UserRole.ORGANIZER);
             this.setupViewAttributes(req);
             this.getServletContext().getRequestDispatcher(Constantes.VIEW_ADD_PLAYER).forward(req, resp);
         } catch (UnauthenticatedUserException e) {
-            resp.sendRedirect("../" + Constantes.URL_LOGIN);
+            resp.sendRedirect("../" + Constantes.URL_LOGOUT);
         }
     }
 
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
-            this.checkAuthentication(request);
+            this.checkAuthentication(request, UserRole.ORGANIZER);
             this.tryToSavePlayer(request);
             response.sendRedirect("../" + Constantes.URL_PLAYERS);
         } catch (UnauthenticatedUserException e) {
-            response.sendRedirect("../" + Constantes.URL_LOGIN);
+            response.sendRedirect("../" + Constantes.URL_LOGOUT);
         } catch (InvalidActorException e) {
             request.setAttribute("errorMessage", e.getMessage());
             this.getServletContext().getRequestDispatcher(Constantes.VIEW_ADD_PLAYER).forward(request, response);
@@ -72,7 +73,7 @@ public class AddPlayerServlet extends BaseServlet {
         if (playerPersistentRemote.allRankingsByGender(gender).contains(rankings)) {
             throw new InvalidActorException("Ce classement est déjà attribué à un autre joueur");
         }
-        if (playerPersistentRemote.getPlayerWithLastnameAndFirstname(lastname, firstname) !=  null){
+        if (playerPersistentRemote.getPlayerWithLastnameAndFirstname(lastname, firstname) != null) {
             throw new InvalidActorException("Ce joueur a déjà été ajouté");
         }
 

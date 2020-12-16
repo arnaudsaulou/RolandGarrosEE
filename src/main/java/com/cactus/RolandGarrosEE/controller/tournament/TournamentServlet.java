@@ -6,6 +6,7 @@ import com.cactus.RolandGarrosEE.repositories.remotes.DoubleMatchPersistentRemot
 import com.cactus.RolandGarrosEE.repositories.remotes.SingleMatchRemote;
 import com.cactus.RolandGarrosEE.repositories.remotes.TournamentPersistentRemote;
 import com.cactus.RolandGarrosEE.utils.Constantes;
+import com.cactus.RolandGarrosEE.utils.enums.UserRole;
 import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserException;
 
 import javax.ejb.EJB;
@@ -32,10 +33,10 @@ public class TournamentServlet extends BaseServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
-            this.checkAuthentication(request);
+            this.checkAuthentication(request, UserRole.JOURNALIST);
             this.selectMatchType(request, response);
         } catch (UnauthenticatedUserException e) {
-            response.sendRedirect(Constantes.URL_LOGIN);
+            response.sendRedirect(Constantes.URL_LOGOUT);
         }
     }
 

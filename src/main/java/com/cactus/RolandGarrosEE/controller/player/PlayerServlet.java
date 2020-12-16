@@ -4,6 +4,7 @@ import com.cactus.RolandGarrosEE.controller.BaseServlet;
 import com.cactus.RolandGarrosEE.entities.Player;
 import com.cactus.RolandGarrosEE.repositories.remotes.PlayerPersistentRemote;
 import com.cactus.RolandGarrosEE.utils.Constantes;
+import com.cactus.RolandGarrosEE.utils.enums.UserRole;
 import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserException;
 
 import javax.ejb.EJB;
@@ -22,12 +23,12 @@ public class PlayerServlet extends BaseServlet {
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try{
-            this.checkAuthentication(req);
+            this.checkAuthentication(req, UserRole.ORGANIZER);
             this.setupViewAttributes(req);
             this.getPlayer(req);
             this.getServletContext().getRequestDispatcher(Constantes.VIEW_PLAYERS).forward(req, resp);
         } catch (UnauthenticatedUserException e){
-            resp.sendRedirect(Constantes.URL_LOGIN);
+            resp.sendRedirect(Constantes.URL_LOGOUT);
         }
     }
 

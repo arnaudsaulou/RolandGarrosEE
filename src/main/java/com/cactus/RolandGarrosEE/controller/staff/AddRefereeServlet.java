@@ -4,6 +4,7 @@ import com.cactus.RolandGarrosEE.controller.BaseServlet;
 import com.cactus.RolandGarrosEE.utils.Constantes;
 import com.cactus.RolandGarrosEE.entities.Referee;
 import com.cactus.RolandGarrosEE.repositories.remotes.RefereePersistentRemote;
+import com.cactus.RolandGarrosEE.utils.enums.UserRole;
 import com.cactus.RolandGarrosEE.utils.exceptions.InvalidActorException;
 import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserException;
 
@@ -22,21 +23,21 @@ public class AddRefereeServlet extends BaseServlet {
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            this.checkAuthentication(req);
+            this.checkAuthentication(req, UserRole.ORGANIZER);
             this.setupViewAttributes(req);
             this.getServletContext().getRequestDispatcher(Constantes.VIEW_ADD_REFEREE).forward(req, resp);
         } catch (UnauthenticatedUserException e) {
-            resp.sendRedirect("../" + Constantes.URL_LOGIN);
+            resp.sendRedirect("../" + Constantes.URL_LOGOUT);
         }
     }
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         try {
-            this.checkAuthentication(req);
+            this.checkAuthentication(req, UserRole.ORGANIZER);
             this.tryToSaveReferee(req);
             resp.sendRedirect("../" + Constantes.URL_REFEREES);
         } catch (UnauthenticatedUserException e) {
-            resp.sendRedirect("../" + Constantes.URL_LOGIN);
+            resp.sendRedirect("../" + Constantes.URL_LOGOUT);
         } catch (InvalidActorException e) {
             req.setAttribute("errorMessage", e.getMessage());
             this.getServletContext().getRequestDispatcher(Constantes.VIEW_ADD_REFEREE).forward(req, resp);

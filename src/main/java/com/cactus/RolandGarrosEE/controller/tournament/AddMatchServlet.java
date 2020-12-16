@@ -4,6 +4,7 @@ import com.cactus.RolandGarrosEE.controller.BaseServlet;
 import com.cactus.RolandGarrosEE.entities.*;
 import com.cactus.RolandGarrosEE.repositories.remotes.*;
 import com.cactus.RolandGarrosEE.utils.Constantes;
+import com.cactus.RolandGarrosEE.utils.enums.UserRole;
 import com.cactus.RolandGarrosEE.utils.exceptions.InvalidMatchException;
 import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserException;
 
@@ -46,20 +47,20 @@ public class AddMatchServlet extends BaseServlet {
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            this.checkAuthentication(req);
+            this.checkAuthentication(req, UserRole.ORGANIZER);
             this.initViewData(req, resp);
         } catch (UnauthenticatedUserException e) {
-            resp.sendRedirect("../" + Constantes.URL_LOGIN);
+            resp.sendRedirect("../" + Constantes.URL_LOGOUT);
         }
     }
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         try {
-            this.checkAuthentication(req);
+            this.checkAuthentication(req, UserRole.ORGANIZER);
             this.tryToSaveMatch(req);
             resp.sendRedirect("../" + Constantes.URL_TOURNAMENT + "?" + Constantes.URL_PARAM_MATCH_TYPE + "=" + this.type + "&" + Constantes.URL_PARAM_GENDER + "=" + this.gender);
         } catch (UnauthenticatedUserException e) {
-            resp.sendRedirect("../" + Constantes.URL_LOGIN);
+            resp.sendRedirect("../" + Constantes.URL_LOGOUT);
         } catch (InvalidMatchException e) {
             req.setAttribute(Constantes.REQUEST_ATTR__ERROR_MSG, e.getMessage());
             this.initViewData(req, resp);

@@ -34,9 +34,9 @@
             <div class="col-9">
                 <select class="form-control" name="actorStatus" required>
                     <option disabled selected value>-- Choisir un role --</option>
-                    <option value="0">Administrateur</option>
-                    <option value="1">Organisateur</option>
-                    <option value="2">Journaliste</option>
+                    <option value="ADMIN">Administrateur</option>
+                    <option value="ORGANIZER">Organisateur</option>
+                    <option value="JOURNALIST">Journaliste</option>
                 </select>
             </div>
         </div>

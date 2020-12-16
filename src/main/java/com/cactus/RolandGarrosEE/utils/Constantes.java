@@ -38,6 +38,7 @@ public class Constantes {
 
     public static final String URL_HOME = "tournoi?type=Single&genre=Femme";
     public static final String URL_LOGIN = "connexion";
+    public static final String URL_LOGOUT = "deconnexion";
     public static final String URL_REFEREES = "arbitres";
     public static final String URL_USERS = "utilisateurs";
     public static final String URL_PLAYERS = "joueurs";

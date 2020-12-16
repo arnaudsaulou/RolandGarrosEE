@@ -27,16 +27,20 @@ public class User implements Serializable {
     @NotNull
     @Column(name="STATUS")
     private int status;
+    @NotNull
+    @Column(name="TOKEN")
+    private String token;
 
     public User() {
     }
 
-    public User(String firstname, String lastname, String mail, String password, int status) {
+    public User(String firstname, String lastname, String mail, String password, int status, String token) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.mail = mail;
         this.password = password;
         this.status = status;
+        this.token = token;
     }
 
     public int getId() {
@@ -85,5 +89,13 @@ public class User implements Serializable {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
