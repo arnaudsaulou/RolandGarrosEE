@@ -4,6 +4,7 @@ import com.cactus.RolandGarrosEE.controller.BaseServlet;
 import com.cactus.RolandGarrosEE.entities.Referee;
 import com.cactus.RolandGarrosEE.repositories.remotes.RefereePersistentRemote;
 import com.cactus.RolandGarrosEE.utils.Constantes;
+import com.cactus.RolandGarrosEE.utils.enums.UserRole;
 import com.cactus.RolandGarrosEE.utils.exceptions.InvalidActorException;
 import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserException;
 import com.cactus.RolandGarrosEE.utils.exceptions.UserNotFoundException;
@@ -23,7 +24,7 @@ public class DetailsRefereeServlet extends BaseServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         try {
-            this.checkAuthentication(req);
+            this.checkAuthentication(req, UserRole.ORGANIZER);
             this.setupViewAttributes(req);
             this.setRefereeInView(req);
             this.getServletContext().getRequestDispatcher(Constantes.VIEW_DETAILS_REFEREE).forward(req, resp);
@@ -37,7 +38,7 @@ public class DetailsRefereeServlet extends BaseServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         try {
-            this.checkAuthentication(req);
+            this.checkAuthentication(req, UserRole.ORGANIZER);
 
             String id = this.getValue(req, Constantes.REQUEST_ATTR_ID);
             Referee referee = refereePersistentRemote.findRefereeById(Integer.parseInt(id));

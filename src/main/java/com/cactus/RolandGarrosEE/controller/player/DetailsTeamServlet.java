@@ -7,6 +7,7 @@ import com.cactus.RolandGarrosEE.entities.Team;
 import com.cactus.RolandGarrosEE.repositories.remotes.PlayerPersistentRemote;
 import com.cactus.RolandGarrosEE.repositories.remotes.TeamPersistentRemote;
 import com.cactus.RolandGarrosEE.utils.Constantes;
+import com.cactus.RolandGarrosEE.utils.enums.UserRole;
 import com.cactus.RolandGarrosEE.utils.exceptions.InvalidActorException;
 import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserException;
 import com.cactus.RolandGarrosEE.utils.exceptions.UserNotFoundException;
@@ -31,7 +32,7 @@ public class DetailsTeamServlet extends BaseServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         try {
-            this.checkAuthentication(req);
+            this.checkAuthentication(req, UserRole.ORGANIZER);
             this.setupViewAttributes(req);
             this.setTeamInView(req);
             this.getServletContext().getRequestDispatcher(Constantes.VIEW_DETAILS_TEAM).forward(req, resp);
@@ -45,7 +46,7 @@ public class DetailsTeamServlet extends BaseServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         try {
-            this.checkAuthentication(req);
+            this.checkAuthentication(req, UserRole.ORGANIZER);
 
             String id = this.getValue(req, Constantes.REQUEST_ATTR_ID);
             Team team = teamPersistentRemote.findTeamById(Integer.parseInt(id));

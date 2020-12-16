@@ -24,26 +24,14 @@ public class LoginServlet extends BaseServlet {
     UserPeristentRemote userPeristentRemote;
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        //TODO Remove bypass
-        String bypassConnection = this.getValue(request, "bypassConnection");
-        if (bypassConnection != null) {
-            try {
-                this.saveUserInfoIntoSession(request, this.tryToLogUser(request, true));
-                response.sendRedirect(Constantes.URL_HOME);
-            } catch (UserNotFoundException | InvalidPasswordException e) {
-                e.printStackTrace();
-            }
-        } else {
-            this.getServletContext().getRequestDispatcher(Constantes.VIEW_LOGIN).forward(request, response);
-        }
+        this.getServletContext().getRequestDispatcher(Constantes.VIEW_LOGIN).forward(request, response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
 
             //TODO Remove bypass
-            User user = this.tryToLogUser(request, false);
+            User user = this.tryToLogUser(request);
 
             this.saveUserInfoIntoSession(request, user);
             response.sendRedirect(Constantes.URL_HOME);
@@ -54,25 +42,16 @@ public class LoginServlet extends BaseServlet {
 
     }
 
-    private User tryToLogUser(HttpServletRequest request, boolean bypassConnection) throws UserNotFoundException, InvalidPasswordException {
+    private User tryToLogUser(HttpServletRequest request) throws UserNotFoundException, InvalidPasswordException {
         String mail = this.getValue(request, Constantes.LOGIN_FORM_FIELD_MAIL);
         String password = this.getValue(request, Constantes.LOGIN_FORM_FIELD_PASSWORD);
 
-        User user;
-
-        //TODO Remove bypass
-        if (bypassConnection)
-            user = new User("firstname", "lastname", "mail", "password", 0, "");
-        else
-            user = this.getUserFromDatabase(mail, password);
-
-        return user;
+        return this.getUserFromDatabase(mail, password);
     }
 
     private User getUserFromDatabase(String mail, String password) throws UserNotFoundException, InvalidPasswordException {
         boolean connectionOk = false;
 
-        // TODO
         User user = userPeristentRemote.findUserByMail(mail);
 
         if (user == null)

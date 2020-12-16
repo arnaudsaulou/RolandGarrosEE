@@ -1,23 +1,8 @@
-INSERT INTO  USER(firstname, lastname, mail, password, status)
-VALUES ('Cloe', 'RICARD', 'cloericard@gmail.com', 'cloemp',  0);
+-- INSERT INTO USER --
+INSERT INTO rolandgarros.user (ID, FIRSTNAME, LASTNAME, MAIL, PASSWORD, STATUS, TOKEN) VALUES (5, 'Administrateur', 'Administrateur', 'admin@admin.fr', 'LYpOilX6TM1yfr3RV4kde+X3UsDEViVuL7L++7nRE6gWQRat2veEFErk9J4uLLJ+yQRCbOxkZWXP3drb7oG2Pw==', 0, 'TWpRAXvTHpOwBM6eC/E2XpldN/K4rtikgU5oi+ZE9QvfOnW1rUhfyGl6DFY188zH/s1f9QDTnE7vuAu3a8N4pA==');
+INSERT INTO rolandgarros.user (ID, FIRSTNAME, LASTNAME, MAIL, PASSWORD, STATUS, TOKEN) VALUES (6, 'Organisateur', 'Organisateur', 'orga@orga.fr', 'kRY73ZTRiGD/kni3KkSoMXfmsREV8BBEtdbCRHz2ABu/yrkKzkPvrMiWlmIL4DmxvP3k8qgnBFhw5D2lScNrMQ==', 1, 'mM2N95ek6Yw1mAiUSEZnz+Zw4X7JFmm/8ygQppXPof3llnr1DR1ua3N586VHUzUORfPYALBi56PxuwKEeGa6gw==');
+INSERT INTO rolandgarros.user (ID, FIRSTNAME, LASTNAME, MAIL, PASSWORD, STATUS, TOKEN) VALUES (7, 'Journaliste', 'Journaliste', 'jour@jour.fr', '66bYPs1jsCHJuNrP55AOSFqCXHS3b1T/6O5tKdFMobND2gVpjYgFhjrLN3ZQPr13lS/TDwbQA40TRVCyWL1XNg==', 2, 'esEjp9BrDNmuSJ4fFb9RnckZm7dw/VW3JO/yRp8UD/yYUDyjYk5LzyCt/bsKNY21tZ5M2haOZ5Gh9f4HA3khpg==');
 
-INSERT INTO  USER(firstname, lastname, mail, password, status)
-VALUES ('Arnaud', 'SAULOU', 'arnaudsauloud@gmail.com', 'arnaudmp',  1);
-
-INSERT INTO  USER(firstname, lastname, mail, password, status)
-VALUES ('Pierre', 'LEMAIGRE', 'pierrelemaigre@gmail.com', 'pierremp',  1);
-
-INSERT INTO  USER(firstname, lastname, mail, password, status)
-VALUES ('Enzo', 'CARVALHO', 'enzocarvalho@gmail.com', 'enzomp',  1);
-
-INSERT INTO  USER(firstname, lastname, mail, password, status)
-VALUES ('Henri', 'VALLETTE', 'henrivallette@gmail.com', 'henrimp',  1);
-
-INSERT INTO  USER(firstname, lastname, mail, password, status)
-VALUES ('Patrick', 'BALKANY', 'journaliste@gmail.com', 'j',  1);
-
-INSERT INTO  USER(firstname, lastname, mail, password, status)
-VALUES ('Billy', 'CRAWFORD', 'organisateur@gmail.com', 'o',  1);
 -- INSERT INTO PLAYER --
 
 INSERT INTO PLAYER(firstname, lastname, nationality, rankings, gender)
