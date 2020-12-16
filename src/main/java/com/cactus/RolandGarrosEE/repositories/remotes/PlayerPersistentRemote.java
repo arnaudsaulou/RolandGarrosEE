@@ -15,5 +15,5 @@ public interface PlayerPersistentRemote {
     List<Player> allPlayer();
     List<Player> allPlayerByGender(Gender gender);
     List<Integer> allRankingsByGender(Gender gender);
-    Player getLastname(String lastname);
+    Player getPlayerWithLastnameAndFirstname(String lastname, String firstname);
 }

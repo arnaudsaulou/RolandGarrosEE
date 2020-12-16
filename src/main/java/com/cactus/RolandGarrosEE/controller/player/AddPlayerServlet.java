@@ -72,6 +72,9 @@ public class AddPlayerServlet extends BaseServlet {
         if (playerPersistentRemote.allRankingsByGender(gender).contains(rankings)) {
             throw new InvalidActorException("Ce classement est déjà attribué à un autre joueur");
         }
+        if (playerPersistentRemote.getPlayerWithLastnameAndFirstname(lastname, firstname) !=  null){
+            throw new InvalidActorException("Ce joueur a déjà été ajouté");
+        }
 
     }
 
