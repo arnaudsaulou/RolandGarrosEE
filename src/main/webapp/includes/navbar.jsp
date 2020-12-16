@@ -65,17 +65,13 @@
                         </a>
                     </li>
                 </c:if>
-                <li class="nav-item">
-                    <a class="text-decoration-none" href="${pageContext.request.contextPath}/deconnexion">
-                        <div>
-                            <div class="d-inline align-middle text-right">
-                                <h4><c:out value='${sessionScope.userSession.firstname}'/></h4>
-                                <h6>Deconnexion</h6>
-                            </div>
-                        </div>
-                    </a>
-                </li>
             </ul>
+            <a class="text-decoration-none" href="${pageContext.request.contextPath}/deconnexion">
+                <div class="d-inline align-middle text-right">
+                    <h4><c:out value='${sessionScope.userSession.firstname}'/></h4>
+                    <h6>Deconnexion</h6>
+                </div>
+            </a>
         </div>
     </c:if>
 </nav>

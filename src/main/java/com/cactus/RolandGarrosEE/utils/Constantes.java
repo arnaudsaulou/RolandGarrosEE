@@ -43,7 +43,7 @@ public class Constantes {
     public static final String URL_TEAM = "equipes";
     public static final String URL_ADD_MATCH = "ajouterMatch";
     public static final String URL_TOURNAMENT = "tournoi";
-    public static final String URL_DETAILS_PLAYER = "joueur";
+    public static final String URL_DETAILS_PLAYER = "detailsJoueur";
 
     //endregion
 
