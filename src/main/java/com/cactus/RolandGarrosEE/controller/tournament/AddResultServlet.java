@@ -50,9 +50,9 @@ public class AddResultServlet extends BaseServlet {
             this.propagateAttributesToRequest(req);
 
             if (typeTournament.equals(TypeTournament.SINGLE)) {
-                this.getServletContext().getRequestDispatcher(Constantes.VIEW_RESULT_DOUBLE_MATCH).forward(req, resp);
-            } else {
                 this.getServletContext().getRequestDispatcher(Constantes.VIEW_RESULT_SINGLE_MATCH).forward(req, resp);
+            } else {
+                this.getServletContext().getRequestDispatcher(Constantes.VIEW_RESULT_DOUBLE_MATCH).forward(req, resp);
             }
 
         } catch (UnauthenticatedUserException e) {
