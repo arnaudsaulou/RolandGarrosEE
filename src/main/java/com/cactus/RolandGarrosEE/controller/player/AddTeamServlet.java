@@ -5,6 +5,7 @@ import com.cactus.RolandGarrosEE.entities.*;
 import com.cactus.RolandGarrosEE.repositories.remotes.PlayerPersistentRemote;
 import com.cactus.RolandGarrosEE.repositories.remotes.TeamPersistentRemote;
 import com.cactus.RolandGarrosEE.utils.Constantes;
+import com.cactus.RolandGarrosEE.utils.enums.UserRole;
 import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserException;
 
 import javax.ejb.EJB;
@@ -25,22 +26,22 @@ public class AddTeamServlet extends BaseServlet {
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            this.checkAuthentication(req);
+            this.checkAuthentication(req, UserRole.ORGANIZER);
             this.setupViewAttributes(req);
             this.getPlayersList(req);
             this.getServletContext().getRequestDispatcher(Constantes.VIEW_ADD_TEAM).forward(req, resp);
         } catch (UnauthenticatedUserException e) {
-            resp.sendRedirect("../" + Constantes.URL_LOGIN);
+            resp.sendRedirect("../" + Constantes.URL_LOGOUT);
         }
     }
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
-            this.checkAuthentication(req);
+            this.checkAuthentication(req, UserRole.ORGANIZER);
             this.tryToTeamMatch(req);
             resp.sendRedirect("../" + Constantes.URL_TEAM);
         } catch (UnauthenticatedUserException e) {
-            resp.sendRedirect("../" + Constantes.URL_LOGIN);
+            resp.sendRedirect("../" + Constantes.URL_LOGOUT);
         }
     }
 

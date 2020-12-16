@@ -24,24 +24,23 @@ public class AddUserServlet extends BaseServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         try {
-            this.checkAuthentication(request);
+            this.checkAuthentication(request, UserRole.ADMIN);
             this.setupViewAttributes(request);
             this.getServletContext().getRequestDispatcher(Constantes.VIEW_ADD_USER).forward(request, response);
         } catch (UnauthenticatedUserException e) {
-            response.sendRedirect("../" + Constantes.URL_LOGIN);
+            response.sendRedirect("../" + Constantes.URL_LOGOUT);
         }
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
-            this.checkAuthentication(request);
+            this.checkAuthentication(request, UserRole.ADMIN);
             this.tryToSaveUser(request);
             response.sendRedirect("../" + Constantes.URL_USERS);
         } catch (UnauthenticatedUserException e) {
-            response.sendRedirect("../" + Constantes.URL_LOGIN);
+            response.sendRedirect("../" + Constantes.URL_LOGOUT);
         } catch (InvalidActorException e) {
             request.setAttribute("errorMessage", e.getMessage());
-            //response.sendRedirect(Constantes.URL_ADD_USER);
             this.getServletContext().getRequestDispatcher(Constantes.VIEW_ADD_USER).forward(request, response);
         }
     }
@@ -59,14 +58,15 @@ public class AddUserServlet extends BaseServlet {
         String lastname = this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_LASTNAME);
         String mail = this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_MAIL);
         String password = this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_PASSWORD);
-        int status = Integer.parseInt(this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_STATUS));
-        this.validateNewUser(firstname, lastname, mail, password, status);
+        UserRole role = UserRole.valueOf(this.getValue(req, Constantes.NEW_ACTOR_FORM_FIELD_STATUS));
+        this.validateNewUser(firstname, lastname, mail, password, role.ordinal());
         if (userPeristentRemote.allMails().contains(mail)){
             throw new InvalidActorException("Ce mail est déjà utilisé");
         }
         Optional<String> hashedPassword = PasswordUtils.hashPassword(password);
         if (hashedPassword.isPresent()) {
-            User newUser = new User(firstname, lastname, mail, hashedPassword.get(), status);
+            String token = PasswordUtils.generateToken(mail, role);
+            User newUser = new User(firstname, lastname, mail, hashedPassword.get(), role.ordinal(), token);
             userPeristentRemote.saveUser(newUser);
         } else {
             throw new InvalidActorException();

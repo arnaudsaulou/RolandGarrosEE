@@ -1,7 +1,11 @@
 package com.cactus.RolandGarrosEE.controller;
 
+import com.cactus.RolandGarrosEE.entities.User;
 import com.cactus.RolandGarrosEE.utils.Constantes;
+import com.cactus.RolandGarrosEE.utils.PasswordUtils;
+import com.cactus.RolandGarrosEE.utils.enums.UserRole;
 import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserException;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -16,7 +20,7 @@ public class BaseServlet extends HttpServlet {
         breadcrumbs.add(newBreadcrumbs);
     }
 
-    protected void resetBreadcrumbs(){
+    protected void resetBreadcrumbs() {
         this.breadcrumbs.clear();
     }
 
@@ -25,8 +29,31 @@ public class BaseServlet extends HttpServlet {
         request.setAttribute(Constantes.REQUEST_ATTR_BREADCRUMBS, this.breadcrumbs);
     }
 
-    protected void checkAuthentication(HttpServletRequest request) throws UnauthenticatedUserException {
-        if(request.getSession().getAttribute(Constantes.SESSION_USER) == null)
+    protected void checkAuthentication(HttpServletRequest request, UserRole role) throws UnauthenticatedUserException {
+        User user = (User) request.getSession().getAttribute(Constantes.SESSION_USER);
+
+        if (user == null)
+            throw new UnauthenticatedUserException();
+
+        ArrayList<String> tokens = new ArrayList<>();
+        switch (role) {
+            case ADMIN:
+                tokens.add(PasswordUtils.generateToken(user.getMail(), UserRole.ADMIN));
+                break;
+            case ORGANIZER:
+                tokens.add(PasswordUtils.generateToken(user.getMail(), UserRole.ADMIN));
+                tokens.add(PasswordUtils.generateToken(user.getMail(), UserRole.ORGANIZER));
+                break;
+            case JOURNALIST:
+                tokens.add(PasswordUtils.generateToken(user.getMail(), UserRole.ADMIN));
+                tokens.add(PasswordUtils.generateToken(user.getMail(), UserRole.ORGANIZER));
+                tokens.add(PasswordUtils.generateToken(user.getMail(), UserRole.JOURNALIST));
+                break;
+            default:
+                throw new UnauthenticatedUserException();
+        }
+
+        if (!this.checkToken(tokens, user))
             throw new UnauthenticatedUserException();
     }
 
@@ -37,6 +64,15 @@ public class BaseServlet extends HttpServlet {
         } else {
             return valeur;
         }
+    }
+
+    private boolean checkToken(ArrayList<String> tokens, User user) {
+        for (String token : tokens) {
+            if (user.getToken().equals(token)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

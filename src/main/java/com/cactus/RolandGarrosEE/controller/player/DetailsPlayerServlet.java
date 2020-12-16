@@ -5,6 +5,7 @@ import com.cactus.RolandGarrosEE.entities.Gender;
 import com.cactus.RolandGarrosEE.entities.Player;
 import com.cactus.RolandGarrosEE.repositories.remotes.PlayerPersistentRemote;
 import com.cactus.RolandGarrosEE.utils.Constantes;
+import com.cactus.RolandGarrosEE.utils.enums.UserRole;
 import com.cactus.RolandGarrosEE.utils.exceptions.InvalidActorException;
 import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserException;
 import com.cactus.RolandGarrosEE.utils.exceptions.UserNotFoundException;
@@ -25,12 +26,12 @@ public class DetailsPlayerServlet extends BaseServlet {
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try{
-            this.checkAuthentication(req);
+            this.checkAuthentication(req, UserRole.ORGANIZER);
             this.setupViewAttributes(req);
             this.getPlayersList(req);
             this.getServletContext().getRequestDispatcher(Constantes.VIEW_DETAILS_PLAYER).forward(req, resp);
         } catch (UnauthenticatedUserException e){
-            resp.sendRedirect(Constantes.URL_LOGIN);
+            resp.sendRedirect(Constantes.URL_LOGOUT);
         } catch (UserNotFoundException e) {
             e.printStackTrace();
         }
@@ -38,7 +39,7 @@ public class DetailsPlayerServlet extends BaseServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
-            this.checkAuthentication(request);
+            this.checkAuthentication(request, UserRole.ORGANIZER);
 
             String id = this.getValue(request, Constantes.REQUEST_ATTR_ID);
             Player player = playerPersistentRemote.findPlayerById(Integer.parseInt(id));
@@ -51,7 +52,7 @@ public class DetailsPlayerServlet extends BaseServlet {
 
             response.sendRedirect(Constantes.URL_PLAYERS);
         } catch (UnauthenticatedUserException e) {
-            response.sendRedirect(Constantes.URL_LOGIN);
+            response.sendRedirect(Constantes.URL_LOGOUT);
         } catch (InvalidActorException e) {
             request.setAttribute("errorMessage", e.getMessage());
             this.getServletContext().getRequestDispatcher(Constantes.VIEW_DETAILS_PLAYER).forward(request, response);

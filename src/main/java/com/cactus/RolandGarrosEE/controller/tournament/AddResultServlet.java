@@ -5,7 +5,9 @@ import com.cactus.RolandGarrosEE.entities.*;
 import com.cactus.RolandGarrosEE.repositories.remotes.DoubleMatchPersistentRemote;
 import com.cactus.RolandGarrosEE.repositories.remotes.SingleMatchRemote;
 import com.cactus.RolandGarrosEE.utils.Constantes;
+import com.cactus.RolandGarrosEE.utils.enums.UserRole;
 import com.cactus.RolandGarrosEE.utils.exceptions.InvalidActorException;
+import com.cactus.RolandGarrosEE.utils.exceptions.InvalidMatchException;
 import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserException;
 import com.sun.xml.bind.v2.runtime.unmarshaller.XsiNilLoader;
 
@@ -36,7 +38,7 @@ public class AddResultServlet extends BaseServlet {
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            this.checkAuthentication(req);
+            this.checkAuthentication(req, UserRole.ORGANIZER);
             this.setupViewAttributes(req);
 
             this.typeTournament = this.getTournamentTypeFromURL(req);
@@ -56,13 +58,13 @@ public class AddResultServlet extends BaseServlet {
             }
 
         } catch (UnauthenticatedUserException e) {
-            resp.sendRedirect("../" + Constantes.URL_LOGIN);
+            resp.sendRedirect("../" + Constantes.URL_LOGOUT);
         }
     }
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
-            this.checkAuthentication(req);
+            this.checkAuthentication(req, UserRole.ORGANIZER);
             this.setupViewAttributes(req);
 
             Match match = getMatch(req);
@@ -74,8 +76,8 @@ public class AddResultServlet extends BaseServlet {
             }
 
             resp.sendRedirect("../" + Constantes.URL_TOURNAMENT + "?" + Constantes.URL_PARAM_MATCH_TYPE + "=" + this.typeTournament + "&" + Constantes.URL_PARAM_GENDER + "=" + this.gender);
-        } catch (UnauthenticatedUserException | InvalidActorException e) {
-            resp.sendRedirect("../" + Constantes.URL_LOGIN);
+        } catch (UnauthenticatedUserException e) {
+            resp.sendRedirect("../" + Constantes.URL_LOGOUT);
         }
     }
 
@@ -101,7 +103,7 @@ public class AddResultServlet extends BaseServlet {
         return TypeTournament.getTypeTournamentFromString(matchTypeString);
     }
 
-    private Match getMatch(HttpServletRequest req){
+    private Match getMatch(HttpServletRequest req) {
         int matchId = this.getMatchId(req);
 
         TypeTournament tournamentType = this.getTournamentType(req);
@@ -140,7 +142,7 @@ public class AddResultServlet extends BaseServlet {
         }
     }
 
-    private void tryToDeleteMatch(HttpServletRequest req, Match match) throws InvalidActorException {
+    private void tryToDeleteMatch(HttpServletRequest req, Match match) {
         if (match instanceof SingleMatch) {
             singleMatchRemote.deleteSingleMatch((SingleMatch) match);
         } else {
@@ -157,7 +159,7 @@ public class AddResultServlet extends BaseServlet {
 
     private int getMatchId(HttpServletRequest req) {
         String idMatchString = this.getValue(req, Constantes.URL_PARAM_MATCH_ID);
-        if(idMatchString == null)
+        if (idMatchString == null)
             throw new IllegalArgumentException("Numéro de match non renseignée");
         return Integer.parseInt(idMatchString);
     }

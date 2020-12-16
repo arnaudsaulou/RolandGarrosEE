@@ -1,5 +1,7 @@
 package com.cactus.RolandGarrosEE.utils;
 
+import com.cactus.RolandGarrosEE.utils.enums.UserRole;
+
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.NoSuchAlgorithmException;
@@ -15,7 +17,11 @@ public class PasswordUtils {
     private static final String SALT = "DARMFcJcJDeNMmNMLkZN4rSnHV2OQPDd27yi5fYQ77r2vKTa";
     private static final String ALGORITHM = "PBKDF2WithHmacSHA512";
 
-    public static Optional<String> hashPassword (String password) {
+    private static final String TOKEN_KEY_ADMIN = "NfheHLfhUzhdShfHfMcmzJFHv";
+    private static final String TOKEN_KEY_ORGANIZER = "JOFJoOJIZfdmMDfcZedghOKFK";
+    private static final String TOKEN_KEY_JOURNALIST = "FrLKJHGFIVDCRYppOHioLOIHG";
+
+    public static Optional<String> hashPassword(String password) {
 
         char[] chars = password.toCharArray();
         byte[] bytes = SALT.getBytes();
@@ -36,15 +42,39 @@ public class PasswordUtils {
         }
     }
 
-    public static boolean verifyPassword (String password, String passwordToTry) {
+    public static boolean verifyPassword(String password, String passwordToTry) {
         Optional<String> hashedPasswordToTryOption = PasswordUtils.hashPassword(passwordToTry);
         String hashedPasswordToTry = null;
 
-        if(hashedPasswordToTryOption.isPresent()) {
+        if (hashedPasswordToTryOption.isPresent()) {
             hashedPasswordToTry = hashedPasswordToTryOption.get();
         }
 
         return password.equals(hashedPasswordToTry);
+    }
+
+    public static String generateToken(String username, UserRole role) {
+        String tokenKey = null;
+
+        switch (role) {
+            case ADMIN:
+                tokenKey = TOKEN_KEY_ADMIN;
+                break;
+            case ORGANIZER:
+                tokenKey = TOKEN_KEY_ORGANIZER;
+                break;
+            case JOURNALIST:
+                tokenKey = TOKEN_KEY_JOURNALIST;
+                break;
+            default:
+                break;
+        }
+
+        Optional<String> hashedTokenOption = hashPassword(username + tokenKey);
+        if (hashedTokenOption.isPresent())
+            tokenKey = hashedTokenOption.get();
+
+        return tokenKey;
     }
 
 }

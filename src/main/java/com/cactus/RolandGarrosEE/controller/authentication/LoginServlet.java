@@ -62,7 +62,7 @@ public class LoginServlet extends BaseServlet {
 
         //TODO Remove bypass
         if (bypassConnection)
-            user = new User("firstname", "lastname", "mail", "password", 0);
+            user = new User("firstname", "lastname", "mail", "password", 0, "");
         else
             user = this.getUserFromDatabase(mail, password);
 
