@@ -37,7 +37,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/tournoi?type=MatchDouble&genre=Mixte">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/tournoi?type=Double&genre=Mixte">
                         <button class="btn btn-outline-success btn-outline-success">Double Mixte</button>
                     </a>
                 </li>

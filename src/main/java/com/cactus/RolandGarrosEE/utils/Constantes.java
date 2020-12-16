@@ -95,7 +95,7 @@ public class Constantes {
     public static final String REQUEST_ATTR_ID = "id";
     public static final String REQUEST_ATTR_SINGLE_MATCH_LIST = "singleMatchList";
     public static final String REQUEST_ATTR_DOUBLE_MATCH_LIST = "doubleMatchList";
-    public static final String REQUEST_ATTR__ERROR_MSG = "errorMsg";
+    public static final String REQUEST_ATTR__ERROR_MSG = "errorMessage";
 
 
     //endregion

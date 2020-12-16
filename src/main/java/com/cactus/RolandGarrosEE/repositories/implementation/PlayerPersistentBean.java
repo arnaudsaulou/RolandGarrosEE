@@ -32,7 +32,6 @@ public class PlayerPersistentBean implements PlayerPersistentRemote {
                     .setParameter("id" , player.getId())
                     .executeUpdate();
         } catch (Exception ignored) {
-            ignored.getMessage();
         }
     }
 
@@ -78,6 +77,17 @@ public class PlayerPersistentBean implements PlayerPersistentRemote {
         } catch (NoResultException ignored) {
         }
         return rankings;
+    }
+
+    public Player getPlayerWithLastnameAndFirstname(String lastname, String firstname) {
+        Player player = null;
+        try {
+            player = entityManager.createQuery("SELECT DISTINCT P FROM Player P WHERE P.lastname = :lastname AND P.firstname= :firstname", Player.class)
+                    .setParameter("lastname",lastname).setParameter("firstname", firstname)
+                    .getSingleResult();
+        } catch (NoResultException ignored) {
+        }
+        return player;
     }
 
     @Override
