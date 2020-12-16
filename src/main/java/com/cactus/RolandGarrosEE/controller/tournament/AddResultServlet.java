@@ -5,6 +5,7 @@ import com.cactus.RolandGarrosEE.entities.*;
 import com.cactus.RolandGarrosEE.repositories.remotes.DoubleMatchPersistentRemote;
 import com.cactus.RolandGarrosEE.repositories.remotes.SingleMatchRemote;
 import com.cactus.RolandGarrosEE.utils.Constantes;
+import com.cactus.RolandGarrosEE.utils.exceptions.InvalidActorException;
 import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserException;
 import com.sun.xml.bind.v2.runtime.unmarshaller.XsiNilLoader;
 
@@ -63,9 +64,17 @@ public class AddResultServlet extends BaseServlet {
         try {
             this.checkAuthentication(req);
             this.setupViewAttributes(req);
-            this.tryToPutResult(req);
+
+            Match match = getMatch(req);
+
+            if (req.getParameter(Constantes.NEW_MATCH_ADD) != null) {
+                this.tryToPutResult(req, match);
+            } else if (req.getParameter(Constantes.NEW_DETAILS_DELETE) != null) {
+                this.tryToDeleteMatch(req, match);
+            }
+
             resp.sendRedirect("../" + Constantes.URL_TOURNAMENT + "?" + Constantes.URL_PARAM_MATCH_TYPE + "=" + this.typeTournament + "&" + Constantes.URL_PARAM_GENDER + "=" + this.gender);
-        } catch (UnauthenticatedUserException e) {
+        } catch (UnauthenticatedUserException | InvalidActorException e) {
             resp.sendRedirect("../" + Constantes.URL_LOGIN);
         }
     }
@@ -92,22 +101,26 @@ public class AddResultServlet extends BaseServlet {
         return TypeTournament.getTypeTournamentFromString(matchTypeString);
     }
 
-    private void tryToPutResult(HttpServletRequest req) {
-
+    private Match getMatch(HttpServletRequest req){
         int matchId = this.getMatchId(req);
 
         TypeTournament tournamentType = this.getTournamentType(req);
 
         Match match;
-        String dateEndMatch = req.getParameter(Constantes.NEW_MATCH_FORM_FIELD_END_DATE);
-        String scoreA = req.getParameter(Constantes.NEW_MATCH_FORM_FIELD_SCORE_A);
-        String scoreB = req.getParameter(Constantes.NEW_MATCH_FORM_FIELD_SCORE_B);
 
         if (tournamentType.equals(TypeTournament.SINGLE)) {
             match = singleMatchRemote.findSingleMatchById(matchId);
         } else {
             match = doubleMatchPersistentRemote.findDoubleMatchById(matchId);
         }
+
+        return match;
+    }
+
+    private void tryToPutResult(HttpServletRequest req, Match match) {
+        String dateEndMatch = req.getParameter(Constantes.NEW_MATCH_FORM_FIELD_END_DATE);
+        String scoreA = req.getParameter(Constantes.NEW_MATCH_FORM_FIELD_SCORE_A);
+        String scoreB = req.getParameter(Constantes.NEW_MATCH_FORM_FIELD_SCORE_B);
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         try {
@@ -121,9 +134,17 @@ public class AddResultServlet extends BaseServlet {
         match.setScoreB(Integer.parseInt(scoreB));
 
         if (match instanceof SingleMatch) {
-            singleMatchRemote.updateScore(matchId, scoreA, scoreB, match.getDateEnd());
+            singleMatchRemote.updateScore(match.getId(), scoreA, scoreB, match.getDateEnd());
         } else {
-            doubleMatchPersistentRemote.updateScore(matchId, scoreA, scoreB, match.getDateEnd());
+            doubleMatchPersistentRemote.updateScore(match.getId(), scoreA, scoreB, match.getDateEnd());
+        }
+    }
+
+    private void tryToDeleteMatch(HttpServletRequest req, Match match) throws InvalidActorException {
+        if (match instanceof SingleMatch) {
+            singleMatchRemote.deleteSingleMatch((SingleMatch) match);
+        } else {
+            doubleMatchPersistentRemote.deleteDoubleMatch((DoubleMatch) match);
         }
     }
 

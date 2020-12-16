@@ -32,7 +32,10 @@
             </div>
         </div>
         <div class="form-group text-center mt-3 mb-0">
-            <button type="submit" class="btn btn-primary">Ajouter</button>
+            <button type="submit" name="delete" value="Delete Button" class="btn btn-primary">Ajouter</button>
+        </div>
+        <div class="form-group text-center mt-3 mb-0">
+            <button type="submit" name="delete" value="Delete Button" class="btn btn-primary">Delete</button>
         </div>
 
     </form>
