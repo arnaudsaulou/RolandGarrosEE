@@ -179,7 +179,7 @@ public class AddMatchServlet extends BaseServlet {
         if (teamIdString == null)
             throw new InvalidMatchException("Equipe non renseignée");
 
-        return teamPersistentRemote.getTeamById(Integer.parseInt(teamIdString));
+        return teamPersistentRemote.findTeamById(Integer.parseInt(teamIdString));
     }
 
     private Player getPlayer(HttpServletRequest req, String field) throws InvalidMatchException, IllegalArgumentException {

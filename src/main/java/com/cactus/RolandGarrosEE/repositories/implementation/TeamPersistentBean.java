@@ -27,13 +27,28 @@ public class TeamPersistentBean implements TeamPersistentRemote {
     @Override
     public void deleteTeam(Team team) {
         try {
-            entityManager.remove(team);
+
+            entityManager.createQuery("DELETE FROM Team T WHERE T.id = :id")
+                    .setParameter("id", team.getId())
+                    .executeUpdate();
         } catch (Exception ignored) {
         }
     }
 
     @Override
-    public Team getTeamById(int teamId) {
+    public void updateTeam(Team team) {
+        try {
+            entityManager.createQuery("update Team T SET T.playersList = :playersList WHERE T.id = :id")
+                    .setParameter("id" , team.getId())
+                    .setParameter("playersList", team.getPlayersList())
+                    .executeUpdate();
+        } catch (Exception ignored) {
+            ignored.printStackTrace();
+        }
+    }
+
+    @Override
+    public Team findTeamById(int teamId) {
         Team team = null;
         try {
             team = entityManager.find(Team.class, teamId);
