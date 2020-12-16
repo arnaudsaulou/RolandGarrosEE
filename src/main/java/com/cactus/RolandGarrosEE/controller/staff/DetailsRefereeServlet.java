@@ -4,6 +4,7 @@ import com.cactus.RolandGarrosEE.controller.BaseServlet;
 import com.cactus.RolandGarrosEE.entities.Referee;
 import com.cactus.RolandGarrosEE.repositories.remotes.RefereePersistentRemote;
 import com.cactus.RolandGarrosEE.utils.Constantes;
+import com.cactus.RolandGarrosEE.utils.exceptions.InvalidActorException;
 import com.cactus.RolandGarrosEE.utils.exceptions.UnauthenticatedUserException;
 import com.cactus.RolandGarrosEE.utils.exceptions.UserNotFoundException;
 
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "detailsRefereeServlet", value = "/arbitre")
+@WebServlet(name = "detailsRefereeServlet", value = "/detailsArbitre")
 public class DetailsRefereeServlet extends BaseServlet {
     @EJB
     RefereePersistentRemote refereePersistentRemote;
@@ -41,25 +42,26 @@ public class DetailsRefereeServlet extends BaseServlet {
             String id = this.getValue(req, Constantes.REQUEST_ATTR_ID);
             Referee referee = refereePersistentRemote.findRefereeById(Integer.parseInt(id));
 
-            if (req.getParameter(Constantes.NEW_DETAILS_UPDATE) != null)
-            {
+            if (req.getParameter(Constantes.NEW_DETAILS_UPDATE) != null) {
                 this.tryToUpdateReferee(req, referee);
-            } else if (req.getParameter(Constantes.NEW_DETAILS_DELETE) != null)
-            {
+            } else if (req.getParameter(Constantes.NEW_DETAILS_DELETE) != null) {
                 this.tryToDeleteReferee(req, referee);
             }
 
             resp.sendRedirect(Constantes.URL_REFEREES);
         } catch (UnauthenticatedUserException e) {
             e.printStackTrace();
+        } catch (InvalidActorException e) {
+            req.setAttribute("errorMessage", e.getMessage());
+            this.getServletContext().getRequestDispatcher(Constantes.VIEW_DETAILS_REFEREE).forward(req, resp);
         }
     }
 
-    private void tryToDeleteReferee(HttpServletRequest req, Referee referee) {
+    private void tryToDeleteReferee(HttpServletRequest req, Referee referee) throws InvalidActorException {
         refereePersistentRemote.deleteReferee(referee);
     }
 
-    private void tryToUpdateReferee(HttpServletRequest req, Referee referee) {
+    private void tryToUpdateReferee(HttpServletRequest req, Referee referee) throws InvalidActorException {
         referee.setFirstname(this.getValue(req, "firstname"));
         referee.setLastname(this.getValue(req, "lastname"));
         referee.setNationality(this.getValue(req, "actorNationality"));

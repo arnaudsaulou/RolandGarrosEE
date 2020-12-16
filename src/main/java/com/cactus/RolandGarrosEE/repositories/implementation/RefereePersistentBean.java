@@ -2,6 +2,7 @@ package com.cactus.RolandGarrosEE.repositories.implementation;
 
 import com.cactus.RolandGarrosEE.entities.Player;
 import com.cactus.RolandGarrosEE.entities.Referee;
+import com.cactus.RolandGarrosEE.entities.Team;
 import com.cactus.RolandGarrosEE.repositories.remotes.RefereePersistentRemote;
 
 import javax.ejb.Stateless;
@@ -26,7 +27,7 @@ public class RefereePersistentBean implements RefereePersistentRemote {
     @Override
     public void updateReferee(Referee referee) {
         try {
-            entityManager.createQuery("UPDATE Referee R SET R.firstname = :firstname, R.lastname = :lastname, R.nationality = :nationality WHERE P.id = :id")
+            entityManager.createQuery("UPDATE Referee R SET R.firstname = :firstname, R.lastname = :lastname, R.nationality = :nationality WHERE R.id = :id")
                     .setParameter("id", referee.getId())
                     .setParameter("firstname", referee.getFirstname())
                     .setParameter("lastname", referee.getLastname())
@@ -39,7 +40,15 @@ public class RefereePersistentBean implements RefereePersistentRemote {
     @Override
     public void deleteReferee(Referee referee) {
         try {
-            entityManager.remove(referee);
+            entityManager.createQuery("DELETE FROM SingleMatch S WHERE S.referee.id = :id")
+                    .setParameter("id", referee.getId())
+                    .executeUpdate();
+            entityManager.createQuery("DELETE FROM DoubleMatch D WHERE D.referee.id = :id")
+                    .setParameter("id", referee.getId())
+                    .executeUpdate();
+            entityManager.createQuery("DELETE FROM Referee R WHERE R.id = :id")
+                    .setParameter("id", referee.getId())
+                    .executeUpdate();
         } catch (Exception ignored) {
         }
     }
