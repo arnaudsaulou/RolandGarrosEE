@@ -51,6 +51,8 @@ public class Constantes {
 
     public static final String URL_PARAM_MATCH_TYPE = "type";
     public static final String URL_PARAM_GENDER = "genre";
+    public static final String URL_PARAM_TEAM_ID = "idEquipe";
+    public static final String URL_PARAM_MATCH_ID = "idMatch";
 
     //endregion
 

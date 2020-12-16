@@ -30,21 +30,30 @@ public class AddResultServlet extends BaseServlet {
     @EJB
     DoubleMatchPersistentRemote doubleMatchPersistentRemote;
 
+    private TypeTournament typeTournament;
+    private Gender gender;
+
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             this.checkAuthentication(req);
             this.setupViewAttributes(req);
 
-            // TODO Remove hardcore code double => Replace with enum (discuss which one)
-            if (req.getParameter(Constantes.URL_PARAM_MATCH_TYPE).equals("double"))
-            {
-                this.getServletContext().getRequestDispatcher(Constantes.VIEW_RESULT_DOUBLE_MATCH).forward(req, resp);
-                req.setAttribute(Constantes.URL_PARAM_GENDER, req.getParameter(Constantes.URL_PARAM_GENDER));
+            this.typeTournament = this.getTournamentTypeFromURL(req);
+            this.gender = this.getGenderFromURL(req);
+            int idMatch = this.getMatchId(req);
 
+            this.attributes.put(Constantes.URL_PARAM_MATCH_TYPE, this.typeTournament.toString());
+            this.attributes.put(Constantes.URL_PARAM_GENDER, this.gender.toString());
+            this.attributes.put(Constantes.URL_PARAM_MATCH_ID, idMatch);
+
+            this.propagateAttributesToRequest(req);
+
+            if (typeTournament.equals(TypeTournament.SINGLE)) {
+                this.getServletContext().getRequestDispatcher(Constantes.VIEW_RESULT_DOUBLE_MATCH).forward(req, resp);
             } else {
                 this.getServletContext().getRequestDispatcher(Constantes.VIEW_RESULT_SINGLE_MATCH).forward(req, resp);
-                req.setAttribute(Constantes.URL_PARAM_MATCH_TYPE, req.getParameter(Constantes.URL_PARAM_MATCH_TYPE));
             }
+
         } catch (UnauthenticatedUserException e) {
             resp.sendRedirect("../" + Constantes.URL_LOGIN);
         }
@@ -53,8 +62,9 @@ public class AddResultServlet extends BaseServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
             this.checkAuthentication(req);
-            this.tryToPutResult(req, "1", "Single");
-            resp.sendRedirect("../" + Constantes.URL_TEAM);
+            this.setupViewAttributes(req);
+            this.tryToPutResult(req);
+            resp.sendRedirect("../" + Constantes.URL_TOURNAMENT + "?" + Constantes.URL_PARAM_MATCH_TYPE + "=" + this.typeTournament + "&" + Constantes.URL_PARAM_GENDER + "=" + this.gender);
         } catch (UnauthenticatedUserException e) {
             resp.sendRedirect("../" + Constantes.URL_LOGIN);
         }
@@ -62,30 +72,46 @@ public class AddResultServlet extends BaseServlet {
 
     private void setupViewAttributes(HttpServletRequest req) {
         this.resetBreadcrumbs();
-
-        //TODO Choose breadcrumbs to display
-        /*this.addToBreadcrumbs();
-        this.addToBreadcrumbs();*/
+        this.addToBreadcrumbs(Constantes.TITLE_SINGLE_MATCH_BASE);
+        this.addToBreadcrumbs(Constantes.TITLE_ADD_RESULT);
         this.attributes.put(Constantes.REQUEST_ATTR_TITLE, Constantes.TITLE_ADD_RESULT);
         this.propagateAttributesToRequest(req);
     }
 
-    private void tryToPutResult(HttpServletRequest req, String id, String type) {
+    private Gender getGenderFromURL(HttpServletRequest request) throws IllegalArgumentException {
+        String genderString = this.getValue(request, Constantes.URL_PARAM_GENDER);
+        if (genderString == null)
+            throw new IllegalArgumentException("Genre non renseigné");
+        return Gender.getGenderFromString(genderString);
+    }
+
+    private TypeTournament getTournamentTypeFromURL(HttpServletRequest request) throws IllegalArgumentException {
+        String matchTypeString = this.getValue(request, Constantes.URL_PARAM_MATCH_TYPE);
+        if (matchTypeString == null)
+            throw new IllegalArgumentException("Type de tournois non renseigné");
+        return TypeTournament.getTypeTournamentFromString(matchTypeString);
+    }
+
+    private void tryToPutResult(HttpServletRequest req) {
+
+        int matchId = this.getMatchId(req);
+
+        TypeTournament tournamentType = this.getTournamentType(req);
 
         Match match;
         String dateEndMatch = req.getParameter(Constantes.NEW_MATCH_FORM_FIELD_END_DATE);
         String scoreA = req.getParameter(Constantes.NEW_MATCH_FORM_FIELD_SCORE_A);
         String scoreB = req.getParameter(Constantes.NEW_MATCH_FORM_FIELD_SCORE_B);
 
-        if(type.equals("Single")){
-            match = singleMatchRemote.findSingleMatchById(Integer.parseInt(id));
+        if (tournamentType.equals(TypeTournament.SINGLE)) {
+            match = singleMatchRemote.findSingleMatchById(matchId);
         } else {
-            match = doubleMatchPersistentRemote.findDoubleMatchById(Integer.parseInt(id));
+            match = doubleMatchPersistentRemote.findDoubleMatchById(matchId);
         }
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         try {
-            Date date = formatter.parse(dateEndMatch.replace("T"," "));
+            Date date = formatter.parse(dateEndMatch.replace("T", " "));
             match.setDateEnd(date);
         } catch (ParseException e) {
             e.printStackTrace();
@@ -94,10 +120,24 @@ public class AddResultServlet extends BaseServlet {
         match.setScoreA(Integer.parseInt(scoreA));
         match.setScoreB(Integer.parseInt(scoreB));
 
-        if(match instanceof SingleMatch){
-            singleMatchRemote.updateScore(Integer.parseInt(id), scoreA, scoreB, match.getDateEnd());
+        if (match instanceof SingleMatch) {
+            singleMatchRemote.updateScore(matchId, scoreA, scoreB, match.getDateEnd());
         } else {
-            doubleMatchPersistentRemote.updateScore(Integer.parseInt(id), scoreA, scoreB, match.getDateEnd());
+            doubleMatchPersistentRemote.updateScore(matchId, scoreA, scoreB, match.getDateEnd());
         }
+    }
+
+    private TypeTournament getTournamentType(HttpServletRequest req) {
+        String typeTournamentString = this.getValue(req, Constantes.URL_PARAM_MATCH_TYPE);
+        if (typeTournamentString == null)
+            throw new IllegalArgumentException("Type de tournoi non définie");
+        return TypeTournament.getTypeTournamentFromString(typeTournamentString);
+    }
+
+    private int getMatchId(HttpServletRequest req) {
+        String idMatchString = this.getValue(req, Constantes.URL_PARAM_MATCH_ID);
+        if(idMatchString == null)
+            throw new IllegalArgumentException("Numéro de match non renseignée");
+        return Integer.parseInt(idMatchString);
     }
 }
