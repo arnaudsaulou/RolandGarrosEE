@@ -38,10 +38,7 @@ public class TeamPersistentBean implements TeamPersistentRemote {
     @Override
     public void updateTeam(Team team) {
         try {
-            entityManager.createQuery("update Team T SET T.playersList = :playersList WHERE T.id = :id")
-                    .setParameter("id" , team.getId())
-                    .setParameter("playersList", team.getPlayersList())
-                    .executeUpdate();
+            entityManager.merge(team);
         } catch (Exception ignored) {
             ignored.printStackTrace();
         }
