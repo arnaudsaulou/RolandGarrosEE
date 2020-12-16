@@ -201,10 +201,10 @@ VALUES ('2020-12-01', '2020-12-30', 'HOMME', 12, 'DOUBLE');
 -- INSERT INTO SINGLEMATCH --
 
 INSERT INTO SINGLEMATCH(datebegin, dateend, scorea, scoreb, referee_id, court_ID, tournament_id)
-VALUES ('2020-12-02 02:55:05', '2020-12-02 08:55:05', 4, 1, 1, 1, 2);
+VALUES ('2020-12-02 02:55:05', '2020-12-02 08:55:05', 2, 1, 1, 1, 2);
 
 INSERT INTO SINGLEMATCH(datebegin, dateend, scorea, scoreb, referee_id, court_ID, tournament_id)
-VALUES ('2020-12-10 02:55:05', '2020-12-10 16:55:05',2, 3, 2, 3, 2);
+VALUES ('2020-12-10 02:55:05', '2020-12-10 16:55:05',0, 2, 2, 3, 2);
 
 INSERT INTO SINGLEMATCH(datebegin, dateend, scorea, scoreb, referee_id, court_ID, tournament_id)
 VALUES ('2020-12-14 02:55:05', '2020-12-14 12:59:05', 1, 2, 1, 2, 2);
@@ -213,10 +213,10 @@ INSERT INTO SINGLEMATCH(datebegin, dateend, scorea, scoreb, referee_id, court_ID
 VALUES ('2020-12-14 02:55:05', null, 0, 0, 3, 4, 2);
 
 INSERT INTO SINGLEMATCH(datebegin, dateend, scorea, scoreb, referee_id, court_ID, tournament_id)
-VALUES ('2020-12-14 02:55:05', '2020-12-14 22:59:05', 1, 2, 1, 2, 1);
+VALUES ('2020-12-14 02:55:05', '2020-12-14 22:59:05', 1, 3, 1, 2, 1);
 
 INSERT INTO SINGLEMATCH(datebegin, dateend, scorea, scoreb, referee_id, court_ID, tournament_id)
-VALUES ('2020-12-14 02:55:05', null, 2, 3, 2, 5, 1);
+VALUES ('2020-12-14 02:55:05', null, 0, 0, 2, 5, 1);
 
 -- INSERT INTO PLAYER_SINGLEMATCH --
 
@@ -266,10 +266,10 @@ INSERT INTO DOUBLEMATCH(datebegin, dateend, scorea, scoreb, referee_id, court_ID
 VALUES ('2020-12-18 02:55:05', null, 0, 0, 2, 4, 4);
 
 INSERT INTO DOUBLEMATCH(datebegin, dateend, scorea, scoreb, referee_id, court_ID, tournament_id)
-VALUES ('2020-12-02 02:55:05', '2020-12-02 08:55:05', 4, 1, 1, 1, 5);
+VALUES ('2020-12-02 02:55:05', '2020-12-02 08:55:05', 2, 1, 1, 1, 5);
 
 INSERT INTO DOUBLEMATCH(datebegin, dateend, scorea, scoreb, referee_id, court_ID, tournament_id)
-VALUES ('2020-12-10 02:55:05', '2020-12-10 06:55:05',2, 3, 2, 3, 5);
+VALUES ('2020-12-10 02:55:05', '2020-12-10 06:55:05',2, 1, 2, 3, 5);
 
 INSERT INTO DOUBLEMATCH(datebegin, dateend, scorea, scoreb, referee_id, court_ID, tournament_id)
 VALUES ('2020-12-14 02:55:05', null, 0, 0, 1, 2, 3);
@@ -278,7 +278,7 @@ INSERT INTO DOUBLEMATCH(datebegin, dateend, scorea, scoreb, referee_id, court_ID
 VALUES ('2020-12-14 02:55:05', '2020-12-14 07:59:05', 1, 2, 3, 5, 3);
 
 INSERT INTO DOUBLEMATCH(datebegin, dateend, scorea, scoreb, referee_id, court_ID, tournament_id)
-VALUES ('2020-12-14 02:55:05', '2020-12-14 22:59:05', 3, 2, 2, 1, 3);
+VALUES ('2020-12-14 02:55:05', '2020-12-14 22:59:05', 1, 2, 2, 1, 3);
 
 -- INSERT INTO DOUBLEMATCH_TEAM --
 
