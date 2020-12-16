@@ -94,7 +94,7 @@ public class AddMatchServlet extends BaseServlet {
     }
 
     private void populateReferees() {
-        List<Referee> referees = refereePersistentRemote.allArbitrator();
+        List<Referee> referees = refereePersistentRemote.allReferee();
         this.attributes.put(Constantes.NEW_MATCH_FORM_FIELD_REFEREE, referees);
     }
 
@@ -206,7 +206,7 @@ public class AddMatchServlet extends BaseServlet {
         if (refereeIdString == null)
             throw new InvalidMatchException("Arbitre non renseigné");
 
-        return refereePersistentRemote.getArbitratorById(Integer.parseInt(refereeIdString));
+        return refereePersistentRemote.findRefereeById(Integer.parseInt(refereeIdString));
     }
 
     private Tournament getTournament(HttpServletRequest req) throws InvalidMatchException, IllegalArgumentException {

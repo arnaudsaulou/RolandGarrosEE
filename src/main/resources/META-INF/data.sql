@@ -175,23 +175,3 @@ VALUES (2, 3);
 
 INSERT INTO doublematch_team(doublematch_id, team_id)
 VALUES (2, 4);
-
--- INSERT INTO referee_SINGLE --
-
-INSERT INTO REFEREE_SINGLEMATCH(referee_id, matchssingle_id)
-VALUES (1, 1);
-
-INSERT INTO REFEREE_SINGLEMATCH(referee_id, matchssingle_id)
-VALUES (2, 2);
-
-INSERT INTO REFEREE_SINGLEMATCH(referee_id, matchssingle_id)
-VALUES (1, 3);
-
--- INSERT INTO referee_DOUBLE --
-
-INSERT INTO REFEREE_DOUBLEMATCH(referee_id, matchsDouble_ID)
-VALUES (4, 1);
-
-INSERT INTO REFEREE_DOUBLEMATCH(referee_id, matchsDouble_ID)
-VALUES (2, 2);
-
