@@ -2,12 +2,14 @@ package com.cactus.RolandGarrosEE.repositories.implementation;
 
 import com.cactus.RolandGarrosEE.entities.Gender;
 import com.cactus.RolandGarrosEE.entities.Player;
+import com.cactus.RolandGarrosEE.entities.Referee;
 import com.cactus.RolandGarrosEE.repositories.remotes.PlayerPersistentRemote;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import java.util.Date;
 import java.util.List;
 
 @Stateless
@@ -26,7 +28,9 @@ public class PlayerPersistentBean implements PlayerPersistentRemote {
     @Override
     public void deletePlayer(Player player) {
         try {
-            entityManager.remove(player);
+            entityManager.createQuery("delete from Player P WHERE P.id = :id")
+                    .setParameter("id" , player.getId())
+                    .executeUpdate();
         } catch (Exception ignored) {
         }
     }
@@ -73,5 +77,31 @@ public class PlayerPersistentBean implements PlayerPersistentRemote {
         } catch (NoResultException ignored) {
         }
         return rankings;
+    }
+
+    public Player getPlayerWithLastnameAndFirstname(String lastname, String firstname) {
+        Player player = null;
+        try {
+            player = entityManager.createQuery("SELECT DISTINCT P FROM Player P WHERE P.lastname = :lastname AND P.firstname= :firstname", Player.class)
+                    .setParameter("lastname",lastname).setParameter("firstname", firstname)
+                    .getSingleResult();
+        } catch (NoResultException ignored) {
+        }
+        return player;
+    }
+
+    @Override
+    public void updatePlayer(Player player) {
+        try {
+            entityManager.createQuery("update Player P set P.lastname = :lastname, P.firstname = :firstname, P.nationality = :nationality, P.rankings = :rankings WHERE P.id = :id")
+                    .setParameter("id" , player.getId())
+                    .setParameter("lastname" , player.getLastname())
+                    .setParameter("firstname" , player.getFirstname())
+                    .setParameter("nationality" , player.getNationality())
+                    .setParameter("rankings" , player.getRankings())
+                    .executeUpdate();
+        } catch (NoResultException ignored) {
+            ignored.printStackTrace();
+        }
     }
 }
