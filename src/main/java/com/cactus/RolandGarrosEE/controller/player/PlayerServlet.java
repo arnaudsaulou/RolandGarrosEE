@@ -24,7 +24,7 @@ public class PlayerServlet extends BaseServlet {
         try{
             this.checkAuthentication(req);
             this.setupViewAttributes(req);
-            this.getPlayersList(req);
+            this.getPlayer(req);
             this.getServletContext().getRequestDispatcher(Constantes.VIEW_PLAYERS).forward(req, resp);
         } catch (UnauthenticatedUserException e){
             resp.sendRedirect(Constantes.URL_LOGIN);
@@ -38,7 +38,7 @@ public class PlayerServlet extends BaseServlet {
         this.propagateAttributesToRequest(req);
     }
 
-    private void getPlayersList(HttpServletRequest req){
+    private void getPlayer(HttpServletRequest req){
         List<Player> playersList = playerPersistentRemote.allPlayer();
         req.setAttribute(Constantes.REQUEST_ATTR_PLAYERS_LIST,playersList);
     }

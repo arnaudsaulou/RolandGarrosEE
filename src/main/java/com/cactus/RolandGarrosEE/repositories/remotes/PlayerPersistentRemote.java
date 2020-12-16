@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @Remote
 public interface PlayerPersistentRemote {
+    void updatePlayer(Player player);
     void savePlayer(Player player);
     void deletePlayer(Player player);
     Player findPlayerById(int playerId);
