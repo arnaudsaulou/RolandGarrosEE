@@ -41,8 +41,11 @@ public class SingleMatchPersistentBean implements SingleMatchRemote {
     @Override
     public void deleteSingleMatch(SingleMatch singleMatch) {
         try {
-            entityManager.remove(singleMatch);
+            entityManager.createQuery("delete from SingleMatch sm WHERE sm.id = :id")
+                    .setParameter("id" , singleMatch.getId())
+                    .executeUpdate();
         } catch (Exception ignored) {
+            ignored.printStackTrace();
         }
     }
 

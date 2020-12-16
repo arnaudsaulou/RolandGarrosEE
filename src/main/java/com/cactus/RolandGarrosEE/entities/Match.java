@@ -1,5 +1,8 @@
 package com.cactus.RolandGarrosEE.entities;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -25,7 +28,8 @@ public abstract class Match implements Serializable {
     private Tournament tournament;
     @ManyToOne
     private Court court;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.REMOVE, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Referee referee;
 
     public Match() {

@@ -74,6 +74,7 @@ public class DetailsPlayerServlet extends BaseServlet {
     private void setupViewAttributes(HttpServletRequest req){
         this.resetBreadcrumbs();
         this.addToBreadcrumbs(Constantes.TITLE_PLAYERS);
+        this.addToBreadcrumbs(Constantes.URL_DETAILS_PLAYER);
         this.attributes.put(Constantes.REQUEST_ATTR_TITLE, Constantes.TITLE_PLAYERS);
         this.propagateAttributesToRequest(req);
     }

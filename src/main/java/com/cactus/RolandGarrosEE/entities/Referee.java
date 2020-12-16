@@ -1,5 +1,8 @@
 package com.cactus.RolandGarrosEE.entities;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -8,9 +11,9 @@ import java.util.List;
 @Entity
 @Table(name = "REFEREE")
 public class Referee extends Member implements Serializable {
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE}, fetch = FetchType.LAZY, mappedBy="referee")
     private List<SingleMatch> matchsSingle;
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE}, fetch = FetchType.LAZY, mappedBy="referee")
     private List<DoubleMatch> matchsDouble;
 
     public Referee() {

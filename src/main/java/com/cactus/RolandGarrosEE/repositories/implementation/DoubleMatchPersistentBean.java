@@ -50,7 +50,9 @@ public class DoubleMatchPersistentBean implements DoubleMatchPersistentRemote {
     @Override
     public void deleteDoubleMatch(DoubleMatch doubleMatch) {
         try {
-            entityManager.remove(doubleMatch);
+            entityManager.createQuery("delete from DoubleMatch dm WHERE dm.id = :id")
+                    .setParameter("id" , doubleMatch.getId())
+                    .executeUpdate();
         } catch (Exception ignored) {
         }
     }
