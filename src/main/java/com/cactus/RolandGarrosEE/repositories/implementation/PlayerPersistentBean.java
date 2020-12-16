@@ -74,4 +74,13 @@ public class PlayerPersistentBean implements PlayerPersistentRemote {
         }
         return rankings;
     }
+
+    public Player getLastname(String lastname){
+        Player player = null;
+        try {
+            player = entityManager.find(Player.class, lastname);
+        } catch (NoResultException ignored) {
+        }
+        return player;
+    }
 }
