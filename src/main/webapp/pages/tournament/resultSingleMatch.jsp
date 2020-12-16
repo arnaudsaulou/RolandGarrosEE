@@ -15,7 +15,7 @@
             <label class="col-3 col-form-label">Score Joueur A</label>
             <div class="col-8">
                 <select class="form-control" id="scoreJoueurA" name="matchScoreA" required>
-                    <c:forEach var="i" begin="0" end="5" step="1">
+                    <c:forEach var="i" begin="0" end="3" step="1">
                         <option value="${i}">${i}</option>
                     </c:forEach>>
                 </select>
