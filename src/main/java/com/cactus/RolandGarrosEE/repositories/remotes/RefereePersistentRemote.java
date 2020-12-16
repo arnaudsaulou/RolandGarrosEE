@@ -11,4 +11,5 @@ public interface RefereePersistentRemote {
     void deleteArbitrator(Referee referee);
     Referee getArbitratorById(int referee);
     List<Referee> allArbitrator();
+    Referee getRefereeWithLastnameAndFirstname(String lastname, String firstname);
 }

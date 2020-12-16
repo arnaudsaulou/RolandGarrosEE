@@ -38,6 +38,7 @@ public class AddRefereeServlet extends BaseServlet {
         } catch (UnauthenticatedUserException e) {
             resp.sendRedirect("../" + Constantes.URL_LOGIN);
         } catch (InvalidActorException e) {
+            req.setAttribute("errorMessage", e.getMessage());
             this.getServletContext().getRequestDispatcher(Constantes.VIEW_ADD_REFEREE).forward(req, resp);
         }
     }
@@ -62,6 +63,8 @@ public class AddRefereeServlet extends BaseServlet {
     private void validateNewReferee(String firstname, String lastname, String nationality) throws InvalidActorException {
         if (firstname == null || lastname == null || nationality == null)
             throw new InvalidActorException();
+        if (refereePersistentRemote.getRefereeWithLastnameAndFirstname(lastname, firstname) !=  null)
+            throw new InvalidActorException("Cet arbitre a déjà été ajouté");
     }
 
 }

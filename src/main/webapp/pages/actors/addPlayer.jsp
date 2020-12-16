@@ -32,8 +32,8 @@
             <label class="col-3 col-form-label">Genre</label>
             <div class="col-9">
                 <select class="form-control" required="required" name="actorGender">
-                    <option value="HOMME">Homme</option>
-                    <option value="FEMME">Femme</option>
+                    <option value="Homme">Homme</option>
+                    <option value="Femme">Femme</option>
                 </select>
             </div>
         </div>
