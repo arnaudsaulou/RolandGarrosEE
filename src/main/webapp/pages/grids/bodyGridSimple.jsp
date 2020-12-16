@@ -5,9 +5,6 @@
 <h3 class="text-center mb-5 mt-5">Liste des matchs simples</h3>
 
 <c:if test="${sessionScope.isAdmin || sessionScope.isOrganizer}">
-    <a href="${pageContext.request.contextPath}/tournoi/ajouterResultat?type=${type}&genre=${genre}">
-        <button type="button" class="btn btn-secondary mt-2 mr-5 mb-2" style="float:right;">Ajouter Résultat</button>
-    </a>
     <a href="${pageContext.request.contextPath}/tournoi/ajouterMatch?type=${type}&genre=${genre}">
         <button type="button" class="btn btn-secondary mt-2 mr-5 mb-2" style="float:right;">Ajouter Match</button>
     </a>
@@ -30,7 +27,7 @@
         </thead>
         <tbody>
         <c:forEach items="${singleMatchList}" var="singleMatch">
-            <tr>
+            <tr onclick="document.location = '${pageContext.request.contextPath}/tournoi/ajouterResultat?type=${type}&genre=${genre}&idMatch=${singleMatch.id}'">
                 <td class="text-center">${singleMatch.id}</td>
                 <td class="text-center">${singleMatch.dateBegin}</td>
                 <td class="text-center">${singleMatch.dateEnd}</td>
